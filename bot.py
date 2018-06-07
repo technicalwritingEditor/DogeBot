@@ -5,19 +5,15 @@ import os
 bot=commands.Bot(command_prefix='-')
 bot.remove_command('help')
 
+bot.load_extension("cogs.fun")
+bot.load_extension("cogs.images")
+bot.load_extension("cogs.info")
+bot.load_extension("cogs.utility")
+
 @bot.event
 async def on_ready():
     print("Im online")
-    bot.load_extension("cogs.fun")
-    print("Loaded fun")
-    bot.load_extension("cogs.images")
-    print("Loaded images")
-    bot.load_extension("cogs.info")
-    print("Loaded info")  
-    bot.load_extension("cogs.utility")
-    print("Loaded utility")
-
-
+    
 @bot.event
 async def on_guild_join(guild):
     embed=discord.Embed(title="New server!", description=f"Guild: **{guild.name}**", color=0x9b9dff, timestamp = datetime.datetime.utcnow())
@@ -58,4 +54,6 @@ async def help(ctx):
     embed.set_footer(text="I´m a very new bot and in early development, there will come A LOT more commands!")
     await ctx.send(embed=embed)
 
-bot.run("NDUzODI5NjUyNzkyODY4ODY2.DfmKfw.Zfdmywrc5PmjeVZrLAMY2xcA9EQ")
+if not os.environ.get('TOKEN'):
+    print("no token found")
+bot.run(os.environ.get('TOKEN').strip('"'))
