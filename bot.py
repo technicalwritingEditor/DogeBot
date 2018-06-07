@@ -32,16 +32,16 @@ async def on_guild_remove(guild):
 async def on_member_join(member):
     embed=discord.Embed(description=f"New member **{member.mention}** :tada:", color=0x9b9dff, timestamp = datetime.datetime.utcnow())
     guild = member.guild
-    if guild.id == 453812812272107521:
-        channel = bot.get_channel(453812948360757258)
+    if guild.id == 453975047384727556:
+        channel = bot.get_channel(454293410321399808)
         await channel.send(embed=embed)
 
 @bot.event
 async def on_member_remove(member):
     embed=discord.Embed(description=f"Member left **{member}**", color=0x9b9dff, timestamp = datetime.datetime.utcnow())
     guild = member.guild
-    if guild.id == 453812812272107521:
-        channel = bot.get_channel(453812948360757258)
+    if guild.id == 453975047384727556:
+        channel = bot.get_channel(454293410321399808)
         await channel.send(embed=embed)
 
 @bot.command()
