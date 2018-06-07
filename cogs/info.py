@@ -18,5 +18,10 @@ class info():
         embed=discord.Embed(description=f"**Information**\n\n__**Stats**__\nUptime: **%dd %dh %dm %ds**\nServers: **{len(self.bot.guilds)}**\nDiscord.py: **{discord.__version__}**"% (day, hour, minute, second),color=0x9b9dff)
         await ctx.send(embed=embed)
 
+    @commands.command()
+    async def invite(self, ctx):
+        embed=discord.Embed(description="[Invite](https://discordapp.com/oauth2/authorize?client_id=454285151531433984&permissions=8&scope=bot)\n[Support guild](https://discord.gg/jvpKrVN)", color=0x9b9dff)
+        await ctx.send(embed=embed)
+        
 def setup(bot):
     bot.add_cog(info(bot))
