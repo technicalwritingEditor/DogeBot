@@ -12,7 +12,7 @@ bot.load_extension("cogs.utility")
 
 @bot.event
 async def on_ready():
-    print("Im online")
+    print("Im online yay")
     
 @bot.event
 async def on_guild_join(guild):
