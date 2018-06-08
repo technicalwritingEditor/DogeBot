@@ -33,22 +33,7 @@ class fun():
         if user.id == 454285151531433984:
             await ctx.send(f"**{ctx.author.name}** I aint going to roast myself faggot!")
         else:
-            await ctx.send("**{}** | {}".format(user.name, roast))
-
-    @commands.command(name="cat")
-    @commands.cooldown(1, 3, commands.BucketType.user)
-    async def cat_command(self, ctx):
-        api = 'http://aws.random.cat/meow'
-        async with aiohttp.ClientSession() as session:
-            async with session.get(api) as r:
-                if r.status == 200:
-                    response = await r.json()
-                    embed = discord.Embed(color=0xe156f1)
-                    embed.set_author(name="{} here is your random dogs".format(ctx.message.author.name))
-                    embed.set_image(url=response['file'])
-                    await ctx.send(embed=embed)
-                else:
-                    await ctx.send('Could not access random.cat API!')   
+            await ctx.send("**{}** | {}".format(user.name, roast)) 
                     
     @commands.command(name="dog")
     @commands.cooldown(1, 3, commands.BucketType.user)
