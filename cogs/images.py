@@ -14,12 +14,12 @@ class images():
         if user.id == :
             await ctx.send("Dont rip meh!")
         else:
-             img = Image.open("rip.png")
-             draw = ImageDraw.Draw(img)
-             font = ImageFont.truetype("American Captain.otf", 100)
-             draw.text((131, 399), f"{user.name}", (0, 0, 0), font=font)
-             img.save(f'{user.id}.png')
-             await ctx.send(file=discord.File(f'{user.id}.png'))
+            img = Image.open("rip.png")
+            draw = ImageDraw.Draw(img)
+            font = ImageFont.truetype("American Captain.otf", 100)
+            draw.text((131, 399), f"{user.name}", (0, 0, 0), font=font)
+            img.save(f'{user.id}.png')
+            await ctx.send(file=discord.File(f'{user.id}.png'))
 
     @commands.command()
     async def achievement(self, ctx, *, text = None):
