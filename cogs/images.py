@@ -11,7 +11,7 @@ class images():
     @commands.command()
     async def rip(self, ctx, user:discord.Member = None):
         user = user or ctx.author
-        if user.id == :
+        if user.id == 454285151531433984:
             await ctx.send("Dont rip meh!")
         else:
             img = Image.open("rip.png")
