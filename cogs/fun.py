@@ -35,5 +35,35 @@ class fun():
         else:
             await ctx.send("**{}** | {}".format(user.name, roast))
 
+    @commands.command(name="cat")
+    @commands.cooldown(1, 3, commands.BucketType.user)
+    async def cat_command(self, ctx):
+        api = 'http://aws.random.cat/meow'
+        async with aiohttp.ClientSession() as session:
+            async with session.get(api) as r:
+                if r.status == 200:
+                    response = await r.json()
+                    embed = discord.Embed(color=0xe156f1)
+                    embed.set_author(name="{} here is your random dogs".format(ctx.message.author.name))
+                    embed.set_image(url=response['file'])
+                    await ctx.send(embed=embed)
+                else:
+                    await ctx.send('Could not access random.cat API!')   
+                    
+    @commands.command(name="dog")
+    @commands.cooldown(1, 3, commands.BucketType.user)
+    async def dog_command(self, ctx):
+        """Shows random dogs"""
+        api = "https://api.thedogapi.co.uk/v2/dog.php"
+        async with aiohttp.ClientSession() as session:
+            async with session.get(api) as r:
+                if r.status == 200:
+                    response = await r.json()
+                    embed = discord.Embed(color = 0x05fa5b)
+                    embed.set_author(name = "{} here is your random dog".format(ctx.message.author.name))
+                    embed.set_image(url = response['data'][0]["url"])
+                    await ctx.send(embed = embed)         
+        
+        
 def setup(bot):
     bot.add_cog(fun(bot))
