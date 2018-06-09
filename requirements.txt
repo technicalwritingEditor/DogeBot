@@ -4,3 +4,4 @@ pillow
 youtube_dl
 PyNaCl
 opuslib
+motor
