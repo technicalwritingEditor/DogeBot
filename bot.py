@@ -10,6 +10,7 @@ bot.load_extension("cogs.images")
 bot.load_extension("cogs.info")
 bot.load_extension("cogs.utility")
 bot.load_extension("cogs.music")
+opus.load_opus("cogs.music")
 
 @bot.event
 async def on_ready():
