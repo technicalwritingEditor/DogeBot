@@ -9,6 +9,7 @@ class economy():
     @commands.command()
     async def create(self, ctx):
         self.bot.db.configs.update_one( { "id": ctx.author.id }, { "$set": { "money": 0 } }, upsert=True )
+        await ctx.send("Created account for ya")
 
     @commands.command()
     async def bal(self, ctx):
@@ -17,9 +18,10 @@ class economy():
 
     @commands.command()
     async def work(self, ctx):
+        x = random.randint(100, 1000)
         user = await self.bot.db.configs.find_one( { "id": ctx.author.id } )
         current = user['money']
-        self.bot.db.configs.update_one( { "id": ctx.author.id}, { "$set": { "money": current + 50} })
+        self.bot.db.configs.update_one( { "id": ctx.author.id}, { "$set": { "money": current + x} })
         await ctx.send("You have worked and gained 50 :dollar:")
         
 def setup(bot):
