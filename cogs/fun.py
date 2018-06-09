@@ -58,6 +58,13 @@ class fun():
 	    embed.set_image(url=data['sprites']['front_default'])
 	    await ctx.send(embed=embed)
 	    await self.bot.db.configs.update_one({ "id": ctx.author.id }, { "$set": { "pokemon": data['id'] } }, upsert=True)
+		
+    @commands.command()
+    async def inventory(self,ctx):
+        user = await self.bot.db.configs.find_one({ "id": ctx.author.id })
+# None if not found
+# otherwise has attributes of the data
+        print(user.pokemon)
                     
         
 def setup(bot):
