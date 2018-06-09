@@ -14,7 +14,7 @@ class economy():
     async def bal(self, ctx):
         user = await self.bot.db.configs.find_one({ "id": ctx.author.id })
         await ctx.send(user['money'])
-
+#hope
 
 def setup(bot):
     bot.add_cog(economy(bot))
