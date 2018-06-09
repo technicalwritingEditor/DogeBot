@@ -12,7 +12,7 @@ class pokemon():
         async with aiohttp.ClientSession().get(f'https://pokeapi.co/api/v2/pokemon-form/{num}/') as resp:
             data = await resp.json()
         await ctx.send(f"You catched a {data['name']} {data['sprites']['front_default']}")
-        await self.bot.db.configs.update_one({ "id": ctx.author.id }, { "$set": { "pokemon": data['sprites']['front_default'], data['name'] } }, upsert=True)
+        await self.bot.db.configs.update_one({ "id": ctx.author.id }, { "$set": { "pokemon": data['sprites']['front_default'], "name": data['name'] } }, upsert=True)
 
     @commands.command()
     async def mypokemon(self, ctx):
