@@ -26,9 +26,20 @@ class utility():
         await ctx.send(embed=embed)
 
     @commands.command()
-    async def prefix(self, ctx, prefix):
-        await self.bot.db.configs.update_one({ "id": ctx.guild.id }, { "$set": { "prefix": "{}".format(prefix) } }, upsert=True)
-        await ctx.send("Set the prefix to {}".format(prefix))
+    @commands.has_permissions(manage_guild = True)
+    async def prefix(self, ctx, prefix=None):
+        em = discord.Embed(color=discord.Color(value=0x00ff00), title="Bot Prefix")
+        if prefix is None:
+            em.description = f"The bot's prefix for server **{ctx.guild.name}** is set to `{ctx.prefix}`."
+            return await ctx.send(embed=em)
+        if prefix.lower() == 'clear':
+            await self.bot.db.prefix.update_one({"id": str(ctx.guild.id)}, {"$set": {"prefix": "*"}}, upsert=True)
+            em.description = f"The bot's prefix is now set to the default: `*`."
+            return await ctx.send(embed=em)
+        else:
+            await self.bot.db.prefix.update_one({"id": str(ctx.guild.id)}, {"$set": {"prefix": prefix}}, upsert=True)
+            em.description = f"The bot's prefix for this server is set to: `{prefix}`."
+            return await ctx.send(embed=em)
         
 def setup(bot):
     bot.add_cog(utility(bot))
