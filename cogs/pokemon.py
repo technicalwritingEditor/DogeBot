@@ -1,6 +1,6 @@
 import discord
 from discord.ext import commands
-import random, asyncio, aiohttp, ezjson
+import random, asyncio, aiohttp
 
 class pokemon():
     def __init__(self, bot):
