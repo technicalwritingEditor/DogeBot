@@ -67,7 +67,7 @@ class fun():
         embed=discord.Embed(title="Your inventory ")
 	embed.set_image(url=user['sprites'])
         await ctx.send(embed=embed)
-                    
+#start                    
         
 def setup(bot):
     bot.add_cog(fun(bot))
