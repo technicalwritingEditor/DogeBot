@@ -17,6 +17,7 @@ class economy():
         await ctx.send(f"{user['money']} :dollar:")
 
     @commands.command()
+    @commands.cooldown(1, 120, commands.BucketType.user)                  
     async def work(self, ctx):
         x = random.randint(100, 1000)
         user = await self.bot.db.configs.find_one( { "id": ctx.author.id } )
