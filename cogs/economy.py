@@ -19,7 +19,7 @@ class economy():
     async def work(self, ctx):
         user = await self.bot.db.configs.find_one( { "id": ctx.author.id } )
         current = user['money']
-        self.bot.db.configs.update_one( { "id": ctx.author.id}, { "$set": { "money": current + "50"} })
+        self.bot.db.configs.update_one( { "id": ctx.author.id}, { "$set": { "money": current + 50} })
         await ctx.send("You have worked and gained 50 :dollars:")
         
 def setup(bot):
