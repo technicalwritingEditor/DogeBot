@@ -1,6 +1,6 @@
 import discord, datetime
 from discord.ext import commands
-import os
+import os, opus
 
 bot=commands.Bot(command_prefix='-')
 bot.remove_command('help')
