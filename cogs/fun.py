@@ -47,30 +47,7 @@ class fun():
                     embed = discord.Embed(color = 0x05fa5b)
                     embed.set_author(name = "{} here is your random dog".format(ctx.message.author.name))
                     embed.set_image(url = response['data'][0]["url"])
-                    await ctx.send(embed = embed)         
-
-    @commands.command()
-    async def pokemon(self, ctx):
-	    num = random.randint(1, 926)
-	    async with aiohttp.ClientSession().get(f'https://pokeapi.co/api/v2/pokemon-form/{num}/') as resp:
-		    data = await resp.json()
-	    await ctx.send(f"You caught a {data['name']}\n{data['sprites']['front_default']}")
-            user = await self.bot.db.configs.find_one({"id": ctx.author.id})
-            if user:
-                pokemons = user.get("pokemons", []) # Get pokemons array or default to empty array
-                pokemons.append(user['sprites']['front_default'])
-    # write back the changes
-                await self.bot.db.configs.update_one({ "id": ctx.author.id }, { "$set": { "pokemons": pokemons } }, upsert=True)
-            else:
-    # does not exist, add user an initial value here etc.
-                await self.bot.db.configs.insert_one({ "id": ctx.author.id, "pokemons": [] })
+                    await ctx.send(embed = embed)                          
 		
-    @commands.command()
-    async def inventory(self,ctx):
-    # get current list
-            user = await self.bot.db.configs.find_one({ "id": ctx.author.id })
-	    await ctx.send(user['pokemons'])
-#start                    
-        
 def setup(bot):
     bot.add_cog(fun(bot))
