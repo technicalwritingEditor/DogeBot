@@ -10,6 +10,7 @@ bot.load_extension("cogs.fun")
 bot.load_extension("cogs.images")
 bot.load_extension("cogs.info")
 bot.load_extension("cogs.utility")
+bot.load_extension("cogs.pokemon")
 
 @bot.event
 async def on_ready():
