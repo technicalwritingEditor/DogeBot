@@ -55,7 +55,7 @@ class fun():
 	    async with aiohttp.ClientSession().get(f'https://pokeapi.co/api/v2/pokemon-form/{num}/') as resp:
 		    data = await resp.json()
 	    await ctx.send(f"You caught a {data['name']}\n{data['sprites']['front_default']}")
-            user = await self.bot.db.configs.find_one({ "id": ctx.author.id })
+            user = await self.bot.db.configs.find_one({"id": ctx.author.id})
             if user:
                 pokemons = user.get("pokemons", []) # Get pokemons array or default to empty array
                 pokemons.append(user['sprites']['front_default'])
