@@ -30,6 +30,22 @@ async def on_member_remove(member):
         channel = bot.get_channel(454707800627740672)
         await channel.send(embed=embed)
 
+@bot.event
+async def on_reaction_add(reaction, user):
+        if reaction.emoji == "⭐":
+            embed=discord.Embed(title="Starboard", description=reaction.message.content, color=0xffff80)
+            embed.set_author(name=reaction.message.author.name, icon_url=reaction.message.author.avatar_url)
+            try:
+                img_url = reaction.message.attachments[0].url
+                if img_url:
+                    embed.set_image(url=str(img_url))
+            except IndexError:
+                img_url = None
+            guild = reaction.message.guild
+            if guild.id == 454634784669433859:
+                channel=bot.get_channel(454974580222853141)
+                await channel.send(embed=embed)        
+        
 @bot.command()
 async def help(ctx):
     embed=discord.Embed(title="My commands", color=0x9b9dff)
