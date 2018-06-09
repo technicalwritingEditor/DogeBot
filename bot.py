@@ -59,7 +59,7 @@ async def help(ctx):
     await ctx.send(embed=embed)
 
 db = AsyncIOMotorClient(os.environ.get("MONGODB"))
-bot.db = db.YOUR_DB_NAME    
+bot.db = db.pepe_my_bot    
     
 if not os.environ.get('TOKEN'):
     print("no token found")
