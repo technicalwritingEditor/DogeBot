@@ -25,5 +25,10 @@ class utility():
         embed=discord.Embed(description=f"{user.mention}\nId: **{user.id}**\nRoles: **{len(user.roles)}**\nStatus: **{user.status}**\nJoined at: **{user.joined_at}**", color=user.color)
         await ctx.send(embed=embed)
 
+    @commands.command()
+    async def prefix(self, ctx, prefix):
+        await self.bot.db.configs.update_one({ "id": ctx.guild.id }, { "$set": { "prefix": "{}".format(prefix) } }, upsert=True)
+        await ctx.send("Set the prefix to {}".format(prefix))
+        
 def setup(bot):
     bot.add_cog(utility(bot))
