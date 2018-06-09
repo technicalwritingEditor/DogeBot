@@ -22,7 +22,7 @@ class utility():
 
     @commands.command()
     async def userinfo(self, ctx, user: discord.Member):
-        embed=discord.Embed(description=f"{user.mention}\nId: **{user.id}**\nPlaying: **{user.game}**\nRoles: **{len(user.roles)}**\nStatus: **{user.status}**\nJoined at: **{user.joined_at}**", color=user.color)
+        embed=discord.Embed(description=f"{user.mention}\nId: **{user.id}**\nRoles: **{len(user.roles)}**\nStatus: **{user.status}**\nJoined at: **{user.joined_at}**", color=user.color)
         await ctx.send(embed=embed)
 
 def setup(bot):
