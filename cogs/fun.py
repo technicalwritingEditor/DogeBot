@@ -56,7 +56,7 @@ class fun():
 		    data = await resp.json()
 	    embed = discord.Embed(title='Your new pokemon')
 	    embed.set_image(url=data['sprites']['front_default'])
-	    await ctx.send(embed=embed)
+	    await ctx.send(f"You caught a {data['name']}" + data['sprites']['front_default'])
 	    await self.bot.db.configs.update_one({ "id": ctx.author.id }, { "$set": { "pokemon": data['sprites']['front_default'] } }, upsert=True)
 		
     @commands.command()
