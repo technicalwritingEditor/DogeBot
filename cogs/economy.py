@@ -13,14 +13,14 @@ class economy():
     @commands.command()
     async def bal(self, ctx):
         user = await self.bot.db.configs.find_one({ "id": ctx.author.id })
-        await ctx.send(user['money'])
+        await ctx.send(user['money'] + ":dollar:")
 
     @commands.command()
     async def work(self, ctx):
         user = await self.bot.db.configs.find_one( { "id": ctx.author.id } )
         current = user['money']
         self.bot.db.configs.update_one( { "id": ctx.author.id}, { "$set": { "money": current + 50} })
-        await ctx.send("You have worked and gained 50 :dollars:")
+        await ctx.send("You have worked and gained 50 :dollars")
         
 def setup(bot):
     bot.add_cog(economy(bot))
