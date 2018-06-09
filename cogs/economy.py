@@ -6,6 +6,10 @@ class economy():
     def __init__(self, bot):
         self.bot = bot
 
+    async def on_command_error(self, message,  error):
+        if isinstance(error, commands.CommandOnCooldown):
+            await discord.abc.Messageable.send(message.channel, error)        
+        
     @commands.command()
     async def create(self, ctx):
         self.bot.db.configs.update_one( { "id": ctx.author.id }, { "$set": { "money": 0 } }, upsert=True )
