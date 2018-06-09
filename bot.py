@@ -3,13 +3,6 @@ from discord.ext import commands
 import os
 from motor.motor_asyncio import AsyncIOMotorClient
 
-async def getprefix(bot, message):
-    if isinstance(message.channel, discord.DMChannel): return "*"
-    x = await db.prefix.find_one({"id": str(message.guild.id)})
-    pre = x['prefix'] if x is not None else '*'
-    match = re.match(f"<@!?{bot.user.id}> ", message.content)
-    return match.group() if match else pre
-
 bot=commands.Bot(command_prefix=getprefix)
 bot.remove_command('help')
 
