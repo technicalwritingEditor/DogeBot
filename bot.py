@@ -10,6 +10,7 @@ bot.load_extension("cogs.images")
 bot.load_extension("cogs.info")
 bot.load_extension("cogs.utility")
 bot.load_extension("cogs.music")
+
 @bot.event
 async def on_ready():
     print("Im online")
@@ -56,6 +57,9 @@ async def help(ctx):
     embed.set_footer(text="I´m a very new bot and in early development, there will come A LOT more commands!")
     await ctx.send(embed=embed)
 
+db = AsyncIOMotorClient(os.environ.get("MONGODB"))
+bot.db = db.YOUR_DB_NAME    
+    
 if not os.environ.get('TOKEN'):
     print("no token found")
 bot.run(os.environ.get('TOKEN').strip('"'))
