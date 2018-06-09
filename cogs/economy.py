@@ -8,7 +8,7 @@ class economy():
 
     @commands.command()
     async def create(self, ctx):
-        self.bot.db.configs.update_one( { "id": ctx.author.id }, { "$set": { "money": "0" } }, upsert=True )
+        self.bot.db.configs.update_one( { "id": ctx.author.id }, { "$set": { "money": 0 } }, upsert=True )
 
     @commands.command()
     async def bal(self, ctx):
