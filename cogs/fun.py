@@ -64,7 +64,7 @@ class fun():
         user = await self.bot.db.configs.find_one({ "id": ctx.author.id })
 # None if not found
 # otherwise has attributes of the data
-        await ctx.send(user['sprites']['front_default'])
+        await ctx.send(user['front_default'])
 #start                    
         
 def setup(bot):
