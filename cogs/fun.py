@@ -64,7 +64,7 @@ class fun():
         user = await self.bot.db.configs.find_one({ "id": ctx.author.id })
 # None if not found
 # otherwise has attributes of the data
-        print(user.pokemon)
+        await ctx.send(user.pokemon)
                     
         
 def setup(bot):
