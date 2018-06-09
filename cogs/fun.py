@@ -65,6 +65,8 @@ class fun():
 # None if not found
 # otherwise has attributes of the data
         await ctx.send(user.pokemon)
+   else:
+	await ctx.send("Mum gay")
                     
         
 def setup(bot):
