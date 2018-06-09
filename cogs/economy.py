@@ -22,7 +22,7 @@ class economy():
         user = await self.bot.db.configs.find_one( { "id": ctx.author.id } )
         current = user['money']
         self.bot.db.configs.update_one( { "id": ctx.author.id}, { "$set": { "money": current + x} })
-        await ctx.send("You have worked and gained 50 :dollar:")
-        
+        await ctx.send(f"You have worked and gained {x} :dollar:")
+                       
 def setup(bot):
     bot.add_cog(economy(bot))
