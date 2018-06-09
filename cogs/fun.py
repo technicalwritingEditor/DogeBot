@@ -48,7 +48,16 @@ class fun():
                     embed.set_author(name = "{} here is your random dog".format(ctx.message.author.name))
                     embed.set_image(url = response['data'][0]["url"])
                     await ctx.send(embed = embed)         
-        
+
+    @commands.command()
+    async def pokemon(self, ctx):
+	    num = random.randint(1, 926)
+	    async with aiohttp.ClientSession().get(f'https://pokeapi.co/api/v2/pokemon-form/{num}/') as resp:
+		    data = await resp.json()
+	    embed = discord.Embed(title='Who\'s that pokemon?')
+	    embed.set_image(url=data['sprites']['front_default'])
+	    await ctx.send(embed=embed)                    
+                    
         
 def setup(bot):
     bot.add_cog(fun(bot))
