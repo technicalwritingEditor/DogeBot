@@ -3,4 +3,3 @@ yarl<1.2
 pillow
 youtube_dl
 PyNaCl
-opus
