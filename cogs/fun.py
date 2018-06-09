@@ -64,7 +64,9 @@ class fun():
         user = await self.bot.db.configs.find_one({ "id": ctx.author.id })
 # None if not found
 # otherwise has attributes of the data
-        await ctx.send(user.pokemon)
+        embed=discord.Embed(title="Your inventory")
+        embed.add_field(name=f"{ctx.author.name}", value=user.pokemon)
+        await ctx.send(embed=embed)
                     
         
 def setup(bot):
