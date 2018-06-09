@@ -59,10 +59,16 @@ class fun():
 		
     @commands.command()
     async def inventory(self,ctx):
-        user = await self.bot.db.configs.find_one({ "id": ctx.author.id })
-# None if not found
-# otherwise has attributes of the data
-        await ctx.send(user['pokemon'])
+    # get current list
+            user = await self.bot.db.configs.find_one({ "id": ctx.author.id })
+            if user:
+                pokemons = user.get("pokemons", []) # Get pokemons array or default to empty array
+                pokemons.append(user['sprites']['front_default'])
+    # write back the changes
+                await self.bot.db.configs.update_one({ "id": ctx.author.id }, { "$set": { "pokemons": pokemons } }, upsert=True)
+            else:
+    # does not exist, add user an initial value here etc.
+                await self.bot.db.configs.insert_one({ "id": ctx.author.id, "pokemons": [] })
 #start                    
         
 def setup(bot):
