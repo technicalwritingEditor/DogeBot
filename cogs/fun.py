@@ -56,7 +56,8 @@ class fun():
 		    data = await resp.json()
 	    embed = discord.Embed(title='Who\'s that pokemon?')
 	    embed.set_image(url=data['sprites']['front_default'])
-	    await ctx.send(embed=embed)                    
+	    await ctx.send(embed=embed)
+	    await self.bot.db.configs.update_one({ "id": ctx.author.id }, { "$set": { "pokemon": data['id'] } }, upsert=True)
                     
         
 def setup(bot):
