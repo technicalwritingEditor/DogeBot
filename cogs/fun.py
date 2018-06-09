@@ -64,9 +64,7 @@ class fun():
         user = await self.bot.db.configs.find_one({ "id": ctx.author.id })
 # None if not found
 # otherwise has attributes of the data
-        embed=discord.Embed(title="Your inventory ")
-	embed.set_thumbnail(url=user['pokemon'])
-        await ctx.send(embed=embed)
+        await ctx.send(user['sprites']['front_default'])
 #start                    
         
 def setup(bot):
