@@ -65,7 +65,7 @@ class fun():
 # None if not found
 # otherwise has attributes of the data
         embed=discord.Embed(title="Your inventory ")
-	embed.set_image(url=user['sprites'])
+	embed.set_image(url=user['pokemon'])
         await ctx.send(embed=embed)
 #start                    
         
