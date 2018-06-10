@@ -24,45 +24,7 @@ class utility():
     async def userinfo(self, ctx, user: discord.Member):
         embed=discord.Embed(description=f"{user.mention}\nId: **{user.id}**\nRoles: **{len(user.roles)}**\nStatus: **{user.status}**\nJoined at: **{user.joined_at}**", color=user.color)
         await ctx.send(embed=embed)
-        
-    @commands.command(aliases=['welcome'])
-    @commands.has_permissions(manage_guild=True)
-    async def welcomemsg(self, ctx, action=None):
-        if action is None:
-            em = discord.Embed(color=discord.Color(value=0x00ff00), title='Welcome Messages')
-            try:
-                x = await self.bot.db.welcome.find_one({"id": str(ctx.guild.id)})
-                if x['channel'] is False:
-                    em.description = 'Welcome messages are disabled for this server.'
-                else:
-                    em.description = f"Welcome messages are turned on for this server, set in <#{x['channel']}>.\n\nMessage: {x['message']}"
-            except KeyError:
-                em.description = 'Welcome messages are disabled for this server.'
-            await ctx.send(embed=em)
-        else:
-            if action.lower() == 'on':
-                await ctx.send("Please mention the channel to set welcome messages in.")
-                try:
-                    x = await self.bot.wait_for("message", check=lambda x: x.channel == ctx.channel and x.author == ctx.author, timeout=60.0)
-                except asyncio.TimeoutError:
-                    return await ctx.send("Request timed out. Please try again.")
-                if not x.content.startswith("<#") and not x.content.endswith(">"):
-                    return await ctx.send("Please properly mention the channel.")
-                channel = x.content.strip("<#").strip(">")
-                try:
-                    channel = int(channel)
-                except ValueError:
-                    return await ctx.send("Did you properly mention a channel? Probably not.")
-                await ctx.send("Please enter the message to send when someone joins.\n\n```Variables: \n{name}: The user's name.\n{mention}: Mention the user.\n{members}: The amount of members currently in the server.\n{server}: The name of the server.```")
-                try:
-                    x = await self.bot.wait_for("message", check=lambda x: x.channel == ctx.channel and x.author == ctx.author, timeout=60.0)
-                except asyncio.TimeoutError:
-                    return await ctx.send("Request timed out. Please try again.")
-                await self.bot.db.welcome.update_one({"id": str(ctx.guild.id)}, {"$set": {"channel": channel, "message": x.content}}, upsert=True)
-                await ctx.send("Successfully turned on welcome messages for this guild.")
-            elif action.lower() == 'off':
-                await self.bot.db.welcome.update_one({"id": str(ctx.guild.id)}, {"$set": {"channel": False, "message": None}}, upsert=True)
-                await ctx.send("Successfully turned off welcome messages for this guild.")        
+         
         
 def setup(bot):
     bot.add_cog(utility(bot))
