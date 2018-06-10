@@ -31,7 +31,7 @@ class mod():
         await send_channel.send(embed=em)   
    
     async def on_message_delete(self, message):
-        x = await self.bot.db.leave.find_one({"id": str(message.guild.id)})
+        x = await self.bot.db.modlog.find_one({"id": str(message.guild.id)})
         if not x:
             return
         channel = int(x['channel'])
