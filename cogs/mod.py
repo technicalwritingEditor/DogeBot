@@ -30,19 +30,6 @@ class mod():
             return
         await send_channel.send(embed=em)   
 
-    async def on_message_edit(before, after):
-        em=discord.Embed()
-        em.add_field(name="Author", value=before.author.mention)
-        em.add_field(name="Before", value=before.content)
-        em.add_field(name="After", value=after.content)
-        x = await self.bot.db.modlog.find_one({"id": str(user.guild.id)})
-        if not x:
-            return
-        channel = int(x['channel'])
-        send_channel = self.bot.get_channel(channel)
-        if not send_channel:
-            return
-        await send_channel.send(embed=em)
         
     @commands.command()
     @commands.has_permissions(manage_guild=True)
@@ -78,24 +65,7 @@ class mod():
         except ValueError:
             return await ctx.send("Please mention the channel right")
         await self.bot.db.leave.update_one({"id": str(ctx.guild.id)}, {"$set": {"channel": channel} }, upsert=True )
-        await ctx.send("I have set the leave channel!")
-
-    @commands.command()
-    async def modlog(self, ctx):
-        await ctx.send("Please mention the channel to set the log messages in.")
-        try:
-            x = await self.bot.wait_for("message", check=lambda x: x.channel == ctx.channel and x.author == ctx.author, timeout=60.0)
-        except asyncio.TimeoutError:
-            return await ctx.send("The time is up")
-        if not x.content.startswith("<#") and not x.content.endswith(">"):
-            return await ctx.send("Please mention the channel")
-        channel = x.content.strip("<#").strip(">")
-        try:
-            channel = int(channel)
-        except ValueError:
-            return await ctx.send("Please mention the channel right")
-        await self.bot.db.modlog.update_one({"id": str(ctx.guild.id)}, {"$set": {"channel": channel} }, upsert=True )
-        await ctx.send("I have set the mod-log channel!")        
+        await ctx.send("I have set the leave channel!")   
         
 def setup(bot):
     bot.add_cog(mod(bot))
