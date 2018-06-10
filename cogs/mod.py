@@ -33,41 +33,49 @@ class mod():
         
     @commands.command()
     async def welcome(self, ctx, sort=None):
+        if sort == None:
+            await ctx.send("**Choose `on` or `off`**")
         if sort == "on":
-            await ctx.send("Please mention the channel to set the welcome messages in.")
+            await ctx.send("**Please mention the channel to set the welcome messages in.**")
             try:
                 x = await self.bot.wait_for("message", check=lambda x: x.channel == ctx.channel and x.author == ctx.author, timeout=60.0)
             except asyncio.TimeoutError:
-                return await ctx.send("The time is up")
+                return await ctx.send("**The time is up**")
             if not x.content.startswith("<#") and not x.content.endswith(">"):
-                return await ctx.send("Please mention the channel")
+                return await ctx.send("**Please mention the channel**")
             channel = x.content.strip("<#").strip(">")
             try:
                 channel = int(channel)
             except ValueError:
-                return await ctx.send("Please mention the channel right")
+                return await ctx.send("**Please mention the channel right**")
             await self.bot.db.welcome.update_one({"id": str(ctx.guild.id)}, {"$set": {"channel": channel} }, upsert=True )
-            await ctx.send("I have set the welcome channel!")
+            await ctx.send("**I have set the welcome channel!**")
         if sort == "off":
             await self.bot.db.welcome.update_one({"id": str(ctx.guild.id)}, {"$set": {"channel": False} }, upsert=True )
-        
+            await ctx.send("**I have turned on welcome messages**")
+
     @commands.command()
-    @commands.has_permissions(manage_guild=True)
-    async def leave(self, ctx):
-        await ctx.send("Please mention the channel to set leave messages in.")
-        try:
-            x = await self.bot.wait_for("message", check=lambda x: x.channel == ctx.channel and x.author == ctx.author, timeout=60.0)
-        except asyncio.TimeoutError:
-            return await ctx.send("The time is up")
-        if not x.content.startswith("<#") and not x.content.endswith(">"):
-            return await ctx.send("Please mention the channel")
-        channel = x.content.strip("<#").strip(">")
-        try:
-            channel = int(channel)
-        except ValueError:
-            return await ctx.send("Please mention the channel right")
-        await self.bot.db.leave.update_one({"id": str(ctx.guild.id)}, {"$set": {"channel": channel} }, upsert=True )
-        await ctx.send("I have set the leave channel!")   
+    async def leave(self, ctx, sort=None):
+        if sort == None:
+            await ctx.send("**`on` or `off`**")
+        if sort == "on":
+            await ctx.send("**Please mention the channel to set the leave messages in.**")
+            try:
+                x = await self.bot.wait_for("message", check=lambda x: x.channel == ctx.channel and x.author == ctx.author, timeout=60.0)
+            except asyncio.TimeoutError:
+                return await ctx.send("**The time is up**")
+            if not x.content.startswith("<#") and not x.content.endswith(">"):
+                return await ctx.send("**Please mention the channel**")
+            channel = x.content.strip("<#").strip(">")
+            try:
+                channel = int(channel)
+            except ValueError:
+                return await ctx.send("**Please mention the channel right**")
+            await self.bot.db.leave.update_one({"id": str(ctx.guild.id)}, {"$set": {"channel": channel} }, upsert=True )
+            await ctx.send("**I have set the leave channel!**")
+        if sort == "off":
+            await self.bot.db.leave.update_one({"id": str(ctx.guild.id)}, {"$set": {"channel": False} }, upsert=True )
+            await ctx.send("**I have turned off leave messages**")
         
 def setup(bot):
     bot.add_cog(mod(bot))
