@@ -7,13 +7,13 @@ class mod():
         self.bot = bot
 
     async def on_member_join(self, user):
-        em = discord.Embed(description=f"Welcome **{user.mention}**!", color=0x1aff00, timestamp = datetime.datetime.utcnow())
-        em.set_author(name=user, icon_url=user.avatar_url)
         x = await self.bot.db.welcome.find_one({"id": str(user.guild.id)})
         if not x:
             return
         channel = int(x['channel'])
         send_channel = self.bot.get_channel(channel)
+        em = discord.Embed(description=x['message'], color=0x9b9dff, timestamp = datetime.datetime.utcnow())
+        em.set_author(name=user, icon_url=user.avatar_url)
         if not send_channel:
             return
         await send_channel.send(embed=em)
