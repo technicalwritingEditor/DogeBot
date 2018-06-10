@@ -31,6 +31,7 @@ class mod():
         await send_channel.send(embed=em)   
 
     @commands.command()
+    @commands.has_permissions(manage_guild=True)
     async def welcome(self, ctx):
         await ctx.send("Please mention the channel to set welcome messages in.")
         try:
