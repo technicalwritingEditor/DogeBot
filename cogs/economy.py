@@ -30,6 +30,7 @@ class economy():
         await ctx.send(f"You have worked and gained {x} :dollar:")                       
               
     @commands.command()
+    @commands.cooldown(1, 86400, commands.BucketType.user)
     async def daily(self, ctx):
         x = random.randint(500, 10000)
         user = await self.bot.db.configs.find_one( { "id": ctx.author.id } )
