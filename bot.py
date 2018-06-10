@@ -12,6 +12,7 @@ bot.load_extension("cogs.info")
 bot.load_extension("cogs.utility")
 bot.load_extension("cogs.economy")
 bot.load_extension("cogs.mod")
+bot.load_extension("cogs.owner")
 
 @bot.event
 async def on_ready():
