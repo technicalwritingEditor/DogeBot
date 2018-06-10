@@ -10,8 +10,18 @@ class economy():
         if isinstance(error, commands.CommandOnCooldown):
             await discord.abc.Messageable.send(message.channel, error)        
         
+    async def is_registered(self, user):
+        x = await self.db.configs.find_one({"user": user.id})
+        if x is None:
+            return False
+        else:
+            return True        
+        
     @commands.command()
     async def create(self, ctx):
+        registered = await self.is_registered(ctx.author)
+        if registered:
+            return await ctx.send(f"You already have a bank account!")
         self.bot.db.configs.update_one( { "id": ctx.author.id }, { "$set": { "money": 0 } }, upsert=True )
         await ctx.send("Created account for ya")
 
