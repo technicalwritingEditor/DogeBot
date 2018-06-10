@@ -49,6 +49,7 @@ class mod():
         await ctx.send("I have set the welcome channel!")
         
     @commands.command()
+    @commands.has_permissions(manage_guild=True)
     async def leave(self, ctx):
         await ctx.send("Please mention the channel to set leave messages in.")
         try:
