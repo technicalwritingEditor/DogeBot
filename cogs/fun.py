@@ -32,8 +32,6 @@ class fun():
         roast = random.choice(roasts)
         if user.id == 454285151531433984:
             await ctx.send(f"**{ctx.author.name}** I aint going to roast myself faggot!")
-	elif user.id == 338600456383234058:
-		await ctx.send(f"**{ctx.author.name}** Dont to to roast my owner you twat!")
         else:
             await ctx.send("**{}** | {}".format(user.name, roast)) 
                     
