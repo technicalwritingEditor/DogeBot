@@ -31,6 +31,9 @@ class mod():
         await send_channel.send(embed=em)   
    
     async def on_message_delete(self, message):
+        em = discord.Embed(color=0x1aff00, timestamp = datetime.datetime.utcnow())
+        em.add_field(name="Message deleted", value=message.content)
+        em.set_author(name=message.author, icon_url=message.author.avatar_url)
         x = await self.bot.db.modlog.find_one({"id": str(message.guild.id)})
         if not x:
             return
@@ -38,7 +41,7 @@ class mod():
         send_channel = self.bot.get_channel(channel)
         if not send_channel:
             return
-        await send_channel.send("yeet")           
+        await send_channel.send(embed=em)           
 
     @commands.command()
     @commands.has_permissions(manage_guild=True)
