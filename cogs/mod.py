@@ -30,6 +30,16 @@ class mod():
             return
         await send_channel.send(embed=em)   
    
+    async def on_message_delete(self, message):
+        x = await self.bot.db.leave.find_one({"id": str(user.guild.id)})
+        if not x:
+            return
+        channel = int(x['channel'])
+        send_channel = self.bot.get_channel(channel)
+        if not send_channel:
+            return
+        await send_channel.send("yeet")           
+
     @commands.command()
     @commands.has_permissions(manage_guild=True)
     async def welcome(self, ctx, sort=None):
