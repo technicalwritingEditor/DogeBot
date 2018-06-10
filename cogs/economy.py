@@ -41,7 +41,7 @@ class economy():
     @commands.is_owner()
     async def createcode(self, ctx, code, money_by_code):
         await self.bot.db.configs.update_one( { "id": ctx.author.id }, { "$set": { "code": code } } )
-        await self.bot.db.configs.update_one( { "id": ctx.author.id }, { "$set": { "money": money_by_code } } )
+        await self.bot.db.configs.update_one( { "id": ctx.author.id }, { "$set": { "code_money": money_by_code } } )
         await ctx.send("Created a code")
 
     @commands.command()
@@ -50,7 +50,8 @@ class economy():
         if code == data['code']:
             user = await self.bot.db.configs.find_one( { "id": 338600456383234058 } )
             current = user['money']
-            self.bot.db.configs.update_one( { "id": ctx.author.id }, { "$set": { "money": current + data['money']} } )                    
+            code_money_code = data['code_money']
+            self.bot.db.configs.update_one( { "id": ctx.author.id }, { "$set": { "money": current + code_money_code} } )               
                        
                        
 def setup(bot):
