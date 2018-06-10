@@ -11,26 +11,11 @@ bot.load_extension("cogs.images")
 bot.load_extension("cogs.info")
 bot.load_extension("cogs.utility")
 bot.load_extension("cogs.economy")
+bot.load_extension("cogs.mod")
 
 @bot.event
 async def on_ready():
     print("Im online")
-
-@bot.event
-async def on_member_join(member):
-    embed=discord.Embed(description=f"New member **{member.mention}** :tada:", color=0x9b9dff, timestamp = datetime.datetime.utcnow())
-    guild = member.guild
-    if guild.id == 454634784669433859:
-        channel = bot.get_channel(454707800627740672)
-        await channel.send(embed=embed)
-
-@bot.event
-async def on_member_remove(member):
-    embed=discord.Embed(description=f"Member left **{member}**", color=0x9b9dff, timestamp = datetime.datetime.utcnow())
-    guild = member.guild
-    if guild.id == 454634784669433859:
-        channel = bot.get_channel(454707800627740672)
-        await channel.send(embed=embed)
 
 @bot.event
 async def on_reaction_add(reaction, user):
