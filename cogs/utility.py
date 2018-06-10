@@ -40,6 +40,7 @@ class utility():
         except ValueError:
             return await ctx.send("Did you properly mention a channel? Probably not.")
         await self.bot.db.welcome.update_one({"id": str(ctx.guild.id)}, {"$set": {"channel": channel} }, upsert=True )
+        await ctx.send("I have set the welcome channel!")
             
 def setup(bot):
     bot.add_cog(utility(bot))
