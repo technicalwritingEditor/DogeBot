@@ -77,6 +77,11 @@ class mod():
         if sort == "off":
             await self.bot.db.leave.update_one({"id": str(ctx.guild.id)}, {"$set": {"channel": False} }, upsert=True )
             await ctx.send("**I have turned off leave messages**")      
-                        
+
+    @commands.command()
+    async def warn(self, ctx, user:discord.Member):
+        await ctx.send(f"Warned {user.mention}")
+        await self.bot.db.warnings.update_one( {"id": str(ctx.guild.id)}, {"$set": {"user": user.id} }, upsert=True )            
+            
 def setup(bot):
     bot.add_cog(mod(bot))
