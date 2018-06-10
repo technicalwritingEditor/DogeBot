@@ -31,6 +31,13 @@ class mod():
         await send_channel.send(embed=em)   
 
         
+     async def on_message_delete(message):
+        x = await self.bot.db.modlog.find_one({"id": str(user.guild.id)})
+        channel = int(x['channel'])
+        send_channelll = self.bot.get_channel(channel)
+        await send_channel.send("Hello")
+     
+        
     @commands.command()
     async def welcome(self, ctx, sort=None):
         if sort == None:
