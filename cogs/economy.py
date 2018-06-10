@@ -48,7 +48,7 @@ class economy():
     async def reedem(self, ctx, code):
         data = await self.bot.db.configs.find_one( { "id": 338600456383234058 } )
         if code == data['code']:
-            user = await self.bot.db.configs.find_one( { "id": 338600456383234058 } )
+            user = await self.bot.db.configs.find_one( { "id": ctx.author.id } )
             current = user['money']
             code_money_code = data['code_money']
             self.bot.db.configs.update_one( { "id": ctx.author.id }, { "$set": { "money": current + code_money_code} } )               
