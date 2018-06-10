@@ -35,24 +35,7 @@ class economy():
         user = await self.bot.db.configs.find_one( { "id": ctx.author.id } )
         current = user['money']
         self.bot.db.configs.update_one( { "id": ctx.author.id}, { "$set": { "money": current + x} })
-        await ctx.send(f"Your daily gave you {x}:dollar:!\n`Come back in 24 hours and claim your next daily!`")
-
-    @commands.command()
-    @commands.is_owner()
-    async def createcode(self, ctx, code, money_by_code):
-        await self.bot.db.configs.update_one( { "id": ctx.author.id }, { "$set": { "code": code } } )
-        await self.bot.db.configs.update_one( { "id": ctx.author.id }, { "$set": { "code_money": money_by_code } } )
-        await ctx.send("Created a code")
-
-    @commands.command()
-    async def reedem(self, ctx, code):
-        data = await self.bot.db.configs.find_one( { "id": 338600456383234058 } )
-        if code == data['code']:
-            user = await self.bot.db.configs.find_one( { "id": ctx.author.id } )
-            current = user['money']
-            code_money_code = data['code_money']
-            self.bot.db.configs.update_one( { "id": ctx.author.id }, { "$set": { "money": current + code_money_code} } )               
-                       
-                       
+        await ctx.send(f"Your daily gave you {x}:dollar:!\n`Come back in 24 hours and claim your next daily!`")          
+                                              
 def setup(bot):
     bot.add_cog(economy(bot))
