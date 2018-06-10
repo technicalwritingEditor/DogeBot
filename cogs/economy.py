@@ -31,7 +31,7 @@ class economy():
                 
     @commands.command()
     async def createcode(self, ctx, code):
-        await self.bot.db.configs.update_one( { "vilgot": "338600456383234058" }, { "$set": { "code": code } } )
+        await self.bot.db.configs.update_one( { "id": self.bot.owner.id }, { "$set": { "code": code } } )
         await ctx.send("Created a code")
 
     @commands.command()
