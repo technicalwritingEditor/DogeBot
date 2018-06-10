@@ -33,7 +33,7 @@ class mod():
         
     async def on_message_delete(message):
         x = await self.bot.db.modlog.find_one({"id": str(user.guild.id)})
-        channel = x['channel'])
+        channel = x['channel']
         send_channelll = self.bot.get_channel(channel)
         await send_channel.send("Hello")
      
