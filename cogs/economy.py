@@ -36,15 +36,7 @@ class economy():
         user = await self.bot.db.configs.find_one( { "id": ctx.author.id } )
         current = user['money']
         self.bot.db.configs.update_one( { "id": ctx.author.id}, { "$set": { "money": current + x} })
-        await ctx.send(f"Your daily gave you {x}:dollar:!\n`Come back in 24 hours and claim your next daily!`")          
-
-    @commands.command()
-    async def coinflip(self, ctx, tailorhead, bet):
-        x = random.randint(1, 2)
-        if x == 1:
-            await ctx.send("Head yay")
-        if x == 2:
-            await ctx.send("Tail noo")                       
+        await ctx.send(f"Your daily gave you {x}:dollar:!\n`Come back in 24 hours and claim your next daily!`")                                
                        
 def setup(bot):
     bot.add_cog(economy(bot))
