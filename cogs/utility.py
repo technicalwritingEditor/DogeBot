@@ -25,6 +25,21 @@ class utility():
         embed=discord.Embed(description=f"{user.mention}\nId: **{user.id}**\nRoles: **{len(user.roles)}**\nStatus: **{user.status}**\nJoined at: **{user.joined_at}**", color=user.color)
         await ctx.send(embed=embed)
          
-        
+    @commands.command()
+    async def welcome(self, ctx):
+        await ctx.send("Please mention the channel to set welcome messages in.")
+        try:
+            x = await self.bot.wait_for("message", check=lambda x: x.channel == ctx.channel and x.author == ctx.author, timeout=60.0)
+        except asyncio.TimeoutError:
+            return await ctx.send("Request timed out. Please try again.")
+        if not x.content.startswith("<#") and not x.content.endswith(">"):
+            return await ctx.send("Please properly mention the channel.")
+        channel = x.content.strip("<#").strip(">")
+        try:
+            channel = int(channel)
+        except ValueError:
+            return await ctx.send("Did you properly mention a channel? Probably not.")
+        await self.bot.db.welcome.update_one({"id": str(ctx.guild.id)}, {"$set": {"channel": channel} }, upsert=True )
+            
 def setup(bot):
     bot.add_cog(utility(bot))
