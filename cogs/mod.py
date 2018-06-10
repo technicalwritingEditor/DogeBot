@@ -31,11 +31,10 @@ class mod():
         await send_channel.send(embed=em)   
 
         
-    async def on_message_delete(message):
-        x = await self.bot.db.modlog.find_one({"id": str(user.guild.id)})
+    async def on_message_delete(self, message):
+        x = self.bot.db.modlog.find_one( {"id": str(message.guild) } )
         channel = x['channel']
-        send_channelll = self.bot.get_channel(channel)
-        await send_channel.send("Hello")
+        await self.bot.get_channel(channel).send(f"Message deleted: {message.content}")
      
         
     @commands.command()
