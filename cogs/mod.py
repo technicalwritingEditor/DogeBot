@@ -7,13 +7,13 @@ class mod():
         self.bot = bot
 
     async def on_member_join(self, user):
+        em = discord.Embed(description=f"Welcome **{user.mention}**!", color=0x1aff00, timestamp = datetime.datetime.utcnow())
+        em.set_author(name=user, icon_url=user.avatar_url)
         x = await self.bot.db.welcome.find_one({"id": str(user.guild.id)})
         if not x:
             return
         channel = int(x['channel'])
         send_channel = self.bot.get_channel(channel)
-        em = discord.Embed(description=x['message'], color=0x9b9dff, timestamp = datetime.datetime.utcnow())
-        em.set_author(name=user, icon_url=user.avatar_url)
         if not send_channel:
             return
         await send_channel.send(embed=em)
@@ -32,8 +32,6 @@ class mod():
    
     @commands.command()
     async def welcome(self, ctx, sort=None):
-        def check2(message):
-            return message.author == ctx.author
         if sort == None:
             await ctx.send("**Choose `on` or `off`**")
         if sort == "on":
@@ -51,9 +49,6 @@ class mod():
                 return await ctx.send("**Please mention the channel right**")
             await self.bot.db.welcome.update_one({"id": str(ctx.guild.id)}, {"$set": {"channel": channel} }, upsert=True )
             await ctx.send("**I have set the welcome channel!**")
-            await ctx.send("**What should the welcome message be?**")
-            y = await self.bot.wait_for("message", check=check2)
-            await self.bot.db.welcome.update_one({"id": str(ctx.guild.id)}, {"$set": {"message": y} }, upsert=True )
         if sort == "off":
             await self.bot.db.welcome.update_one({"id": str(ctx.guild.id)}, {"$set": {"channel": False} }, upsert=True )
             await ctx.send("**I have turned on welcome messages**")
