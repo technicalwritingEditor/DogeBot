@@ -31,14 +31,14 @@ class economy():
                 
     @commands.command()
     async def createcode(self, ctx, code):
-        await self.bot.db.configs.update_one( { "by": 338600456383234058 }, { "$set": { "code": code } } )
+        await self.bot.db.configs.update_one( { "vilgot": "338600456383234058" }, { "$set": { "code": code } } )
         await ctx.send("Created a code")
 
     @commands.command()
     async def reedem(self, ctx, code):
-        data = await self.bot.db.configs.find_one( { "by": 338600456383234058 } )
+        data = await self.bot.db.configs.find_one( { "vilgot": "338600456383234058" } )
         if code == data['code']:
-            await ctx.send("Yay")                       
+            await ctx.send("Yay")                   
                        
 def setup(bot):
     bot.add_cog(economy(bot))
