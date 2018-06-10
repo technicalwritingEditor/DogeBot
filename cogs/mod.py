@@ -32,6 +32,8 @@ class mod():
    
     @commands.command()
     async def welcome(self, ctx, sort=None):
+        def check2(message):
+            return message.author == ctx.author
         if sort == None:
             await ctx.send("**Choose `on` or `off`**")
         if sort == "on":
@@ -49,6 +51,9 @@ class mod():
                 return await ctx.send("**Please mention the channel right**")
             await self.bot.db.welcome.update_one({"id": str(ctx.guild.id)}, {"$set": {"channel": channel} }, upsert=True )
             await ctx.send("**I have set the welcome channel!**")
+            await ctx.send("**What should the welcome message be?**")
+            y = await self.bot.wait_for("message", check=check2)
+            await self.bot.db.welcome.update_one({"id": str(ctx.guild.id)}, {"$set": {"message": y} }, upsert=True )
         if sort == "off":
             await self.bot.db.welcome.update_one({"id": str(ctx.guild.id)}, {"$set": {"channel": False} }, upsert=True )
             await ctx.send("**I have turned on welcome messages**")
