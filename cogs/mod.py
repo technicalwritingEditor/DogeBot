@@ -31,6 +31,7 @@ class mod():
         await send_channel.send(embed=em)   
    
     @commands.command()
+    @commands.has_permissions(manage_guild=True)
     async def welcome(self, ctx, sort=None):
         if sort == None:
             await ctx.send("**Choose `on` or `off`**")
@@ -51,9 +52,10 @@ class mod():
             await ctx.send("**I have set the welcome channel!**")
         if sort == "off":
             await self.bot.db.welcome.update_one({"id": str(ctx.guild.id)}, {"$set": {"channel": False} }, upsert=True )
-            await ctx.send("**I have turned on welcome messages**")
+            await ctx.send("**I have turned off welcome messages**")
 
     @commands.command()
+    @commands.has_permissions(manage_guild=True)
     async def leave(self, ctx, sort=None):
         if sort == None:
             await ctx.send("**`on` or `off`**")
