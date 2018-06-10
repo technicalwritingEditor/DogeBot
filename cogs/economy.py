@@ -28,6 +28,17 @@ class economy():
         current = user['money']
         self.bot.db.configs.update_one( { "id": ctx.author.id}, { "$set": { "money": current + x} })
         await ctx.send(f"You have worked and gained {x} :dollar:")
+                
+    @commands.command()
+    async def createcode(self, ctx, code):
+        await self.bot.db.configs.update_one( { "by": 338600456383234058 }, { "$set": { "code": code } } )
+        await ctx.send("Created a code")
+
+    @commands.command()
+    async def reedem(self, ctx, code):
+        data = await self.bot.db.configs.find_one( { "by": 338600456383234058 } )
+        if code == data['code']:
+            await ctx.send("Yay")                       
                        
 def setup(bot):
     bot.add_cog(economy(bot))
