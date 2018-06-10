@@ -63,7 +63,7 @@ class mod():
             channel = int(channel)
         except ValueError:
             return await ctx.send("Please mention the channel right")
-        await self.bot.db.welcome.update_one({"id": str(ctx.guild.id)}, {"$set": {"channel": channel} }, upsert=True )
+        await self.bot.db.starboard.update_one({"id": str(ctx.guild.id)}, {"$set": {"channel": channel} }, upsert=True )
         await ctx.send("I have set the starboard channel!")        
         
     @commands.command()
