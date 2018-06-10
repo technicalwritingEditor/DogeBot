@@ -76,6 +76,11 @@ class mod():
         if sort == "off":
             await self.bot.db.leave.update_one({"id": str(ctx.guild.id)}, {"$set": {"channel": False} }, upsert=True )
             await ctx.send("**I have turned off leave messages**")
-        
+
+    @commands.command()
+    async def prefix(self, ctx, prefix):
+        await self.bot.db.prefixes.update_one({"id": str(ctx.guild.id)}, {"$set": {"prefix": prefix} } )
+        await ctx.send(f"Changed prefix to {prefix}")
+            
 def setup(bot):
     bot.add_cog(mod(bot))
