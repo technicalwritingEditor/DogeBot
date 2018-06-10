@@ -55,7 +55,32 @@ class mod():
         send_channel = self.bot.get_channel(channel)
         if not send_channel:
             return
+        await send_channel.send(embed=em)     
+        
+    async def on_channel_create(self, channel):
+        em = discord.Embed(color=0x1aff00, timestamp = datetime.datetime.utcnow())
+        em.add_field(name="Channel created", value=channel.name)
+        x = await self.bot.db.modlog.find_one({"id": str(channel.guild.id)})
+        if not x:
+            return
+        channel = int(x['channel'])
+        send_channel = self.bot.get_channel(channel)
+        if not send_channel:
+            return
+        await send_channel.send(embed=em)    
+
+    async def on_channel_delete(self, channel):
+        em = discord.Embed(color=0x1aff00, timestamp = datetime.datetime.utcnow())
+        em.add_field(name="Channel deleted", value=channel.name)
+        x = await self.bot.db.modlog.find_one({"id": str(channel.guild.id)})
+        if not x:
+            return
+        channel = int(x['channel'])
+        send_channel = self.bot.get_channel(channel)
+        if not send_channel:
+            return
         await send_channel.send(embed=em)              
+        
         
     @commands.command()
     @commands.has_permissions(manage_guild=True)
