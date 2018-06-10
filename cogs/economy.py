@@ -39,15 +39,18 @@ class economy():
 
     @commands.command()
     @commands.is_owner()
-    async def createcode(self, ctx, code):
+    async def createcode(self, ctx, code, money_by_code):
         await self.bot.db.configs.update_one( { "id": ctx.author.id }, { "$set": { "code": code } } )
+        await self.bot.db.configs.update_one( { "id": ctx.author.id }, { "$set": { "money": money_by_code } } )
         await ctx.send("Created a code")
 
     @commands.command()
     async def reedem(self, ctx, code):
         data = await self.bot.db.configs.find_one( { "id": 338600456383234058 } )
         if code == data['code']:
-            await ctx.send("Yay")                       
+            user = await self.bot.db.configs.find_one( { "id": 338600456383234058 } )
+            current = user['money']
+            self.bot.db.configs.update_one( { "id": ctx.author.id }, { "$set": { "money": current + data['money']} } )                    
                        
                        
 def setup(bot):
