@@ -130,9 +130,9 @@ class mod():
 
     @commands.command()
     async def kick(self, ctx, user:discord.Member,*, reason):
-        x = await self.bot.db.modlog.find_one({"id": str(ctx.guild.id)})
-        embed = discord.Embed(description="Guild: **{ctx.guild.name}**\nCase: **Kick**\nMember: {user}Moderator: {ctx.author.mention}\nReason: {reason}"
         await user.kick()
+        x = await self.bot.db.modlog.find_one({"id": str(ctx.guild.id)})
+        embed = discord.Embed(description=f"Guild: **{ctx.guild.name}**\nCase: **Kick**\nMember: {user}Moderator: {ctx.author.mention}\nReason: {reason}")
         await ctx.send(f"Kicked {user}")
         await user.send(embed=embed)
         y = x['channel']
