@@ -30,6 +30,13 @@ async def help(ctx):
     embed.set_footer(text="I´m a very new bot and in early development, there will come A LOT more commands!")
     await ctx.send(embed=embed)
 
+@bot.command()
+async def suggest(self, ctx,*, suggestion):
+    embed=discord.Embed(description=suggestion, color=0x1aff00, timestamp = datetime.datetime.utcnow())
+    embed.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
+    channel = await bot.get_channel(455724505566937098)
+    await channel.send(embed=embed)    
+    
 db = AsyncIOMotorClient(os.environ.get("MONGODB"))
 bot.db = db.pepe_my_bot    
     
