@@ -135,7 +135,8 @@ class mod():
         await user.kick()
         await ctx.send(f"Kicked {user}")
         await user.send(embed=embed)
-        await x['channel'].send(embed=embed)
+        y = x['channel']
+        await y.send(embed=embed)
     
             
             
