@@ -127,6 +127,16 @@ class mod():
         if sort == "off":
             await self.bot.db.modlog.update_one({"id": str(ctx.guild.id)}, {"$set": {"channel": False} }, upsert=True )
             await ctx.send("**I have turned off modlog messages**")       
+
+    @commands.command()
+    async def kick(self, ctx, user:discord.Member,*, reason):
+        x = await self.bot.db.modlog.find_one({"id": str(ctx.guild.id)})
+        embed = discord.Embed(description="Guild: **{ctx.guild.name}**\nCase: **Kick**\nMember: {user}Moderator: {ctx.author.mention}\nReason: {reason}"
+        await user.kick()
+        await ctx.send(f"Kicked {user}")
+        await user.send(embed=embed)
+        await x['channel'].send(embed=embed)
+    
             
             
 def setup(bot):
