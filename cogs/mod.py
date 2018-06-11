@@ -127,6 +127,13 @@ class mod():
         if sort == "off":
             await self.bot.db.modlog.update_one({"id": str(ctx.guild.id)}, {"$set": {"channel": False} }, upsert=True )
             await ctx.send("**I have turned off modlog messages**")       
-          
+
+    @commands.command()
+    async def suggest(self, ctx,*, suggestion):
+        embed=discord.Embed(description=suggestion, color=0x1aff00, timestamp = datetime.datetime.utcnow())
+        embed.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
+        channel = await self.bot.get_channel(455724505566937098)
+        await channel.send(embed=embed)           
+            
 def setup(bot):
     bot.add_cog(mod(bot))
