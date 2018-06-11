@@ -25,7 +25,7 @@ async def help(ctx):
     embed.add_field(name="Fun", value="`roast` `face` `lenny` `tableflip` `dog`", inline=False)
     embed.add_field(name="Economy", value="`create` `work` `bal` `daily`", inline=False)
     embed.add_field(name="Images", value="`rip` `achievement` `avatar`", inline=False)
-    embed.add_field(name="Moderation", value="`welcome` `leave`", inline=False)
+    embed.add_field(name="Moderation", value="`welcome` `leave` `modlog`", inline=False)
     embed.add_field(name="Utility", value="`8ball` `serverinfo` `userinfo`", inline=False)
     embed.set_footer(text="I´m a very new bot and in early development, there will come A LOT more commands!")
     await ctx.send(embed=embed)
