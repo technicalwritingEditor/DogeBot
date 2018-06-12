@@ -89,7 +89,7 @@ class mod():
 
     @commands.command()
     @commands.has_permissions(manage_guild=True)
-    async def welcome(self, ctx, sort=None):
+    async def leave(self, ctx, sort=None):
         if sort == None:
             await ctx.send("**Choose `on` or `off`**")
         if sort == "on":
