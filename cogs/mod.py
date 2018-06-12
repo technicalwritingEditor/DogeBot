@@ -112,6 +112,7 @@ class mod():
             await ctx.send("**I have turned off leave messages**")             
 
     @commands.command()
+    @commands.has_permissions(manage_guild=True)
     async def modlog(self, ctx, sort=None):
         if sort == None:
             await ctx.send("**`on` or `off`**")
