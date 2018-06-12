@@ -14,7 +14,7 @@ class mod():
         send_channel = self.bot.get_channel(channel)
         if not send_channel:
             return
-        await send_channel.send(x['message'].replace('$name$', member.name).replace('$mention$', member.mention).replace.replace('$server$', member.guild.name))
+        await send_channel.send(x['message'].replace('$name$', user.name).replace('$mention$', user.mention).replace.replace('$server$', user.guild.name))
 
 
     async def on_member_remove(self, user):
