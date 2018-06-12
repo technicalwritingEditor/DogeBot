@@ -7,8 +7,6 @@ class mod():
         self.bot = bot
 
     async def on_member_join(self, user):
-        em = discord.Embed(description=f"Welcome **{user.mention}**!", color=0x1aff00, timestamp = datetime.datetime.utcnow())
-        em.set_author(name=user, icon_url=user.avatar_url)
         x = await self.bot.db.welcome.find_one({"id": str(user.guild.id)})
         if not x:
             return
@@ -16,7 +14,8 @@ class mod():
         send_channel = self.bot.get_channel(channel)
         if not send_channel:
             return
-        await send_channel.send(embed=em)
+        await send_channel.send(x['message'].replace('$name$', member.name).replace('$mention$', member.mention).replace.replace('{server}', member.guild.name))
+
 
     async def on_member_remove(self, user):
         em = discord.Embed(description=f"Goodbye **{user.name}**", color=0x1aff00, timestamp = datetime.datetime.utcnow())
