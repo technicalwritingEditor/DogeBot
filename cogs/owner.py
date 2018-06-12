@@ -84,5 +84,14 @@ class Admin:
                 self._last_result = ret
                 await ctx.send(f'```py\n{value}{ret}\n```')
 
+    @commands.command()
+    @commands.is_owner()
+    async def botrename(self, ctx, *, name:str):
+        await self.bot.user.edit(username=name)
+        await ctx.send(f"I have changed username to **{self.bot.user.name}**!")
+        print("I have been renamed to:")
+        print(self.bot.user.name)
+                
+                
 def setup(bot):
     bot.add_cog(Admin(bot))
