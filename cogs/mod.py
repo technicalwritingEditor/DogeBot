@@ -27,7 +27,7 @@ class mod():
         send_channel = self.bot.get_channel(channel)
         if not send_channel:
             return
-        await send_channel.send(x['message'].replace('$name$', user.name).replace('$mention$', user.mention).replace('$server$', user.guild.name)))   
+        await send_channel.send(x['message'].replace('$name$', user.name).replace('$mention$', user.mention).replace('$server$', user.guild.name))   
    
     async def on_message_delete(self, message):
         em = discord.Embed(color=0x1aff00, timestamp = datetime.datetime.utcnow())
