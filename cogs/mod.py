@@ -14,7 +14,7 @@ class mod():
         send_channel = self.bot.get_channel(channel)
         if not send_channel:
             return
-        await send_channel.send(x['message'].replace('$name$', user.name).replace('$mention$', user.mention).replace('$server$', user.guild.name).replace)
+        await send_channel.send(x['message'].replace('$name$', user.name).replace('$mention$', user.mention).replace('$server$', user.guild.name))
 
 
     async def on_member_remove(self, user):
@@ -76,7 +76,7 @@ class mod():
                 return await ctx.send("**Please mention the channel right**")
             await self.bot.db.welcome.update_one({"id": str(ctx.guild.id)}, {"$set": {"channel": channel} }, upsert=True )
             await ctx.send("**I have set the welcome channel!**")
-            await ctx.send("Please enter the message.\n\nVariables: \n$name$: The user's name.\n$mention$: Mention the user.\n{server}: The name of the server.")
+            await ctx.send("Please enter the message.\n\nVariables: \n$name$: The user's name.\n$mention$: Mention the user.\n$server$: The name of the server.")
             try:
                 x = await self.bot.wait_for("message", check=lambda x: x.channel == ctx.channel and x.author == ctx.author, timeout=60.0)
             except asyncio.TimeoutError:
