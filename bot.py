@@ -21,6 +21,7 @@ async def on_ready():
 
 @bot.event
 async def on_guild_join(guild):
+    guild = ctx.guild
     embed=discord.Embed(description="Thanks for inviting me!\nI am being developed by **Vilgot#7447**\nInvite me [here](https://discordapp.com/oauth2/authorize?client_id=454285151531433984&permissions=8&scope=bot) or join my support guild [here](https://discord.gg/Z6d8Ecq)"
         await guild.channels[0].send(embed=embed) 
 
