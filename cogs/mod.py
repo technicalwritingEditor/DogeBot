@@ -61,7 +61,7 @@ class mod():
         await send_channel.send(embed=em)           
 
     async def on_message_edit(self, before, after):
-        if message.author == 454285151531433984:
+        if before.author == 454285151531433984:
             pass
         em = discord.Embed(color=0x1aff00, timestamp = datetime.datetime.utcnow())
         em.add_field(name="Before", value=before.content)
