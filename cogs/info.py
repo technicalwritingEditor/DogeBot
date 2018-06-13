@@ -20,7 +20,7 @@ class info():
 
     @commands.command()
     async def invite(self, ctx):
-        embed=discord.Embed(description="[Invite](https://discordapp.com/oauth2/authorize?client_id=454285151531433984&permissions=8&scope=bot)\n[Support guild](https://discord.gg/jvpKrVN)", color=0x9b9dff)
+        embed=discord.Embed(description="[Invite](https://discordapp.com/oauth2/authorize?client_id=454285151531433984&permissions=8&scope=bot)\n[Support guild](https://discord.gg/Z6d8Ecq)", color=0x9b9dff)
         await ctx.send(embed=embed)
         
 def setup(bot):
