@@ -159,6 +159,8 @@ class mod():
     @commands.command()
     @commands.has_permissions(manage_guild=True)
     async def antiinvites(self, ctx, sort=None):
+        if sort == None:
+            await ctx.send("choose `on` or `off`")
         if sort == "on":
             await ctx.send("**You have turned on anti invites!**")
             await self.bot.db.antiinvites.update_one({"id": str(ctx.guild.id)}, {"$set": {"on_or_off": "on"} }, upsert=True )
