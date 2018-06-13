@@ -18,7 +18,7 @@ class utility():
     async def serverinfo(self, ctx):
         guild = ctx.guild
         time = str(guild.created_at.strftime("%b %m, %Y, %A, %I:%M %p"))
-        embed=discord.Embed(description=f"**{guild.name}**\nOwner: **{guild.owner.mention}**\nMembers: **{len(guild.members)}**\nRoles: **{len(guild.members)}**\nVerification level: **{guild.verification_level}**\nCreated at: **{'Created - %s' % time}**", color=0x06ff06)
+        embed=discord.Embed(description=f"**{guild.name}**\nOwner: **{guild.owner.mention}**\nMembers: **{len(guild.members)}**\nRoles: **{len(guild.members)}**\nVerification level: **{guild.verification_level}**\nCreated at: **{'%s' % time}**", color=0x06ff06)
         await ctx.send(embed=embed)
 
     @commands.command()
