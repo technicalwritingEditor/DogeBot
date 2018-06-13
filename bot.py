@@ -17,7 +17,7 @@ bot.load_extension("cogs.owner")
 @bot.event
 async def on_ready():
     print("Im online") 
-    await client.change_presence(game=discord.Game(name=';help'))
+    await bot.change_presence(game=discord.Game(name=';help'))
         
 @bot.command()
 async def help(ctx):
