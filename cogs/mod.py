@@ -7,7 +7,7 @@ class mod():
         self.bot = bot
 
     async def on_message(self, message):
-        if  "https://discord.gg/".lower() in message.content.lower()
+        if  "https://discord.gg/".lower() in message.content.lower():
             await message.channel.send("No invites")
             await message.delete()
         
