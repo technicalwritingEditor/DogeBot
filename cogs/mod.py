@@ -10,7 +10,7 @@ class mod():
         y = await self.bot.db.antiinvites.find_one({"id": str(message.guild.id)})
         if not y:
             return
-        on_or_off = int(y['on_or_off'])
+        on_or_off = y['on_or_off']
         if on_or_off == "on":
             if  "https://discord.gg/".lower() in message.content.lower():
                 x = await message.channel.send("No invites")
