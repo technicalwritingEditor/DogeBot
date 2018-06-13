@@ -122,7 +122,8 @@ class mod():
                 return await ctx.send("**Please mention the channel right**")
             await self.bot.db.leave.update_one({"id": str(ctx.guild.id)}, {"$set": {"channel": channel} }, upsert=True )
             await ctx.send("**I have set the welcome channel!**")
-            await ctx.send("Please enter the message.\n\nVariables: \n$name$: The user's name.\n$mention$: Mention the user.\n$server$: The name of the server.")
+            embed=discord.Embed(description="**Write a message!**\n\nVaribales:\n**$name$** Name of user\n**$mention$** Mentions user\n**$server$** Server name", color=0x00ff00)
+            await ctx.send(embed=embed)
             try:
                 x = await self.bot.wait_for("message", check=lambda x: x.channel == ctx.channel and x.author == ctx.author, timeout=60.0)
             except asyncio.TimeoutError:
