@@ -7,16 +7,22 @@ class mod():
         self.bot = bot
 
     async def on_message(self, message):
-        if  "https://discord.gg/".lower() in message.content.lower():
-            await message.channel.send("No invites")
-            await message.delete()
+        y = await self.bot.db.antiinvites.find_one({"id": str(user.guild.id)})
+        if not y:
+            return
+        on_or_off = int(y['on_or_off'])
+        if on_or_off == "on":
+            if  "https://discord.gg/".lower() in message.content.lower():
+                x = await message.channel.send("No invites")
+                await message.delete()
+                await asyncio.sleep(3)
+                await x.delete()
         
     async def on_member_join(self, user):
         x = await self.bot.db.welcome.find_one({"id": str(user.guild.id)})
         if not x:
             return
         channel = int(x['channel'])
-        image = int(x['image'])
         send_channel = self.bot.get_channel(channel)
         if not send_channel:
             return
@@ -146,7 +152,13 @@ class mod():
             await ctx.send("**I have set the mod-log channel!**")
         if sort == "off":
             await self.bot.db.modlog.update_one({"id": str(ctx.guild.id)}, {"$set": {"channel": False} }, upsert=True )
-            await ctx.send("**I have turned off modlog messages**")       
+            await ctx.send("**I have turned off modlog messages**")
+
+    @commands.command()
+    async def anti(self, ctx, sort=None):
+        if sort == "on":
+           await self.bot.db.antiinvites.update_one({"id": str(ctx.guild.id)}, {"$set": {"on_or_off": sort} }, upsert=True )
+            
             
 def setup(bot):
     bot.add_cog(mod(bot))
