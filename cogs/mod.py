@@ -7,8 +7,6 @@ class mod():
         self.bot = bot
 
     async def on_message(self, message):
-        if message.author == 454285151531433984:
-            pass
         y = await self.bot.db.antiinvites.find_one({"id": str(message.guild.id)})
         if not y:
             return
@@ -46,8 +44,6 @@ class mod():
         await send_channel.send(x['message'].replace('$name$', user.name).replace('$mention$', user.mention).replace('$server$', user.guild.name))   
    
     async def on_message_delete(self, message):
-        if message.author == 454285151531433984:
-            pass
         em = discord.Embed(color=0x1aff00, timestamp = datetime.datetime.utcnow())
         em.add_field(name="Message deleted", value=message.content)
         em.set_author(name=message.author, icon_url=message.author.avatar_url)
@@ -61,9 +57,6 @@ class mod():
         await send_channel.send(embed=em)           
 
     async def on_message_edit(self, before, after):
-        if before.author == 454285151531433984:
-            pass
-        else:
             em = discord.Embed(color=0x1aff00, timestamp = datetime.datetime.utcnow())
             em.add_field(name="Before", value=before.content)
             em.add_field(name="After", value=after.content)
