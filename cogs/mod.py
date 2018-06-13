@@ -157,7 +157,7 @@ class mod():
             await ctx.send("**I have turned off modlog messages**")
 
     @commands.command()
-    async def anti(self, ctx, sort=None):
+    async def antiinvites(self, ctx, sort=None):
         if sort == "on":
             await ctx.send("**You have turned on anti invites!**")
             await self.bot.db.antiinvites.update_one({"id": str(ctx.guild.id)}, {"$set": {"on_or_off": "on"} }, upsert=True )
