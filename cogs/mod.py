@@ -159,7 +159,9 @@ class mod():
     @commands.command()
     async def anti(self, ctx, sort=None):
         if sort == "on":
-           await self.bot.db.antiinvites.update_one({"id": str(ctx.guild.id)}, {"$set": {"on_or_off": sort} }, upsert=True )
+           await self.bot.db.antiinvites.update_one({"id": str(ctx.guild.id)}, {"$set": {"on_or_off": "on"} }, upsert=True )
+        if sort == "off":
+            await self.bot.db.antiinvites.update_one( {"id": str(ctx.guild.id), {"$set": {"on_or_off": "off"} }, upsert=True )
             
             
 def setup(bot):
