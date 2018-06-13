@@ -24,7 +24,8 @@ class utility():
 
     @commands.command()
     async def userinfo(self, ctx, user: discord.Member):
-        embed=discord.Embed(description=f"{user.mention}\nId: **{user.id}**\nRoles: **{len(user.roles)}**\nStatus: **{user.status}**\nJoined at: **{user.joined_at}**", color=user.color)
+        join_time = str(ctx.author.joined_at.strftime("%b %m, %Y, %A, %I:%M %p"))
+        embed=discord.Embed(description=f"{user.mention}\nId: **{user.id}**\nRoles: **{len(user.roles)}**\nStatus: **{user.status}**\Joined at: **{'%s' % join_time}**", color=user.color)
         embed.set_thumbnail(url=user.avatar_url)
         await ctx.send(embed=embed)
    
