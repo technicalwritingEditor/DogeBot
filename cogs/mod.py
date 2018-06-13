@@ -6,9 +6,7 @@ class mod():
     def __init__(self, bot):
         self.bot = bot
 
-    async def on_message(self, message):
-        if message.content == "hi":
-            await message.channel.send("hello")        
+    
         
     async def on_member_join(self, user):
         x = await self.bot.db.welcome.find_one({"id": str(user.guild.id)})
