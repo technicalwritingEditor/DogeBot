@@ -18,7 +18,14 @@ bot.load_extension("cogs.owner")
 async def on_ready():
     print("Im online") 
     await bot.change_presence(activity=discord.Game(name=";help"))
-                                                    
+
+@bot.event
+async def on_guild_join(guild):
+    embed=discord.Embed(description="Thanks for inviting me!\nI am being developed by **Vilgot#7447**\nInvite me [here](https://discordapp.com/oauth2/authorize?client_id=454285151531433984&permissions=8&scope=bot) or join my support guild [here](https://discord.gg/Z6d8Ecq)"
+        await guild.channels[0].send(embed=embed) 
+
+    
+    
 @bot.command()
 async def help(ctx):
     embed=discord.Embed(title="My commands", color=0x9b9dff)
