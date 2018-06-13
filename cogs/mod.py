@@ -7,6 +7,8 @@ class mod():
         self.bot = bot
 
     async def on_message(self, message):
+        if message.author == 454285151531433984:
+            pass
         y = await self.bot.db.antiinvites.find_one({"id": str(message.guild.id)})
         if not y:
             return
