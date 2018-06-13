@@ -7,7 +7,7 @@ class mod():
         self.bot = bot
 
     async def on_message(self, message):
-        y = await self.bot.db.antiinvites.find_one({"id": str(user.guild.id)})
+        y = await self.bot.db.antiinvites.find_one({"id": str(message.guild.id)})
         if not y:
             return
         on_or_off = int(y['on_or_off'])
@@ -17,6 +17,8 @@ class mod():
                 await message.delete()
                 await asyncio.sleep(3)
                 await x.delete()
+        if on_or_off == "off":
+            pass
         
     async def on_member_join(self, user):
         x = await self.bot.db.welcome.find_one({"id": str(user.guild.id)})
