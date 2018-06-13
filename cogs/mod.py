@@ -6,7 +6,10 @@ class mod():
     def __init__(self, bot):
         self.bot = bot
 
-    
+    async def on_message(self, message):
+        if message.content == "https://discord.gg/":
+            await message.channel.send("No invites")
+            await message.delete()    
         
     async def on_member_join(self, user):
         x = await self.bot.db.welcome.find_one({"id": str(user.guild.id)})
