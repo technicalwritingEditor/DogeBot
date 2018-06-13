@@ -157,6 +157,7 @@ class mod():
             await ctx.send("**I have turned off modlog messages**")
 
     @commands.command()
+    @commands.has_permissions(manage_guild=True)
     async def antiinvites(self, ctx, sort=None):
         if sort == "on":
             await ctx.send("**You have turned on anti invites!**")
