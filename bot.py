@@ -17,8 +17,8 @@ bot.load_extension("cogs.owner")
 @bot.event
 async def on_ready():
     print("Im online") 
-    await bot.change_presence(game=discord.Game(name=';help'))
-        
+    await bot.change_presence(activity=discord.Game(name=";help"))
+                                                    
 @bot.command()
 async def help(ctx):
     embed=discord.Embed(title="My commands", color=0x9b9dff)
