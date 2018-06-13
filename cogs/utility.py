@@ -25,7 +25,7 @@ class utility():
     @commands.command()
     async def userinfo(self, ctx, user: discord.Member):
         embed=discord.Embed(description=f"{user.mention}\nId: **{user.id}**\nRoles: **{len(user.roles)}**\nStatus: **{user.status}**\nJoined at: **{user.joined_at}**", color=user.color)
-        embed.set_thumbnail(url=guild.icon_url)
+        embed.set_thumbnail(url=user.avatar_url)
         await ctx.send(embed=embed)
    
 def setup(bot):
