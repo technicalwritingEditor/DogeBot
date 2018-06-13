@@ -63,18 +63,19 @@ class mod():
     async def on_message_edit(self, before, after):
         if before.author == 454285151531433984:
             pass
-        em = discord.Embed(color=0x1aff00, timestamp = datetime.datetime.utcnow())
-        em.add_field(name="Before", value=before.content)
-        em.add_field(name="After", value=after.content)
-        em.set_author(name=before.author, icon_url=before.author.avatar_url)
-        x = await self.bot.db.modlog.find_one({"id": str(before.guild.id)})
-        if not x:
-            return
-        channel = int(x['channel'])
-        send_channel = self.bot.get_channel(channel)
-        if not send_channel:
-            return
-        await send_channel.send(embed=em)     
+        else:
+            em = discord.Embed(color=0x1aff00, timestamp = datetime.datetime.utcnow())
+            em.add_field(name="Before", value=before.content)
+            em.add_field(name="After", value=after.content)
+            em.set_author(name=before.author, icon_url=before.author.avatar_url)
+            x = await self.bot.db.modlog.find_one({"id": str(before.guild.id)})
+            if not x:
+                return
+            channel = int(x['channel'])
+            send_channel = self.bot.get_channel(channel)
+            if not send_channel:
+                return
+            await send_channel.send(embed=em)     
 
     @commands.command()
     @commands.has_permissions(manage_guild=True)
