@@ -16,15 +16,6 @@ class mod():
         if not send_channel:
             return
         await send_channel.send(x['message'].replace('$name$', user.name).replace('$mention$', user.mention).replace('$server$', user.guild.name))
-        if image == "on":
-            img = Image.open("maxresdefault.jpg")
-            draw = ImageDraw.Draw(img)
-            font = ImageFont.truetype("American Captain.otf", 75)
-            fontbig = ImageFont.truetype("American Captain.ttf", 100)
-            draw.text((100, 0), "Welcome", (255, 255, 255), font=fontbig)
-            draw.text((150, 125), "{}".format(user.name), (255, 255, 255), font=font)
-            img.save(f'{user.id}.jpg')
-            await send_channel.send(file=discord.File(f'{user.id}.jpg'))
 
 
     async def on_member_remove(self, user):
