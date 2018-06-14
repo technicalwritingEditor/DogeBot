@@ -1,6 +1,9 @@
 import discord
 from discord.ext import commands
 import random, asyncio, aiohttp
+from PIL import Image
+from PIL import ImageDraw
+from PIL import ImageFont
 
 class economy():
     def __init__(self, bot):
@@ -17,8 +20,16 @@ class economy():
 
     @commands.command()
     async def bal(self, ctx):
-        user = await self.bot.db.configs.find_one({ "id": ctx.author.id })
-        await ctx.send(f"{user['money']} :dollar:")
+    user = await self.bot.db.configs.find_one({ "id": ctx.author.id })
+    img = Image.open("maxresdefault.jpg")
+    draw = ImageDraw.Draw(img)
+    font = ImageFont.truetype("American Captain.otf", 75)
+    fontbig = ImageFont.truetype("American Captain.ttf", 100)
+    #    (x,y)::↓ ↓ ↓ (text)::↓ ↓     (r,g,b)::↓ ↓ ↓
+    draw.text((100, 0), "{}´s bal".format(ctx.author), (255, 255, 255), font=fontbig)
+    draw.text((150, 125), "{}".format(user['money']), (255, 255, 255), font=font)
+    img.save(f'{user.id}.jpg')
+    await ctx.send(file=discord.File(f'{user.id}.jpg'))
 
     @commands.command()
     @commands.cooldown(1, 120, commands.BucketType.user)                  
