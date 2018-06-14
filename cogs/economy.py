@@ -18,7 +18,7 @@ class economy():
     @commands.command()
     async def bal(self, ctx):
           user=await self.bot.db.configs.find_one({ "id": ctx.author.id })
-          await ctx.send(f"{ctx.author.mention} | Your bal: {user['money']}")
+          await ctx.send(f"{ctx.author.mention} | Your bal: **{user['money']}**:dollar: ")
 
     @commands.command()
     @commands.cooldown(1, 120, commands.BucketType.user)                  
