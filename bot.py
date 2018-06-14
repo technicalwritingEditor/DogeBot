@@ -40,7 +40,7 @@ async def suggest(ctx,*, suggestion):
 @bot.event
 async def on_guild_join(guild):
     embed=discord.Embed(description="My name is **Pepe The Frog**\n\nThanks for inviting me!\n\nTo find my commands use ;help!\n\nNeed any help? Join the support server:\nhttps://discord.gg/Z6d8Ecq")
-        await guild.channels[0].send(embed=embed)    
+    await guild.channels[0].send(embed=embed)
     
 db = AsyncIOMotorClient(os.environ.get("MONGODB"))
 bot.db = db.pepe_my_bot    
