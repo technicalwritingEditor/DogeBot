@@ -169,7 +169,19 @@ class mod():
         if sort == "off":
             await ctx.send("**You have turned off anti invites!**")
             await self.bot.db.antiinvites.update_one({"id": str(ctx.guild.id)}, {"$set": {"on_or_off": "off"} }, upsert=True )
-            
+
+
+    @commands.command()
+    @commands.has_permissions(kick_members=True)
+    async def kick(self, ctx, user:discord.Member,*, reason):
+        await user.kick()
+        x = await self.bot.db.modlog.find_one({"id": str(ctx.guild.id)})
+        embed = discord.Embed(description=f"Guild: **{ctx.guild.name}**\nCase: **Kick**\nMember: {user}Moderator: {ctx.author.mention}\nReason: {reason}")
+        await ctx.send(f"Kicked {user}")
+        await user.send(embed=embed)
+        channel = int(x['channel'])
+        send_channel= self.bot.get_channel(channel)
+        await send_channel.send(embed=embed)            
             
 def setup(bot):
     bot.add_cog(mod(bot))
