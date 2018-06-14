@@ -25,10 +25,13 @@ class mod():
         if not x:
             return
         channel = int(x['channel'])
+        image = x['image']
         send_channel = self.bot.get_channel(channel)
         if not send_channel:
             return
         await send_channel.send(x['message'].replace('$name$', user.name).replace('$mention$', user.mention).replace('$server$', user.guild.name))
+        if image == "on":
+            await ctx.send("Hello bruv")
 
 
     async def on_member_remove(self, user):
@@ -97,7 +100,15 @@ class mod():
             except asyncio.TimeoutError:
                  return await ctx.send("Request timed out. Please try again.")
             await self.bot.db.welcome.update_one({"id": str(ctx.guild.id)}, {"$set": {"channel": channel, "message": x.content}}, upsert=True)
-            await ctx.send("Successfully turned on message")   
+            await ctx.send("Successfully turned on message")
+            await ctx.send("Do you want images? `yes` or `no`")
+            try:
+                x = await self.bot.wait_for("message", check=lambda x: x.channel == ctx.channel and x.author == ctx.author, timeout=60.0)
+            except asyncio.TimeoutError:
+                 return await ctx.send("Request timed out. Please try again.")
+            if x == "on":
+                await self.bot.db.welcome.update_one({"id": str(ctx.guild.id)}, {"$set": {"channel": channel, "image": "on"}}, upsert=True)
+                await ctx.send("Successfully turned on images")
         if sort == "off":
             await self.bot.db.welcome.update_one({"id": str(ctx.guild.id)}, {"$set": {"channel": False, "message": None}}, upsert=True)
             await ctx.send("**I have turned off welcome messages**")
