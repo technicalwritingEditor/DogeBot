@@ -281,7 +281,7 @@ class mod():
             except ValueError:
                 return await ctx.send("**Please mention the channel right**")
             await self.bot.db.suggestions.update_one({"id": str(ctx.guild.id)}, {"$set": {"channel": channel} }, upsert=True )
-            await ctx.send("**I have set the mod-log channel!**")
+            await ctx.send("**I have set the suggestions channel!**")
         if sort == "off":
             await self.bot.db.suggestions.update_one({"id": str(ctx.guild.id)}, {"$set": {"channel": False} }, upsert=True )
             await ctx.send("**I have turned off suggestions**")
@@ -295,7 +295,7 @@ class mod():
         send_channel = bot.get_channel(channel)
         if not send_channel:
             return
-        await send_channel.send()        
+        await send_channel.send(suggestion)
         
 def setup(bot):
     bot.add_cog(mod(bot))
