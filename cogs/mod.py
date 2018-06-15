@@ -261,6 +261,37 @@ class mod():
         x = discord.utils.get(ctx.guild.roles, name=str(role))
         await user.add_roles(x)
         await ctx.send(f"Added **{role}** to **{user}**")           
+
+    @bot.command()
+    async def suggestions(ctx, sort):
+        if sort == None:
+            await ctx.send("**`on` or `off`**")
+        if sort == "on":
+            await ctx.send("**Please mention the channel to set the suggestions in.**")
+            try:
+                x = await self.bot.wait_for("message", check=lambda x: x.channel == ctx.channel and x.author == ctx.author, timeout=60.0)
+            except asyncio.TimeoutError:
+                return await ctx.send("**The time is up**")
+            if not x.content.startswith("<#") and not x.content.endswith(">"):
+                return await ctx.send("**Please mention the channel**")
+            channel = x.content.strip("<#").strip(">")
+            try:
+                channel = int(channel)
+            except ValueError:
+                return await ctx.send("**Please mention the channel right**")
+            await self.bot.db.suggestions.update_one({"id": str(ctx.guild.id)}, {"$set": {"channel": channel} }, upsert=True )
+            await ctx.send("**I have set the suggestions channel!**")
+
+    @commands.command()
+    async def suggest(ctx,*, suggestion):
+        x = await self.bot.db.suggestions.find_one({"id": str(ctx.guild.id)})
+        if not x:
+            return
+        channel = int(x['channel'])
+        send_channel = bot.get_channel(channel)
+        if not send_channel:
+            return
+        await send_channel.send()        
         
 def setup(bot):
     bot.add_cog(mod(bot))
