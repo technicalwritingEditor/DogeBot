@@ -54,7 +54,7 @@ def has_role_in_my_server(name):
 @bot.command()
 @has_role_in_my_server("premium")
 @commands.cooldown(1, 60, commands.BucketType.user)
-async def repeat(self, ctx, times: int,*, content : str):
+async def repeat(ctx, times: int,*, content : str):
     for i in range(times):
         await ctx.send(content) 
     
