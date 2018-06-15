@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 import random, asyncio, aiohttp, datetime
 
-class mod():
+class premium():
     def __init__(self, bot):
         self.bot = bot
 
@@ -26,4 +26,4 @@ class mod():
         await ctx.send(f"Your bigearn gave you {x}:dollar:!")      
 
 def setup(bot):
-    bot.add_cog(mod(bot))
+    bot.add_cog(premium(bot))
