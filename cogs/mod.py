@@ -35,6 +35,7 @@ class mod():
         on_or_off = x['on_or_off']
         if on_or_off == "on":
             img = Image.open("maxresdefault.jpg")
+            img.thumbnail( ( 500, 400, 400, 400 ) )
             draw = ImageDraw.Draw(img)
             font = ImageFont.truetype("American Captain.otf", 75)
             draw.text((100, 0), "Welcome", (255, 255, 255), font=font)
