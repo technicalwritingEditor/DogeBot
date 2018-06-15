@@ -58,43 +58,7 @@ def has_role_in_my_server(name):
 @commands.cooldown(1, 60, commands.BucketType.user)
 async def repeat(ctx, times: int,*, content : str):
     for i in range(times):
-        await ctx.send(content) 
-
-class premium():
-    def __init__(self, bot):
-        self.bot = bot
-    
-    @commands.command()
-    @has_role_in_my_server("premium")
-    async def suggestions(self, ctx, sort):
-        if sort == None:
-            await ctx.send("**`on` or `off`**")
-        if sort == "on":
-            await ctx.send("**Please mention the channel to set the suggestions in.**")
-            try:
-                x = await self.bot.wait_for("message", check=lambda x: x.channel == ctx.channel and x.author == ctx.author, timeout=60.0)
-            except asyncio.TimeoutError:
-                return await ctx.send("**The time is up**")
-            if not x.content.startswith("<#") and not x.content.endswith(">"):
-                return await ctx.send("**Please mention the channel**")
-            channel = x.content.strip("<#").strip(">")
-            try:
-                channel = int(channel)
-            except ValueError:
-                return await ctx.send("**Please mention the channel right**")
-            await self.bot.db.suggestions.update_one({"id": str(ctx.guild.id)}, {"$set": {"channel": channel} }, upsert=True )
-            await ctx.send("**I have set the suggestions channel!**")
-
-    @commands.command()
-    async def suggest(self, ctx,*, suggestion):
-        x = await self.bot.db.suggestions.find_one({"id": str(ctx.guild.id)})
-        if not x:
-            return
-        channel = int(x['channel'])
-        send_channel = bot.get_channel(channel)
-        if not send_channel:
-            return
-        await send_channel.send(suggestion)        
+        await ctx.send(content)       
         
 db = AsyncIOMotorClient(os.environ.get("MONGODB"))
 bot.db = db.pepe_my_bot    
