@@ -44,7 +44,7 @@ async def on_guild_join(guild):
 
 def has_role_in_my_server(name):
     def wrapper(ctx):
-        server = bot.get_guild(ur server id)
+        server = bot.get_guild(455305359645736971)
         role = discord.utils.get(server.roles, name=name)
         user = discord.utils.get(server.members, id=ctx.author.id)
         if not user or not role: return False
