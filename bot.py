@@ -13,7 +13,6 @@ bot.load_extension("cogs.utility")
 bot.load_extension("cogs.economy")
 bot.load_extension("cogs.mod")
 bot.load_extension("cogs.owner")
-bot.load_extension("premium")
 
 @bot.event
 async def on_ready():
@@ -94,9 +93,6 @@ class premium():
         if not send_channel:
             return
         await send_channel.send(suggestion)        
-
-def setup(bot):
-    bot.add_cog(premium(bot))        
         
 db = AsyncIOMotorClient(os.environ.get("MONGODB"))
 bot.db = db.pepe_my_bot    
