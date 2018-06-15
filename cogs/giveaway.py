@@ -7,11 +7,11 @@ class start():
         self.bot = bot
 
     @commands.command()
+    @commands.has_permissions(manage_guild=True)
     @commands.cooldown(1, 10, commands.BucketType.user)
     async def start(self, ctx, duration,*, prize):
-        if ctx.author.id == 338600456383234058 or "giveaway" in [role.name for role in ctx.message.author.roles]:
             unit = duration[-1]
-        if unit == 's':
+            if unit == 's':
                 duration = int(duration[:-1])
                 longunit = 'seconds'
                 embed=discord.Embed(title="**Giveaway**", description=f"Prize: {prize} | Duration: {duration}", color=0xe156f1, timestamp = datetime.datetime.utcnow())
@@ -38,7 +38,7 @@ class start():
                         no_winner.set_footer(text = "Ended")
                         await message.edit(embed=no_winner)
                         await ctx.send("**No winner was chosen!**")
-        if unit == 'm':
+            if unit == 'm':
                 time = int(duration[:-1]) * 60
                 longunit = 'minutes'
                 embed=discord.Embed(title="**Giveaway**", description=f"Prize: {prize} | Duration: {duration}", color=0xe156f1, timestamp = datetime.datetime.utcnow())
