@@ -293,7 +293,7 @@ class mod():
         x = await self.bot.db.suggestions.find_one({"id": str(ctx.guild.id)})
         channel = int(x['channel'])
         send_channel= self.bot.get_channel(channel)
-        await send_channel.send(suggestion)
+        await send_channel.send(embed=embed)
         
 def setup(bot):
     bot.add_cog(mod(bot))
