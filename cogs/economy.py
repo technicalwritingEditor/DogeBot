@@ -22,12 +22,12 @@ class economy():
 
     @commands.command()
     @commands.cooldown(1, 120, commands.BucketType.user)                  
-    async def work(self, ctx):
+    async def earn(self, ctx):
         x = random.randint(100, 1000)
         user = await self.bot.db.configs.find_one( { "id": ctx.author.id } )
         current = user['money']
         self.bot.db.configs.update_one( { "id": ctx.author.id}, { "$set": { "money": current + x} })
-        await ctx.send(f"You have worked and gained {x} :dollar:")                       
+        await ctx.send(f"You have earned {x} :dollar:")                       
               
     @commands.command()
     @commands.cooldown(1, 86400, commands.BucketType.user)
@@ -37,6 +37,10 @@ class economy():
         current = user['money']
         self.bot.db.configs.update_one( { "id": ctx.author.id}, { "$set": { "money": current + x} })
         await ctx.send(f"Your daily gave you {x}:dollar:!\n`Come back in 24 hours and claim your next daily!`")                                
-                       
+
+    @commands.command()
+    async def test(self, ctx):
+        await ctx.send(f"{self.bot.get_emoji(457055188260356098)}")                         
+                         
 def setup(bot):
     bot.add_cog(economy(bot))
