@@ -39,7 +39,7 @@ class mod():
             draw = ImageDraw.Draw(img)
             font = ImageFont.truetype("American Captain.otf", 75)
             draw.text((100, 0), "Welcome", (255, 255, 255), font=font)
-            draw.text((150, 125), "{}".format(user.name), (255, 255, 255), font=font)
+            draw.text((100, 125), "{}".format(user.name), (255, 255, 255), font=font)
             img.save(f'{user.id}.jpg')
             await send_channel.send(file=discord.File(f'{user.id}.jpg'))
 
