@@ -42,6 +42,12 @@ class mod():
             draw.text((0, 125), "{}".format(user.name), (255, 255, 255), font=font)
             img.save(f'{user.id}.jpg')
             await send_channel.send(file=discord.File(f'{user.id}.jpg'))
+        y = await bot.db.autorole.find_one({"id": str(member.guild.id)})
+        if y is None:
+            return
+        role = y['role']
+        r = discord.utils.get(member.guild.roles, name=role)
+        await member.add_roles(r)
 
 
     async def on_member_remove(self, user):
