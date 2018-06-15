@@ -288,6 +288,8 @@ class mod():
 
     @commands.command()
     async def suggest(self, ctx,*, suggestion):
+        embed=discord.Embed(description=suggestion, color=0x1aff00, timestamp = datetime.datetime.utcnow())
+        embed.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
         x = await self.bot.db.suggestions.find_one({"id": str(ctx.guild.id)})
         channel = int(x['channel'])
         send_channel= self.bot.get_channel(channel)
