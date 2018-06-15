@@ -40,7 +40,7 @@ class mod():
             draw.text((100, 0), "Welcome", (255, 255, 255), font=font)
             draw.text((150, 125), "{}".format(user.name), (255, 255, 255), font=font)
             img.save(f'{user.id}.jpg')
-            await ctx.send(file=discord.File(f'{user.id}.jpg'))
+            await send_channel.send(file=discord.File(f'{user.id}.jpg'))
 
 
     async def on_member_remove(self, user):
