@@ -33,12 +33,6 @@ async def help(ctx):
     embed.set_footer(text="I´m a very new bot and in early development, there will come A LOT more commands!")
     await ctx.send(embed=embed)
 
-@bot.command()
-async def suggest(ctx,*, suggestion):
-    embed=discord.Embed(description=suggestion, color=0x1aff00, timestamp = datetime.datetime.utcnow())
-    embed.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
-    await bot.get_channel(455724505566937098).send(embed=embed)
-
 @bot.event
 async def on_guild_join(guild):
     embed=discord.Embed(description="My name is **Pepe The Frog**\n\nI am meant to be a fun, moderation, and easy to use bot\n\nTo find my commands use `;help`!\n\nNeed any help? Join the support server:\nhttps://discord.gg/Z6d8Ecq",color=0x00ff00)
