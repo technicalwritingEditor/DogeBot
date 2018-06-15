@@ -223,13 +223,12 @@ class mod():
     @commands.command()
     @commands.has_permissions(manage_messages=True)
     async def purge(self, ctx, number: int):
-        """Deletes a # of msgs. *purge [# of msgs].""" 
         try:
             float(number)
         except ValueError:
             return await ctx.send("The number is invalid.")
         await ctx.channel.purge(limit=number+1)
-        msg = await ctx.send(f"Purged {number}")
+        msg = await ctx.send(f"Purged **{number}** messages!")
         x = await self.bot.db.modlog.find_one({"id": str(ctx.guild.id)})
         channel = int(x['channel'])
         send_channel = self.bot.get_channel(channel)
