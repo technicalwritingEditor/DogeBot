@@ -53,8 +53,13 @@ def has_role_in_my_server(name):
 
 @bot.command()
 @has_role_in_my_server("premium")
-async def test(ctx):
-    await ctx.send("Hello premium user!")
+@commands.cooldown(1, 1800, commands.BucketType.user)
+async def bigearn(ctx):
+    x = random.randint(500, 10000)
+    user = await bot.db.configs.find_one( { "id": ctx.author.id } )
+    current = user['money']
+    bot.db.configs.update_one( { "id": ctx.author.id}, { "$set": { "money": current + x} })
+    await ctx.send(f"Your bigearn gave you {x}:dollar:!")
     
 db = AsyncIOMotorClient(os.environ.get("MONGODB"))
 bot.db = db.pepe_my_bot    
