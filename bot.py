@@ -24,7 +24,7 @@ async def help(ctx):
     embed=discord.Embed(title="My commands", color=0x9b9dff)
     embed.add_field(name="Info", value="`help`, `info`, `invite`", inline=False)
     embed.add_field(name="Fun", value="`roast`, `face`, `lenny`, `tableflip`, `dog`", inline=False)
-    embed.add_field(name="Economy", value="`create`, `work`, `bal`, `daily`", inline=False)
+    embed.add_field(name="Economy", value="`create`, `earn`, `bal`, `daily`", inline=False)
     embed.add_field(name="Images", value="`rip`, `achievement`, `avatar`", inline=False)
     embed.add_field(name="Moderation", value="`welcome`, `leave`, `modlog`, `antiinvites`, `kick`", inline=False)
     embed.add_field(name="Utility", value="`8ball`, `serverinfo`, `userinfo`", inline=False)
