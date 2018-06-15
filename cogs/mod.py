@@ -222,21 +222,21 @@ class mod():
 
     @commands.command()
     @commands.has_permissions(manage_messages=True)
-    async def purge(self, ctx, number):
-        y = await self.bot.db.modlog.find_one({"id": str(ctx.guild.id)})
+    async def purge(self, ctx, number: int):
+        """Deletes a # of msgs. *purge [# of msgs].""" 
+        try:
+            float(number)
+        except ValueError:
+            return await ctx.send("The number is invalid.")
+        await ctx.channel.purge(limit=number+1)
+        msg = await ctx.send(f"Purged {number}")
+        x = await self.bot.db.modlog.find_one({"id": str(ctx.guild.id)})
         channel = int(x['channel'])
-        send_channel= self.bot.get_channel(channel)
-        await discord.Message.delete(ctx.message)
-        mgs = []
-        number = int(number)
-        async for x in discord.abc.Messageable.history(ctx.message.channel, limit=number):
-            mgs.append(x)
-        await ctx.channel.delete_messages(mgs)
-        embed=discord.Embed(title="Purged", description=f"Purged **{number}** messages\nModerator: {ctx.author.mention}")
-        x = await ctx.send(f"Purged {number} messages!")
+        send_channel = self.bot.get_channel(channel)
+        embed=discord.Embed(description=f"Purged {messages}\nModerator: {ctx.author.mention}")
         await send_channel.send(embed=embed)
         await asyncio.sleep(3)
-        await x.delete()        
+        await msg.delete()
         
 def setup(bot):
     bot.add_cog(mod(bot))
