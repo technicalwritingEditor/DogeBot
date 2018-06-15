@@ -289,12 +289,8 @@ class mod():
     @commands.command()
     async def suggest(ctx,*, suggestion):
         x = await self.bot.db.suggestions.find_one({"id": str(ctx.guild.id)})
-        if not x:
-            return
         channel = int(x['channel'])
-        send_channel = bot.get_channel(channel)
-        if not send_channel:
-            return
+        send_channel= self.bot.get_channel(channel)
         await send_channel.send(suggestion)
         
 def setup(bot):
