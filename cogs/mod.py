@@ -290,6 +290,7 @@ class mod():
     async def suggest(ctx,*, suggestion):
         x = await self.bot.db.suggestions.find_one({"id": str(ctx.guild.id)})
         channel = int(x['channel'])
+        await ctx.send("hello")
         send_channel= self.bot.get_channel(channel)
         await send_channel.send(suggestion)
         
