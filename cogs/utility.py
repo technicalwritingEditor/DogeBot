@@ -1,6 +1,6 @@
 import discord
 from discord.ext import commands
-import random
+import random, time
 
 class utility():
     def __init__(self, bot):
@@ -28,6 +28,14 @@ class utility():
         embed=discord.Embed(description=f"{user.mention}\nId: **{user.id}**\nRoles: **{len(user.roles)}**\nStatus: **{user.status}**\nJoined at: **{'%s' % join_time}**", color=user.color)
         embed.set_thumbnail(url=user.avatar_url)
         await ctx.send(embed=embed)
-   
+
+    @commands.command(name="ping")
+    async def ping_command(self, ctx):
+        t1 = time.perf_counter()
+        message = await ctx.send("checking ping...")
+        t2 = time.perf_counter()
+        ping = round((t2-t1)*1000)
+        await message.edit(content=f":ping_pong: Pong! `{ping}`ms")                            
+                            
 def setup(bot):
     bot.add_cog(utility(bot))
