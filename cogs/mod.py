@@ -29,6 +29,9 @@ class mod():
         if not send_channel:
             return
         await send_channel.send(x['message'].replace('$name$', user.name).replace('$mention$', user.mention).replace('$server$', user.guild.name))
+        on_or_off = x['on_or_off']
+        if on_or_off == "on":
+            await ctx.send("Hello")
 
 
     async def on_member_remove(self, user):
