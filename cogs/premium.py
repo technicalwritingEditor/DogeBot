@@ -16,7 +16,7 @@ class premium():
         return commands.check(wrapper)
 
     @commands.command()
-    @has_role_in_my_server("premium")
+    @has_role_in_my_server()
     @commands.cooldown(1, 1800, commands.BucketType.user)
     async def bigearn(self, ctx):
         x = random.randint(10000, 100000)
