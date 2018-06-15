@@ -236,20 +236,7 @@ class mod():
         await send_channel.send(embed=embed)
         await asyncio.sleep(3)
         await msg.delete()
-
-    @commands.command()
-    @commands.guild_only()
-    @commands.has_permissions(manage_roles = True)
-    async def autorole(self, ctx, *, role):
-        if role == 'off':
-            await self.bot.db.autorole.update_one({"id": str(ctx.guild.id)}, {"$set": {"role": False}}, upsert=True)
-            await ctx.send("Turned off autorole")
-        else:
-            r = discord.utils.get(ctx.guild.roles, name=str(role))
-            if r is None:
-                return await ctx.send("Role not found.")
-            await self.bot.db.autorole.update_one({"id": str(ctx.guild.id)}, {"$set": {"role": str(r)}}, upsert=True)
-            await ctx.send(f"Enabled autorole for **{str(r)}**.")        
+  
         
 def setup(bot):
     bot.add_cog(mod(bot))
