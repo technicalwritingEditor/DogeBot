@@ -1,6 +1,9 @@
 import discord
 from discord.ext import commands
 import random, asyncio, aiohttp, datetime
+from PIL import Image
+from PIL import ImageFont
+from PIL import ImageDraw
 
 class mod():
     def __init__(self, bot):
@@ -31,7 +34,14 @@ class mod():
         await send_channel.send(x['message'].replace('$name$', user.name).replace('$mention$', user.mention).replace('$server$', user.guild.name))
         on_or_off = x['on_or_off']
         if on_or_off == "on":
-            await ctx.send("Hello")
+            img = Image.open("maxresdefault.jpg")
+            draw = ImageDraw.Draw(img)
+            font = ImageFont.truetype("American Captain.otf", 75)
+            fontbig = ImageFont.truetype("American Captain.ttf", 100)
+            draw.text((100, 0), "Welcome", (255, 255, 255), font=fontbig)
+            draw.text((150, 125), "{}".format(user.name), (255, 255, 255), font=font)
+            img.save(f'{user.id}.jpg')
+            await ctx.send(file=discord.File(f'{user.id}.jpg'))
 
 
     async def on_member_remove(self, user):
