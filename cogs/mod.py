@@ -262,7 +262,7 @@ class mod():
         await user.add_roles(x)
         await ctx.send(f"Added **{role}** to **{user}**")           
 
-    @bot.command()
+    @commands.command()
     async def suggestions(ctx, sort):
         if sort == None:
             await ctx.send("**`on` or `off`**")
