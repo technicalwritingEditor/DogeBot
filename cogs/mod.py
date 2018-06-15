@@ -133,7 +133,7 @@ class mod():
             await ctx.send("**You have turned off welcome images**")
             await self.bot.db.welcome.update_one({"id": str(ctx.guild.id)}, {"$set": {"on_or_off": "off"} }, upsert=True )
             
-    @commands.command()
+    @commands.command(aliases=['goodbye'])
     @commands.has_permissions(manage_guild=True)
     async def leave(self, ctx, sort=None):
         if sort == None:
@@ -152,7 +152,7 @@ class mod():
             except ValueError:
                 return await ctx.send("**Please mention the channel right**")
             await self.bot.db.leave.update_one({"id": str(ctx.guild.id)}, {"$set": {"channel": channel} }, upsert=True )
-            await ctx.send("**I have set the welcome channel!**")
+            await ctx.send("**I have set the leave channel!**")
             embed=discord.Embed(description="**Write a message!**\n\nVaribales:\n**$name$** Name of user\n**$mention$** Mentions user\n**$server$** Server name", color=0x00ff00)
             await ctx.send(embed=embed)
             try:
