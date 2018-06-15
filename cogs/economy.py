@@ -37,10 +37,7 @@ class economy():
         current = user['money']
         self.bot.db.configs.update_one( { "id": ctx.author.id}, { "$set": { "money": current + x} })
         await ctx.send(f"Your daily gave you {x}:dollar:!\n`Come back in 24 hours and claim your next daily!`")                                
-
-    @commands.command()
-    async def test(self, ctx):
-        await ctx.send(f"{self.bot.get_emoji(457055188260356098)}")                         
+                    
                          
 def setup(bot):
     bot.add_cog(economy(bot))
