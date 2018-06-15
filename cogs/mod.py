@@ -259,7 +259,7 @@ class mod():
     @commands.command()
     async def addrole(self, ctx, user:discord.Member,*, role):
         x = discord.utils.get(ctx.guild.roles, name = role)
-        await ctx.author.add_roles(x)
+        await user.add_roles(x)
         await ctx.send(f"Added **{role}** to **{user}**")           
 
             
