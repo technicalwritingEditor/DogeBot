@@ -103,12 +103,16 @@ class mod():
             await ctx.send("**I have turned off welcome messages**")
 
     @commands.command()
+    @commands.has_permissions(manage_guild=True)
     async def welcomeimage(self, ctx, sort=None):
         if sort == None:
-            await ctx.send("**Choose `on` or `off`**")
+            await ctx.send("choose `on` or `off`")
         if sort == "on":
-            await ctx.send("You have turned on welcome images")
-            await self.db.welcome.update_one({"id": str(ctx.guild.id)}, {"$set": {"image": "on"}}, upsert=True)
+            await ctx.send("**You have turned on welcome images!**")
+            await self.bot.db.welcome.update_one({"id": str(ctx.guild.id)}, {"$set": {"on_or_off": "on"} }, upsert=True )
+        if sort == "off":
+            await ctx.send("**You have turned off welcome images**")
+            await self.bot.db.welcome.update_one({"id": str(ctx.guild.id)}, {"$set": {"on_or_off": "off"} }, upsert=True )
             
     @commands.command()
     @commands.has_permissions(manage_guild=True)
