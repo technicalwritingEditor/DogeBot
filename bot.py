@@ -51,6 +51,12 @@ def has_role_in_my_server(name):
         return role in user.roles
     return commands.check(wrapper)
 
+@bot.command()
+@has_role_in_my_server("premium")
+@commands.cooldown(1, 60, commands.BucketType.user)
+async def repeat(self, ctx, times: int,*, content : str):
+    for i in range(times):
+        await ctx.send(content) 
     
 db = AsyncIOMotorClient(os.environ.get("MONGODB"))
 bot.db = db.pepe_my_bot    
