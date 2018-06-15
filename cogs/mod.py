@@ -256,6 +256,12 @@ class mod():
             await self.bot.db.autorole.update_one({"id": str(ctx.guild.id)}, {"$set": {"role": str(r)}}, upsert=True)
             await ctx.send(f"Enabled autorole for **{str(r)}**.")
 
+    @commands.command()
+    async def addrole(self, ctx, user:discord.Member,*, role):
+        role = discord.utils.get(user.guild.roles, name=role)
+        await user.add_roles(r)
+        await ctx.send(f"I have added **{role}** to **{user}**")            
 
+            
 def setup(bot):
     bot.add_cog(mod(bot))
