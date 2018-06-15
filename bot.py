@@ -58,7 +58,7 @@ async def repeat(ctx, times: int,*, content : str):
     for i in range(times):
         await ctx.send(content) 
 
-class mod():
+class premium():
     def __init__(self, bot):
         self.bot = bot
     
@@ -93,6 +93,9 @@ class mod():
         if not send_channel:
             return
         await send_channel.send(suggestion)        
+
+def setup(bot):
+    bot.add_cog(premium(bot))        
         
 db = AsyncIOMotorClient(os.environ.get("MONGODB"))
 bot.db = db.pepe_my_bot    
