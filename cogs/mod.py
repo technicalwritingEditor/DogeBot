@@ -207,6 +207,36 @@ class mod():
         channel = int(x['channel'])
         send_channel= self.bot.get_channel(channel)
         await send_channel.send(embed=embed)            
-            
+
+    @commands.command()
+    @commands.has_permissions(kick_members=True)
+    async def ban(self, ctx, user:discord.Member,*, reason):
+        await user.ban()
+        x = await self.bot.db.modlog.find_one({"id": str(ctx.guild.id)})
+        embed = discord.Embed(description=f"Guild: **{ctx.guild.name}**\nCase: **Ban**\nMember: {user}Moderator: {ctx.author.mention}\nReason: **{reason}**",color=0x00ff00, timestamp = datetime.datetime.utcnow())
+        await ctx.send(f"Banned **{user}**")
+        await user.send(embed=embed)
+        channel = int(x['channel'])
+        send_channel= self.bot.get_channel(channel)
+        await send_channel.send(embed=embed)  
+
+    @commands.command()
+    @commands.has_permissions(manage_messages=True)
+    async def purge(self, ctx, number):
+        y = await self.bot.db.modlog.find_one({"id": str(ctx.guild.id)})
+        channel = int(x['channel'])
+        send_channel= self.bot.get_channel(channel)
+        await discord.Message.delete(ctx.message)
+        mgs = []
+        number = int(number)
+        async for x in discord.abc.Messageable.history(ctx.message.channel, limit=number):
+            mgs.append(x)
+        await ctx.channel.delete_messages(mgs)
+        embed=discord.Embed(title="Purged", description=f"Purged **{number}** messages\nModerator: {ctx.author.mention}")
+        x = await ctx.send(f"Purged {number} messages!")
+        await send_channel.send(embed=embed)
+        await asyncio.sleep(3)
+        await x.delete()        
+        
 def setup(bot):
     bot.add_cog(mod(bot))
