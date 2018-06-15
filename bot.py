@@ -45,8 +45,8 @@ async def on_guild_join(guild):
 def has_role_in_my_server(name):
     def wrapper(ctx):
         x = discord.utils.get(bot.guilds, id=455305359645736971)
-        role = discord.utils.find(x.roles, name=name)
-        if role in ctx.author.roles: 
+        role = discord.utils.get(x.roles, name=name)
+        if role in ctx.author.roles:
             return True
         return False
     return commands.check(wrapper)
