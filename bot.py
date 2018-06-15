@@ -42,10 +42,19 @@ async def on_guild_join(guild):
     embed=discord.Embed(description="My name is **Pepe The Frog**\n\nI am meant to be a fun, moderation, and easy to use bot\n\nTo find my commands use `;help`!\n\nNeed any help? Join the support server:\nhttps://discord.gg/Z6d8Ecq",color=0x00ff00)
     await guild.channels[0].send(embed=embed)
 
+def has_role_in_my_server(name):
+    def wrapper(ctx):
+        x = discord.utils.get(bot.guilds, id=ur server id)
+        role = discord.utils.find(x.roles, name=name)
+        if role in ctx.author.roles: 
+            return True
+        return False
+    return commands.check(wrapper)
+
 @bot.command()
+@has_role_in_my_server("premium")
 async def test(ctx):
-    if "premium" in [role.name for role in ctx.message.author.roles in 455305359645736971]:
-        await ctx.send("hello")
+    await ctx.send("Hello premium user!")
     
 db = AsyncIOMotorClient(os.environ.get("MONGODB"))
 bot.db = db.pepe_my_bot    
