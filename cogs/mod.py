@@ -263,11 +263,12 @@ class mod():
         await ctx.send(f"Added **{role}** to **{user}**")           
 
     @commands.command()
-    async def suggestions(ctx, sort):
+    @commands.has_permissions(manage_guild=True)
+    async def suggestion(self, ctx, sort=None):
         if sort == None:
             await ctx.send("**`on` or `off`**")
         if sort == "on":
-            await ctx.send("**Please mention the channel to set the suggestions in.**")
+            await ctx.send("**Please mention the channel to set the suggestions messages in.**")
             try:
                 x = await self.bot.wait_for("message", check=lambda x: x.channel == ctx.channel and x.author == ctx.author, timeout=60.0)
             except asyncio.TimeoutError:
@@ -280,7 +281,10 @@ class mod():
             except ValueError:
                 return await ctx.send("**Please mention the channel right**")
             await self.bot.db.suggestions.update_one({"id": str(ctx.guild.id)}, {"$set": {"channel": channel} }, upsert=True )
-            await ctx.send("**I have set the suggestions channel!**")
+            await ctx.send("**I have set the mod-log channel!**")
+        if sort == "off":
+            await self.bot.db.suggestions.update_one({"id": str(ctx.guild.id)}, {"$set": {"channel": False} }, upsert=True )
+            await ctx.send("**I have turned off suggestions**")
 
     @commands.command()
     async def suggest(ctx,*, suggestion):
