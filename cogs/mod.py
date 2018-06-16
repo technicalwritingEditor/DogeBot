@@ -299,8 +299,8 @@ class mod():
     async def warn(self, ctx, user:discord.Member):
         x = await self.bot.db.warnings.find_one({"id": str(ctx.guild.id)})
         current = x['warnings']
-        await self.bot.db.warnings.update_one({"id": str(ctx.guild.id)}, {"$set": {"user": user.id}, upsert=True)   
-        await self.bot.db.warnings.update_one({"id": str(ctx.guild.id)}, {"$set": {"warnings": current + 1}, upsert=True)
+        await self.bot.db.warnings.update_one({"id": str(ctx.guild.id)}, {"$set": {"user": user.id}}, upsert=True)   
+        await self.bot.db.warnings.update_one({"id": str(ctx.guild.id)}, {"$set": {"warnings": current + 1}}, upsert=True)
         await ctx.send(f"Warned {user.name}")
                                                                           
 def setup(bot):
