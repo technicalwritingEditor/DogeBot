@@ -297,20 +297,19 @@ class mod():
 
     @commands.command()
     @commands.has_permissions(manage_channels=True)
-    async def lockdown(self, ctx, action):
-        """Prevents anyone from chatting in the current channel."""
-        if action.lower() == 'on':
+    async def lockdown(self, ctx, sort):
+        if sort.lower() == 'on':
             msg = await ctx.send("Locking down the channel...")
             for x in ctx.guild.members:
                 await ctx.channel.set_permissions(x, send_messages=False)
             return await msg.edit(content="The channel has been successfully locked down. :lock: ")
-        elif action.lower() == 'off':
+        elif sort.lower() == 'off':
             msg = await ctx.send("Unlocking the channel...")
             for x in ctx.guild.members:
                 await ctx.channel.set_permissions(x, send_messages=True)
             return await msg.edit(content="The channel has been successfully unlocked. :unlock: ")
         else:
-            return await ctx.send("Lockdown command:\n*lockdown [on/off]")        
+            return await ctx.send("**lockdown [on/off]**")        
         
 def setup(bot):
     bot.add_cog(mod(bot))
