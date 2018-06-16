@@ -234,7 +234,8 @@ class GuildMusicState:
             source = Song(next_song_info)
             source.volume = self.player_volume
             self.voice_client.play(source, after=lambda e: asyncio.run_coroutine_threadsafe(self.play_next_song(next_song_info, e), self.loop).result())
-            await next_song_info.channel.send(f'Now playing {next_song_info}')
+            x = await next_song_info.channel.send(f'Now playing {next_song_info}')
+            await x.add_reaction("⏸️")
 
 
 class Music:
