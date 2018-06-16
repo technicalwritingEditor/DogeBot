@@ -267,7 +267,7 @@ class Music:
         return self.music_states.setdefault(guild_id, GuildMusicState(self.bot.loop))
 
     @commands.command()
-    async def status(self, ctx):
+    async def nowplaying(self, ctx):
         """Displays the currently played song."""
         if ctx.music_state.is_playing():
             song = ctx.music_state.current_song
@@ -280,7 +280,7 @@ class Music:
         """Shows info about the current playlist."""
         await ctx.send(f'{ctx.music_state.playlist}')
 
-    @commands.command()
+    @commands.command(aliases=['summon', 'connect'])
     @commands.has_permissions(manage_guild=True)
     async def join(self, ctx, *, channel: discord.VoiceChannel = None):
         """Summons the bot to a voice channel.
