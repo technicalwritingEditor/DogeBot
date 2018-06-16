@@ -294,6 +294,12 @@ class mod():
         channel = int(x['channel'])
         send_channel= self.bot.get_channel(channel)
         await send_channel.send(embed=embed)
+
+    @commands.command()
+    async def warn(self, ctx, user:discord.Member):
+        x = await self.bot.db.warnings.find_one({"id": str(ctx.guild.id)})
+        current = x['warnings']
+        await self.bot.db.warnings.update_one({"id": str(ctx.guild.id)}, {"$set": {"user": user.id}}, {"warnings": current + 1} })        
         
 def setup(bot):
     bot.add_cog(mod(bot))
