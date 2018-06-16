@@ -258,7 +258,7 @@ class mod():
 
     @commands.command()
     async def addrole(self, ctx, user:discord.Member,*, role):
-        x = discord.utils.get(ctx.guild.roles, name=str(role))
+        x = discord.utils.get(ctx.guild.roles, name=role)
         await user.add_roles(x)
         await ctx.send(f"Added **{role}** to **{user}**")           
 
@@ -295,21 +295,5 @@ class mod():
         send_channel= self.bot.get_channel(channel)
         await send_channel.send(embed=embed)
 
-    @commands.command()
-    @commands.has_permissions(manage_channels=True)
-    async def lockdown(self, ctx, sort):
-        if sort.lower() == 'on':
-            msg = await ctx.send("Locking down the channel...")
-            for x in ctx.guild.members:
-                await ctx.channel.set_permissions(x, send_messages=False)
-            return await msg.edit(content="The channel has been successfully locked down. :lock: ")
-        elif sort.lower() == 'off':
-            msg = await ctx.send("Unlocking the channel...")
-            for x in ctx.guild.members:
-                await ctx.channel.set_permissions(x, send_messages=True)
-            return await msg.edit(content="The channel has been successfully unlocked. :unlock: ")
-        else:
-            return await ctx.send("**lockdown [on/off]**")        
-        
 def setup(bot):
     bot.add_cog(mod(bot))
