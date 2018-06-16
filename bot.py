@@ -15,7 +15,6 @@ bot.load_extension("cogs.mod")
 bot.load_extension("cogs.owner")
 bot.load_extension("cogs.giveaway")
 bot.load_extension("cogs.music")
-bot.load_extension("cogs.tags")
 
 @bot.event
 async def on_ready():
