@@ -15,6 +15,7 @@ bot.load_extension("cogs.mod")
 bot.load_extension("cogs.owner")
 bot.load_extension("cogs.giveaway")
 bot.load_extension("cogs.music")
+bot.load_extension("cogs.tags")
 
 @bot.event
 async def on_ready():
@@ -26,7 +27,7 @@ async def help(ctx):
     embed=discord.Embed(title="My commands", color=0x9b9dff)
     embed.add_field(name="Info", value="`help`, `info`, `invite`", inline=False)
     embed.add_field(name="Fun", value="`roast`, `face`, `lenny`, `tableflip`, `dog`", inline=False)
-    embed.add_field(name="Economy", value="`create`, `earn`, `bal`, `daily`", inline=False)
+    embed.add_field(name="Economy", value="`openaccount`, `earn`, `bal`, `daily`", inline=False)
     embed.add_field(name="Images", value="`rip`, `achievement`, `avatar`", inline=False)
     embed.add_field(name="Moderation", value="`welcome`, `leave`, `modlog`, `antiinvites`, `kick`, `ban`, `purge`", inline=False)
     embed.add_field(name="Music", value="`join`, `play`, `nowplaying`, `playlist`, `pause`, `stop`, `resume`, `empty`")
