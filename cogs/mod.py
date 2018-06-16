@@ -62,18 +62,18 @@ class mod():
             return
         await send_channel.send(x['message'].replace('$name$', user.name).replace('$mention$', user.mention).replace('$server$', user.guild.name))   
    
-    async def on_message_delete(self, message):
-        em = discord.Embed(color=0x1aff00, timestamp = datetime.datetime.utcnow())
-        em.add_field(name="Message deleted", value=message.content)
-        em.set_author(name=message.author, icon_url=message.author.avatar_url)
-        x = await self.bot.db.modlog.find_one({"id": str(message.guild.id)})
-        if not x:
-            return
-        channel = int(x['channel'])
-        send_channel = self.bot.get_channel(channel)
-        if not send_channel:
-            return
-        await send_channel.send(embed=em)           
+    #async def on_message_delete(self, message):
+        #em = discord.Embed(color=0x1aff00, timestamp = datetime.datetime.utcnow())
+        #em.add_field(name="Message deleted", value=message.content)
+        #em.set_author(name=message.author, icon_url=message.author.avatar_url)
+        #x = await self.bot.db.modlog.find_one({"id": str(message.guild.id)})
+        #if not x:
+            #return
+        #channel = int(x['channel'])
+        #send_channel = self.bot.get_channel(channel)
+        #if not send_channel:
+            #return
+        #await send_channel.send(embed=em)           
 
     #async def on_message_edit(self, before, after):
             #em = discord.Embed(color=0x1aff00, timestamp = datetime.datetime.utcnow())
@@ -208,9 +208,9 @@ class mod():
         await user.kick()
         x = await self.bot.db.modlog.find_one({"id": str(ctx.guild.id)})
         embed=discord.Embed(title="Case: Kick", color=0xff0f0f)
-        embed.add_field(name="User", value=f"{user} ({user.mention})")
-        embed.add_field(name="Moderator", value=ctx.author)
-        embed.add_field(name="Reason", value=reason)
+        embed.add_field(name="User", value=f"{user} ({user.mention})",inline=False)
+        embed.add_field(name="Moderator", value=ctx.author,inline=False)
+        embed.add_field(name="Reason", value=reason,inline=False)
         await ctx.send(f"Kanned **{user}**")
         channel = int(x['channel'])
         send_channel= self.bot.get_channel(channel)
@@ -223,9 +223,9 @@ class mod():
         await user.ban()
         x = await self.bot.db.modlog.find_one({"id": str(ctx.guild.id)})
         embed=discord.Embed(title="Case: Ban", color=0xff0f0f)
-        embed.add_field(name="User", value=f"{user} ({user.mention})")
-        embed.add_field(name="Moderator", value=ctx.author)
-        embed.add_field(name="Reason", value=reason)
+        embed.add_field(name="User", value=f"{user} ({user.mention})",inline=False)
+        embed.add_field(name="Moderator", value=ctx.author,inline=False)
+        embed.add_field(name="Reason", value=reason,inline=False)
         await ctx.send(f"Banned **{user}**")
         channel = int(x['channel'])
         send_channel= self.bot.get_channel(channel)
