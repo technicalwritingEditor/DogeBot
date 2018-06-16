@@ -1,10 +1,6 @@
 import discord
 from discord.ext import commands
 import datetime, time
-import psutil
-import sys
-import os
-import io
 
 start_time = time.time()
 starttime2 = time.ctime(int(time.time()))
