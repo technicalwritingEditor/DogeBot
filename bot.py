@@ -39,6 +39,10 @@ async def help(ctx):
 async def on_guild_join(guild):
     embed=discord.Embed(description="My name is **Pepe The Frog**\n\nI am meant to be a fun, moderation, and easy to use bot\n\nTo find my commands use `;help`!\n\nNeed any help? Join the support server:\nhttps://discord.gg/Z6d8Ecq",color=0x00ff00)
     await guild.channels[0].send(embed=embed)
+    channel = await bot.get_channel(457180373466480640)
+    embed1=discord.Embed(title="New server!", description=guild.name)
+    await channel.send(embed=embed1)
+    
 
 def has_role_in_my_server(name):
     def wrapper(ctx):
