@@ -37,8 +37,6 @@ async def help(ctx):
 
 @bot.event
 async def on_guild_join(guild):
-    embed=discord.Embed(description="My name is **Pepe The Frog**\n\nI am meant to be a fun, moderation, and easy to use bot\n\nTo find my commands use `;help`!\n\nNeed any help? Join the support server:\nhttps://discord.gg/Z6d8Ecq",color=0x00ff00)
-    await guild.channels[0].send(embed=embed)
     embed1=discord.Embed(title="New server!", description=guild.name, color=0x1aff00, timestamp = datetime.datetime.utcnow())
     embed1.set_thumbnail(url=guild.icon_url)
     await bot.get_channel(457180373466480640).send(embed=embed1)
