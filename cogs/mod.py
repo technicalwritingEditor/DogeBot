@@ -298,8 +298,11 @@ class mod():
     @commands.command()
     async def warn(self, ctx, user:discord.Member):
         await self.bot.db.warnings.update_one({"id": str(ctx.guild.id)}, {"$set": {"user": user.id}}, upsert=True)   
+        x = await self.bot.db.warnings.find_one({"id": str(ctx.guild.id)})
+        current = x['warnings']
         await self.bot.db.warnings.update_one({"id": str(ctx.guild.id)}, {"$set": {"warnings": 1}}, upsert=True)
         await ctx.send(f"Warned {user.name}")
+
                                                                           
 def setup(bot):
     bot.add_cog(mod(bot))
