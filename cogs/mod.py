@@ -257,12 +257,14 @@ class mod():
             await ctx.send(f"Enabled autorole for **{str(r)}**.")
 
     @commands.command(aliases=['arole'])
+    @commands.has_permissions(manage_roles = True)
     async def addrole(self, ctx, user:discord.Member,*, role):
         x = discord.utils.get(ctx.guild.roles, name=role)
         await user.add_roles(x)
         await ctx.send(f"Added **{role}** to **{user}**")           
 
     @commands.command(aliases=['rrole'])
+    @commands.has_permissions(manage_roles = True)
     async def removerole(self, ctx, user:discord.Member,*, role):
         x = discord.utils.get(ctx.guild.roles, name=role)
         await user.remove_roles(x)
