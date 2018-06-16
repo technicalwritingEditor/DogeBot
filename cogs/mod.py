@@ -214,7 +214,7 @@ class mod():
         await ctx.send(f"Kanned **{user}**")
         channel = int(x['channel'])
         send_channel= self.bot.get_channel(channel)
-        await send_channel.send(embed=embed)     
+        await send_channel.send(embed=embed)
         await user.send(f"You have been kicked from {ctx.guild.name}!\nModerator: {ctx.author}\nReason: {reason}")
 
     @commands.command()
