@@ -232,6 +232,20 @@ class mod():
         await send_channel.send(embed=embed)
         await user.send(f"You have been banned from {ctx.guild.name}!\nModerator: {ctx.author}\nReason: {reason}")
 
+    @commands.command()
+    @commands.has_permissions(kick_members=True)
+    async def unban(self, ctx, user:discord.Member,*, reason):
+        await user.unban()
+        x = await self.bot.db.modlog.find_one({"id": str(ctx.guild.id)})
+        embed=discord.Embed(title="Case: Unban", color=0x00f200)
+        embed.add_field(name="User", value=f"{user} ({user.mention})")
+        embed.add_field(name="Moderator", value=ctx.author)
+        embed.add_field(name="Reason", value=reason)
+        await ctx.send(f"Unbanned **{user}**")
+        channel = int(x['channel'])
+        send_channel= self.bot.get_channel(channel)
+        await send_channel.send(embed=embed)
+        
     @commands.command()   
     @commands.has_permissions(kick_members=True)
     async def warn(self, ctx, user:discord.Member,*, reason):
