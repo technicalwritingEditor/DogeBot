@@ -325,25 +325,10 @@ class Music:
         else:
             # Schedule the song's download
             ctx.bot.loop.create_task(song.download(ctx.bot.loop))
-            await ctx.message.remove_reaction('\N{HOURGLASS}', ctx.me)
-            await ctx.message.add_reaction('\N{WHITE HEAVY CHECK MARK}')
-            x = await ctx.send(f'Queued {song} in position **#{ctx.music_state.playlist.qsize()}**')
-            await x.add_reaction("⏸️")
-            await x.add_reaction("⏹️")
-            await x.add_reaction("▶")
-            try:    
-                reaction, user = await self.bot.wait_for('reaction_add', check=lambda reaction, user: user == ctx.author)
-                if reaction.emoji == "⏸":
-                    ctx.voice_client.pause()
-                    await x.remove_reaction("\U000023f8", ctx.author)
-                elif reaction.emoji == "⏹️":
-                    ctx.voice_client.stop()
-                    await x.delete()
-                elif reaction.emoji == "▶":
-                    ctx.voice_client.resume()
-                    await x.remove_reaction("\U000025b6", ctx.author)
-            except discord.Forbidden:
-                return await ctx.send("I can't remove your reactions")
+            await ctx.send(f'Queued {song} in position **#{ctx.music_state.playlist.qsize()}**')
+
+        await ctx.message.remove_reaction('\N{HOURGLASS}', ctx.me)
+        await ctx.message.add_reaction('\N{WHITE HEAVY CHECK MARK}')
 
     @play.error
     async def play_error(self, ctx, error):
@@ -390,6 +375,7 @@ class Music:
 
         if not ctx.music_state.is_playing():
             raise MusicError('Not playing anything to skip.')
+        k = await self.bot.db.music.find_one({"gid" : ctx.guild.id})
         minskips = k['minskips']
         if ctx.author.id in ctx.music_state.skips:
             raise MusicError(f'{ctx.author.mention} You already voted to skip that song')
@@ -402,11 +388,3 @@ class Music:
         if len(ctx.music_state.skips) > minskips or ctx.author == ctx.music_state.current_song.requester:
             ctx.music_state.skips.clear()
             ctx.voice_client.stop()
-
-    @commands.command()
-    @commands.has_permissions(manage_guild=True)
-    async def minskips(self, ctx, number: int):
-        """Sets the minimum number of votes to skip a song.
-        Requires the `Manage Guild` permission.
-        """
-        ctx.music_state.min_skips = number
