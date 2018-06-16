@@ -221,7 +221,7 @@ class GuildMusicState:
 
     async def play_next_song(self, song=None, error=None):
         if error:
-            await self.current_song.channel.send(f'An error has occurred while playing {self.current_song}: {error}')
+            await self.current_song.channel.send(f'**An error has occurred while playing {self.current_song}: {error}**')
 
         if song and not song.local_file and song.filename not in [s.filename for s in self.playlist]:
             os.remove(song.filename)
@@ -234,7 +234,7 @@ class GuildMusicState:
             source = Song(next_song_info)
             source.volume = self.player_volume
             self.voice_client.play(source, after=lambda e: asyncio.run_coroutine_threadsafe(self.play_next_song(next_song_info, e), self.loop).result())
-            await next_song_info.channel.send(f'Now playing {next_song_info}')
+            await next_song_info.channel.send(f'**Now playing {next_song_info}**')
            
 
 
@@ -249,7 +249,7 @@ class Music:
 
     def __local_check(self, ctx):
         if not ctx.guild:
-            raise commands.NoPrivateMessage('This command cannot be used in a private message.')
+            raise commands.NoPrivateMessage('**This command cannot be used in a private message.**')
         return True
 
     async def __before_invoke(self, ctx):
@@ -267,16 +267,16 @@ class Music:
     def get_music_state(self, guild_id):
         return self.music_states.setdefault(guild_id, GuildMusicState(self.bot.loop))
 
-    @commands.command()
+    @commands.command(aliases=['np'])
     async def nowplaying(self, ctx):
         if ctx.music_state.is_playing():
             song = ctx.music_state.current_song
-            await ctx.send(f'Playing {song.name}. Volume at {song.volume * 100}% in {ctx.voice_client.channel.mention}')
+            await ctx.send(f'**Playing {ctx.song}. Volume at {song.volume * 100}% in {ctx.voice_client.channel}**')
         else:
             await ctx.send('Not playing.')
 
-    @commands.command()
-    async def playlist(self, ctx):
+    @commands.command(aliases=['playlist'])
+    async def queue(self, ctx):
         """Shows info about the current playlist."""
         await ctx.send(f'{ctx.music_state.playlist}')
 
@@ -287,7 +287,7 @@ class Music:
         If no channel is given, summons it to your current voice channel.
         """
         if channel is None and not ctx.author.voice:
-            raise MusicError('You are not in a voice channel nor specified a voice channel for me to join.')
+            raise MusicError('**You are not in a voicechannel or told me where to join**')
 
         destination = channel or ctx.author.voice.channel
 
@@ -316,7 +316,7 @@ class Music:
         try:
             ctx.music_state.playlist.add_song(song)
         except asyncio.QueueFull:
-            raise MusicError('Playlist is full, try again later.')
+            raise MusicError('**Playlist is full, try again later.**')
 
         if not ctx.music_state.is_playing():
             # Download the song and play it
@@ -359,32 +359,17 @@ class Music:
     async def volume(self, ctx, volume: int = None):
         """Sets the volume of the player, scales from 0 to 100."""
         if volume < 0 or volume > 100:
-            raise MusicError('The volume level has to be between 0 and 100.')
+            raise MusicError('**The volume level has to be between 0 and 100.**')
         ctx.music_state.volume = volume / 100
 
     @commands.command()
-    async def empty(self, ctx):
+    async def clear(self, ctx):
         """Clears the playlist."""
         ctx.music_state.playlist.clear()
 
     @commands.command()
     async def skip(self, ctx):
-        """Votes to skip the current song.
-        To configure the minimum number of votes needed, use `minskips`
-        """
-
         if not ctx.music_state.is_playing():
-            raise MusicError('Not playing anything to skip.')
-        k = await self.bot.db.music.find_one({"gid" : ctx.guild.id})
-        minskips = k['minskips']
-        if ctx.author.id in ctx.music_state.skips:
-            raise MusicError(f'{ctx.author.mention} You already voted to skip that song')
-
-        # Count the vote
-        ctx.music_state.skips.add(ctx.author.id)
-        await ctx.message.add_reaction('\N{WHITE HEAVY CHECK MARK}')
-
-        # Check if the song has to be skipped
-        if len(ctx.music_state.skips) > minskips or ctx.author == ctx.music_state.current_song.requester:
-            ctx.music_state.skips.clear()
-            ctx.voice_client.stop()
+            raise MusicError('**Not playing anything to skip.**')
+        else:
+            await ctx.music_state.skip.current_song()
