@@ -11,7 +11,7 @@ class economy():
             await discord.abc.Messageable.send(message.channel, error)              
         
     @commands.command()
-    async def create(self, ctx):
+    async def openaccount(self, ctx):
         self.bot.db.configs.update_one( { "id": ctx.author.id }, { "$set": { "money": 0 } }, upsert=True )
         await ctx.send("Created account for ya")
 
