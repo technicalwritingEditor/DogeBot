@@ -207,7 +207,7 @@ class mod():
     async def kick(self, ctx, user:discord.Member,*, reason):
         await user.kick()
         x = await self.bot.db.modlog.find_one({"id": str(ctx.guild.id)})
-        embed=discord.Embed(title="Case: Kick", color=0xff0f0f)
+        embed=discord.Embed(title="Case: Kick", color=0xff0f0f, timestamp = datetime.datetime.utcnow())
         embed.add_field(name="User", value=f"{user} ({user.mention})",inline=False)
         embed.add_field(name="Moderator", value=ctx.author,inline=False)
         embed.add_field(name="Reason", value=reason,inline=False)
@@ -222,7 +222,7 @@ class mod():
     async def ban(self, ctx, user:discord.Member,*, reason):
         await user.ban()
         x = await self.bot.db.modlog.find_one({"id": str(ctx.guild.id)})
-        embed=discord.Embed(title="Case: Ban", color=0xff0f0f)
+        embed=discord.Embed(title="Case: Ban", color=0xff0f0f, timestamp = datetime.datetime.utcnow())
         embed.add_field(name="User", value=f"{user} ({user.mention})",inline=False)
         embed.add_field(name="Moderator", value=ctx.author,inline=False)
         embed.add_field(name="Reason", value=reason,inline=False)
