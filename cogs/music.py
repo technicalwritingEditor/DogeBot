@@ -238,10 +238,12 @@ class GuildMusicState:
             await x.add_reaction("⏸")
             await x.add_reaction("▶")
             await x.add_reaction("⏹")
-            reaction, user = await self.bot.wait_for('reaction_add', check=lambda reaction, user: user == ctx.author)
-            if reaction.emoji == "⏸":
+            try:
+                reaction, user = await self.bot.wait_for('reaction_add', check=lambda reaction, user: user == ctx.author)
+                if reaction.emoji == "⏸":
                     ctx.voice_client.pause()
-                
+            except discord.Forbidden:
+                return await ctx.send("idk lol")
            
 
 
