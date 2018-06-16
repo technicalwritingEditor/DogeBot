@@ -1,6 +1,10 @@
 import discord
 from discord.ext import commands
 import datetime, time
+import psutil
+import sys
+import os
+import io
 
 start_time = time.time()
 starttime2 = time.ctime(int(time.time()))
@@ -19,7 +23,6 @@ class info():
         used = RAM.used >> 20
         percent = RAM.percent
         embed=discord.Embed(description=f"**Information**\n\n__**Stats**__\nUptime: **%dd %dh %dm %ds**\nServers: **{len(self.bot.guilds)}**\nDiscord.py: **{discord.__version__}**" (day, hour, minute, second),color=0x9b9dff)
-        embed.add_field(name="Memory usage", value="{used} MB ({percent}%)")
         await ctx.send(embed=embed)
 
     @commands.command()
