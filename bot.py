@@ -19,7 +19,7 @@ bot.load_extension("cogs.music")
 @bot.event
 async def on_ready():
     print("Im online") 
-    await bot.change_presence(activity=discord.Game(name=";help"))
+    await bot.change_presence(activity=discord.Game(name="p!help"))
     
 @bot.command()
 async def help(ctx):
