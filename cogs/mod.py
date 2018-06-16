@@ -256,12 +256,18 @@ class mod():
             await self.bot.db.autorole.update_one({"id": str(ctx.guild.id)}, {"$set": {"role": str(r)}}, upsert=True)
             await ctx.send(f"Enabled autorole for **{str(r)}**.")
 
-    @commands.command()
+    @commands.command(aliases=['arole'])
     async def addrole(self, ctx, user:discord.Member,*, role):
         x = discord.utils.get(ctx.guild.roles, name=role)
         await user.add_roles(x)
         await ctx.send(f"Added **{role}** to **{user}**")           
 
+    @commands.command(aliases=['rrole'])
+    async def removerole(self, ctx, user:discord.Member,*, role):
+        x = discord.utils.get(ctx.guild.roles, name=role)
+        await user.remove_roles(x)
+        await ctx.send(f"Removed **{role}** from **{user}**")         
+        
     @commands.command()
     @commands.has_permissions(manage_guild=True)
     async def suggestion(self, ctx, sort=None):
