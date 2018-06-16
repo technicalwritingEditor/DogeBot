@@ -234,16 +234,7 @@ class GuildMusicState:
             source = Song(next_song_info)
             source.volume = self.player_volume
             self.voice_client.play(source, after=lambda e: asyncio.run_coroutine_threadsafe(self.play_next_song(next_song_info, e), self.loop).result())
-            x = await next_song_info.channel.send(f'Now playing {next_song_info}')
-            await x.add_reaction("⏸")
-            await x.add_reaction("▶")
-            await x.add_reaction("⏹")
-            try:
-                reaction, user = await self.bot.wait_for('reaction_add', check=lambda reaction, user: user == ctx.author)
-                if reaction.emoji == "⏸":
-                    ctx.voice_client.pause()
-            except discord.Forbidden:
-                return await ctx.send("idk lol")
+            await next_song_info.channel.send(f'Now playing {next_song_info}')
            
 
 
