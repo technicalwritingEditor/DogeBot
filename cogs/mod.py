@@ -275,39 +275,6 @@ class mod():
         x = discord.utils.get(ctx.guild.roles, name=role)
         await user.remove_roles(x)
         await ctx.send(f"Removed **{role}** from **{user}**")         
-        
-    @commands.command()
-    @commands.has_permissions(manage_guild=True)
-    async def suggestion(self, ctx, sort=None):
-        if sort == None:
-            await ctx.send("**`on` or `off`**")
-        if sort == "on":
-            await ctx.send("**Please mention the channel to set the suggestions messages in.**")
-            try:
-                x = await self.bot.wait_for("message", check=lambda x: x.channel == ctx.channel and x.author == ctx.author, timeout=60.0)
-            except asyncio.TimeoutError:
-                return await ctx.send("**The time is up**")
-            if not x.content.startswith("<#") and not x.content.endswith(">"):
-                return await ctx.send("**Please mention the channel**")
-            channel = x.content.strip("<#").strip(">")
-            try:
-                channel = int(channel)
-            except ValueError:
-                return await ctx.send("**Please mention the channel right**")
-            await self.bot.db.suggestions.update_one({"id": str(ctx.guild.id)}, {"$set": {"channel": channel} }, upsert=True )
-            await ctx.send("**I have set the suggestions channel!**")
-        if sort == "off":
-            await self.bot.db.suggestions.update_one({"id": str(ctx.guild.id)}, {"$set": {"channel": False} }, upsert=True )
-            await ctx.send("**I have turned off suggestions**")
-
-    @commands.command()
-    async def suggest(self, ctx,*, suggestion):
-        embed=discord.Embed(description=suggestion, color=0x1aff00, timestamp = datetime.datetime.utcnow())
-        embed.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
-        x = await self.bot.db.suggestions.find_one({"id": str(ctx.guild.id)})
-        channel = int(x['channel'])
-        send_channel= self.bot.get_channel(channel)
-        await send_channel.send(embed=embed)
-
+       
 def setup(bot):
     bot.add_cog(mod(bot))
