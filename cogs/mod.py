@@ -232,6 +232,7 @@ class mod():
         await send_channel.send(embed=embed)
         await user.send(f"You have been banned from {ctx.guild.name}!\nModerator: {ctx.author}\nReason: {reason}")
 
+    @commands.command()   
     @commands.has_permissions(kick_members=True)
     async def warn(self, ctx, user:discord.Member,*, reason):
         x = await self.bot.db.modlog.find_one({"id": str(ctx.guild.id)})
@@ -244,7 +245,8 @@ class mod():
         send_channel= self.bot.get_channel(channel)
         await send_channel.send(embed=embed)
         await user.send(f"You have been Warned in {ctx.guild.name}!\nModerator: {ctx.author}\nReason: {reason}")
-
+        
+    @commands.command()   
     @commands.has_permissions(kick_members=True)
     async def mute(self, ctx, user:discord.Member,*, reason):
         x = await self.bot.db.modlog.find_one({"id": str(ctx.guild.id)})
@@ -257,7 +259,8 @@ class mod():
         channel = int(x['channel'])
         send_channel= self.bot.get_channel(channel)
         await send_channel.send(embed=embed)
-
+        
+    @commands.command()   
     @commands.has_permissions(kick_members=True)
     async def unmute(self, ctx, user:discord.Member,*, reason):
         x = await self.bot.db.modlog.find_one({"id": str(ctx.guild.id)})
