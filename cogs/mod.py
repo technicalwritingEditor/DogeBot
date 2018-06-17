@@ -207,7 +207,7 @@ class mod():
     async def kick(self, ctx, user:discord.Member,*, reason):
         await user.kick()
         x = await self.bot.db.modlog.find_one({"id": str(ctx.guild.id)})
-        embed=discord.Embed(title="Case: kick", color=0xff7c3e)
+        embed=discord.Embed(title="Case: kick", color=0xff7c3e, timestamp = datetime.datetime.utcnow())
         embed.add_field(name="User", value=f"{user} ({user.mention})", inline=False)
         embed.add_field(name="Moderator", value=ctx.author, inline=False)
         embed.add_field(name="Reason", value=reason, inline=False)
@@ -222,7 +222,7 @@ class mod():
     async def ban(self, ctx, user:discord.Member,*, reason):
         await user.ban()
         x = await self.bot.db.modlog.find_one({"id": str(ctx.guild.id)})
-        embed=discord.Embed(title="Case: Ban", color=0xff0f0f)
+        embed=discord.Embed(title="Case: Ban", color=0xff0f0f, timestamp = datetime.datetime.utcnow())
         embed.add_field(name="User", value=f"{user} ({user.mention})", inline=False)
         embed.add_field(name="Moderator", value=ctx.author, inline=False)
         embed.add_field(name="Reason", value=reason, inline=False)
@@ -236,7 +236,7 @@ class mod():
     @commands.has_permissions(kick_members=True)
     async def warn(self, ctx, user:discord.Member,*, reason):
         x = await self.bot.db.modlog.find_one({"id": str(ctx.guild.id)})
-        embed=discord.Embed(title="Case: Warn", color=0xff7c3e)
+        embed=discord.Embed(title="Case: Warn", color=0xff7c3e, timestamp = datetime.datetime.utcnow())
         embed.add_field(name="User", value=f"{user} ({user.mention})", inline=False)
         embed.add_field(name="Moderator", value=ctx.author, inline=False)
         embed.add_field(name="Reason", value=reason, inline=False)
@@ -250,7 +250,7 @@ class mod():
     @commands.has_permissions(manage_channels=True)
     async def mute(self, ctx, user:discord.Member,*, reason):
         x = await self.bot.db.modlog.find_one({"id": str(ctx.guild.id)})
-        embed=discord.Embed(title="Case: Mute", color=0xffff37)
+        embed=discord.Embed(title="Case: Mute", color=0xffff37, timestamp = datetime.datetime.utcnow())
         embed.add_field(name="User", value=f"{user} ({user.mention})", inline=False)
         embed.add_field(name="Moderator", value=ctx.author, inline=False)
         embed.add_field(name="Reason", value=reason, inline=False)
@@ -264,7 +264,7 @@ class mod():
     @commands.has_permissions(manage_channels=True)
     async def unmute(self, ctx, user:discord.Member,*, reason):
         x = await self.bot.db.modlog.find_one({"id": str(ctx.guild.id)})
-        embed=discord.Embed(title="Case: Unmute", color=0x00f200)
+        embed=discord.Embed(title="Case: Unmute", color=0x00f200, timestamp = datetime.datetime.utcnow())
         embed.add_field(name="User", value=f"{user} ({user.mention})", inline=False)
         embed.add_field(name="Moderator", value=ctx.author, inline=False)
         embed.add_field(name="Reason", value=reason, inline=False)
