@@ -36,6 +36,17 @@ class utility():
         t2 = time.perf_counter()
         ping = round((t2-t1)*1000)
         await message.edit(content=f":ping_pong: Pong! `{ping}`ms")                                                     
+
+    @commands.command(name="translate", aliases=['tr'])
+    @commands.cooldown(1, 3, commands.BucketType.user)
+    async def translate_command(self, ctx, tl, *words: str):
+        '''Translate something. Supported list of languages: https://tech.yandex.com/translate/doc/dg/concepts/api-overview-docpage/#languages
+        Usage: translate <from>-<to>
+        Example: translate en-pl sandwich
+        '''
+        words = ' '.join(words)
+        answer = requests.get("https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20170315T092303Z.ece41a1716ebea56.a289d8de3dc45f8ed21e3be5b2ab96e378f684fa&text={0}&lang={1}".format(words,tl)).json()
+        await ctx.send("{0} {1}".format(ctx.message.author.mention, str(answer["text"])[2:-2]))
                             
 def setup(bot):
     bot.add_cog(utility(bot))
