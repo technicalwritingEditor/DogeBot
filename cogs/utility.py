@@ -38,7 +38,6 @@ class utility():
         await message.edit(content=f":ping_pong: Pong! `{ping}`ms")                                                     
 
     @commands.command(name="translate", aliases=['tr'])
-    @commands.cooldown(1, 3, commands.BucketType.user)
     async def translate_command(self, ctx, tl, *words: str):
         '''Translate something. Supported list of languages: https://tech.yandex.com/translate/doc/dg/concepts/api-overview-docpage/#languages
         Usage: translate <from>-<to>
