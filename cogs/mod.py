@@ -23,7 +23,7 @@ class mod():
                 x = await self.bot.db.modlog.find_one({"id": str(message.guild.id)})
                 mod_channel = int(x['channel'])
                 xD = self.bot.get_channel(mod_channel)
-                embed = discord.Embed(description=f"📧 Invite deleted at {message.channel.mention}. Sent by {message.author.mention}!")
+                embed = discord.Embed(description=f"📧 Invite deleted at {message.channel.mention}. Sent by {message.author.mention}!", color=0x9b9dff)
                 await xD.send(embed=embed)
         if on_or_off == "off":
             pass
