@@ -19,7 +19,7 @@ bot.load_extension("cogs.music")
 @bot.event
 async def on_command_error(message,  error):
         if isinstance (error, commands.MissingPermissions):
-            embed3=discord.Embed(color=0xff2d32)
+            embed3=discord.Embed(color=0xff2d32, timestamp = datetime.datetime.utcnow())
             embed3.add_field(name="Error", value=f"{error}")
             await discord.abc.Messageable.send(message.channel, embed=embed3)
 
