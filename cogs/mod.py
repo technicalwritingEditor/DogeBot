@@ -36,7 +36,7 @@ class mod():
         send_channel = self.bot.get_channel(channel)
         if not send_channel:
             return
-        await send_channel.send(x['message'].replace('$name$', user.name).replace('$mention$', user.mention).replace('$server$', user.guild.name))
+        await send_channel.send(x['message'].replace('$name$', user.name).replace('$mention$', user.mention).replace('$server$', user.guild.name).replace('{members}', str(len(member.guild.members))))
         on_or_off = x['on_or_off']
         if on_or_off == "on":
             img = Image.open("maxresdefault.jpg")
