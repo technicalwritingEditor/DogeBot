@@ -208,9 +208,9 @@ class mod():
         await user.kick()
         x = await self.bot.db.modlog.find_one({"id": str(ctx.guild.id)})
         embed=discord.Embed(title="Case: kick", color=0xff7c3e)
-        embed.add_field(name=User, value=f"{user} ({user.mention})")
-        embed.add_field(name=Moderator, value=ctx.author, inline=False)
-        embed.add_field(name=Reason, value=reason)
+        embed.add_field(name="User", value=f"{user} ({user.mention})", inline=False)
+        embed.add_field(name="Moderator", value=ctx.author, inline=False)
+        embed.add_field(name="Reason", value=reason, inline=False)
         await ctx.send(f"Kicked **{user}**")
         channel = int(x['channel'])
         send_channel= self.bot.get_channel(channel)
@@ -218,7 +218,7 @@ class mod():
         await user.send(f"You have been kicked from {ctx.guild.name}!\nModerator: {ctx.author}\nReason: {reason}")
 
     @commands.command()
-    @commands.has_permissions(kick_members=True)
+    @commands.has_permissions(ban_members=True)
     async def ban(self, ctx, user:discord.Member,*, reason):
         await user.ban()
         x = await self.bot.db.modlog.find_one({"id": str(ctx.guild.id)})
@@ -247,7 +247,7 @@ class mod():
         await user.send(f"You have been Warned in {ctx.guild.name}!\nModerator: {ctx.author}\nReason: {reason}")
         
     @commands.command()   
-    @commands.has_permissions(kick_members=True)
+    @commands.has_permissions(manage_channels=True)
     async def mute(self, ctx, user:discord.Member,*, reason):
         x = await self.bot.db.modlog.find_one({"id": str(ctx.guild.id)})
         embed=discord.Embed(title="Case: Mute", color=0xffff37)
@@ -261,7 +261,7 @@ class mod():
         await send_channel.send(embed=embed)
         
     @commands.command()   
-    @commands.has_permissions(kick_members=True)
+    @commands.has_permissions(manage_channels=True)
     async def unmute(self, ctx, user:discord.Member,*, reason):
         x = await self.bot.db.modlog.find_one({"id": str(ctx.guild.id)})
         embed=discord.Embed(title="Case: Unmute", color=0x00f200)
