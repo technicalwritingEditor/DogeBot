@@ -42,6 +42,23 @@ async def help(ctx):
     embed.set_footer(text="I´m a very new bot and in early development, there will come A LOT more commands!")
     await ctx.send(embed=embed)
 
+@bot.command()
+@commands.is_owner()
+async def cogload(ctx, cog):
+    await bot.load_extension(f"cogs.{cog}")
+    await ctx.send(f"Loaded the cog {cog}")
+
+@bot.command()
+async def unloadcog(ctx, cog):
+    await bot.unload_extension(f"cogs.{cog}")
+    await ctx.send(f"Unloaded the cog {cog}")
+
+@bot.command()
+async def restartcog(ctx, cog):
+    await bot.unload_extension(f"cogs.{cog}")
+    await bot.load_extension(f"cogs.{cog}")
+    await ctx.send(f"Reloaded the cog {cog}")
+    
 def has_role_in_my_server(name):
     def wrapper(ctx):
         server = bot.get_guild(455305359645736971)
