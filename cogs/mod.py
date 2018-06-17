@@ -20,6 +20,11 @@ class mod():
                 await message.delete()
                 await asyncio.sleep(3)
                 await x.delete()
+                x = await self.bot.db.modlog.find_one({"id": str(message.guild.id)})
+                mod_channel = int(x['channel'])
+                xD = await self.bot.get_channel(mod_channel)
+                embed = discord.Embed(description=f"📧 Invite deleted at {message.channel.mention}. Sent by {message.author.mention}!")
+                await xD.send(embed=embed)
         if on_or_off == "off":
             pass
         
