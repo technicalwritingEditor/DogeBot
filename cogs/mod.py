@@ -65,7 +65,7 @@ class mod():
         send_channel = self.bot.get_channel(channel)
         if not send_channel:
             return
-        await send_channel.send(x['message'].replace('$name$', user.name).replace('$mention$', user.mention).replace('$server$', user.guild.name))   
+        await send_channel.send(x['message'].replace('$name$', user.name).replace('$mention$', user.mention).replace('$server$', user.guild.name).replace('{members}', str(len(member.guild.members))))   
    
     #async def on_message_delete(self, message):
         #em = discord.Embed(color=0x1aff00, timestamp = datetime.datetime.utcnow())
@@ -114,7 +114,7 @@ class mod():
                 return await ctx.send("**Please mention the channel right**")
             await self.bot.db.welcome.update_one({"id": str(ctx.guild.id)}, {"$set": {"channel": channel} }, upsert=True )
             await ctx.send("**I have set the welcome channel!**")
-            embed=discord.Embed(description="**Write a message!**\n\nVaribales:\n**$name$** Name of user\n**$mention$** Mentions user\n**$server$** Server name", color=0x00ff00)
+            embed=discord.Embed(description="**Write a message!**\n\nVaribales:\n**$name$** Name of user\n**$mention$** Mentions user\n**$server$** Server name\n$members$ The member count", color=0x00ff00)
             await ctx.send(embed=embed)
             try:
                 x = await self.bot.wait_for("message", check=lambda x: x.channel == ctx.channel and x.author == ctx.author, timeout=60.0)
@@ -158,7 +158,7 @@ class mod():
                 return await ctx.send("**Please mention the channel right**")
             await self.bot.db.leave.update_one({"id": str(ctx.guild.id)}, {"$set": {"channel": channel} }, upsert=True )
             await ctx.send("**I have set the leave channel!**")
-            embed=discord.Embed(description="**Write a message!**\n\nVaribales:\n**$name$** Name of user\n**$mention$** Mentions user\n**$server$** Server name", color=0x00ff00)
+            embed=discord.Embed(description="**Write a message!**\n\nVaribales:\n**$name$** Name of user\n**$mention$** Mentions user\n**$server$** Server name\n$members$ The member count", color=0x00ff00)
             await ctx.send(embed=embed)
             try:
                 x = await self.bot.wait_for("message", check=lambda x: x.channel == ctx.channel and x.author == ctx.author, timeout=60.0)
