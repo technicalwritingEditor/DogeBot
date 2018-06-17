@@ -35,18 +35,6 @@ async def help(ctx):
     embed.set_footer(text="I´m a very new bot and in early development, there will come A LOT more commands!")
     await ctx.send(embed=embed)
 
-@bot.event
-async def on_guild_join(guild):
-    embed1=discord.Embed(title="New server!", description=guild.name, color=0x1aff00, timestamp = datetime.datetime.utcnow())
-    embed1.set_thumbnail(url=guild.icon_url)
-    await bot.get_channel(457180373466480640).send(embed=embed1)
-
-@bot.event
-async def on_guild_remove(guild):
-    embed1=discord.Embed(title="Left server!", description=guild.name, color=0xff1c1c, timestamp = datetime.datetime.utcnow())
-    embed1.set_thumbnail(url=guild.icon_url)
-    await bot.get_channel(457180373466480640).send(embed=embed1)    
-
 def has_role_in_my_server(name):
     def wrapper(ctx):
         server = bot.get_guild(455305359645736971)
