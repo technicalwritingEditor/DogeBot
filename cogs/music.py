@@ -321,7 +321,7 @@ class Music:
         else:
             # Schedule the song's download
             ctx.bot.loop.create_task(song.download(ctx.bot.loop))
-            await ctx.send(f'Queued **{song}** in position **#{ctx.music_state.playlist.qsize()}**')
+            await ctx.send(f'Queued {song}** in position #{ctx.music_state.playlist.qsize()}')
 
         await ctx.message.remove_reaction('\N{HOURGLASS}', ctx.me)
         await ctx.message.add_reaction('\N{WHITE HEAVY CHECK MARK}')
@@ -367,5 +367,4 @@ class Music:
         if not ctx.music_state.is_playing():
             raise MusicError('**Not playing anything to skip.**')
         else:
-            song = ctx.music_state.current_song
-            await song.skip()
+            ctx.music_state.playlist.clear(1)
