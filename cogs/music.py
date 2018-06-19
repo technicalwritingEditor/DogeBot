@@ -268,6 +268,7 @@ class Music:
 
     @commands.command(aliases=['np'])
     async def nowplaying(self, ctx):
+        """See whats playing"""
         if ctx.music_state.is_playing():
             song = ctx.music_state.current_song
             await ctx.send(f'Playing {song.name}. Volume at {song.volume * 100}% in {ctx.voice_client.channel}')
@@ -294,11 +295,7 @@ class Music:
 
     @commands.command()
     async def play(self, ctx, *, request: str):
-        """Plays a song or adds it to the playlist.
-        Automatically searches with youtube_dl
-        List of supported sites :
-        https://github.com/rg3/youtube-dl/blob/1b6712ab2378b2e8eb59f372fb51193f8d3bdc97/docs/supportedsites.md
-        """
+        """Plays a song or adds it to the queue."""
         await ctx.message.add_reaction('\N{HOURGLASS}')
 
         # Create the SongInfo
@@ -353,13 +350,14 @@ class Music:
 
     @commands.command()
     async def volume(self, ctx, volume: int = None):
+        """"Set the volume"""
         if volume < 0 or volume > 100:
             raise MusicError('**The volume level has to be between 0 and 100.**')
         ctx.music_state.volume = volume / 100
 
     @commands.command()
     async def clear(self, ctx):
-        """Clears the playlist."""
+        """Clears the queue."""
         ctx.music_state.playlist.clear()
 
     @commands.command()
