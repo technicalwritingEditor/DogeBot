@@ -3,7 +3,7 @@ from discord.ext import commands
 import os
 from motor.motor_asyncio import AsyncIOMotorClient
     
-bot=commands.Bot(command_prefix='p!')
+bot=commands.Bot(command_prefix='d!')
 bot.remove_command('help')
 
 bot.load_extension("cogs.fun")
@@ -32,7 +32,7 @@ async def on_command_error(message,  error):
 @bot.event
 async def on_ready():
     print("Im online") 
-    await bot.change_presence(activity=discord.Game(name="p!help"))
+    await bot.change_presence(activity=discord.Game(name="d!help"))
     
 @bot.command()
 async def help(ctx):
