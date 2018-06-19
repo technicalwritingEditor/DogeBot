@@ -12,17 +12,20 @@ class economy():
         
     @commands.command()
     async def openaccount(self, ctx):
+        """"Create a bank account, if you already have one it will get reseted"""
         self.bot.db.configs.update_one( { "id": ctx.author.id }, { "$set": { "money": 0 } }, upsert=True )
         await ctx.send("Created account for ya")
 
-    @commands.command()
-    async def bal(self, ctx):
+    @commands.command(aliases=['bal'])
+    async def balance(self, ctx):
+        """"See your current balance"""
           user=await self.bot.db.configs.find_one({ "id": ctx.author.id })
           await ctx.send(f"{ctx.author.mention} | Your bal: **{user['money']}**:dollar: ")
 
     @commands.command()
     @commands.cooldown(1, 120, commands.BucketType.user)                  
     async def earn(self, ctx):
+        """Earn some cash"""
         x = random.randint(100, 1000)
         user = await self.bot.db.configs.find_one( { "id": ctx.author.id } )
         current = user['money']
@@ -32,6 +35,7 @@ class economy():
     @commands.command()
     @commands.cooldown(1, 86400, commands.BucketType.user)
     async def daily(self, ctx):
+        """Get your daily cash"""
         x = random.randint(500, 10000)
         user = await self.bot.db.configs.find_one( { "id": ctx.author.id } )
         current = user['money']
