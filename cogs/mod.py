@@ -328,6 +328,15 @@ class mod():
         x = discord.utils.get(ctx.guild.roles, name=role)
         await user.remove_roles(x)
         await ctx.send(f"Removed **{role}** from **{user}**")         
-       
+
+    @commands.command()
+    @commands.has_permissions(manage_server=True)
+    async def poll(self, ctx,*, question):
+        embed=discord.Embed(description=question, color=0xff0f0f, timestamp = datetime.datetime.utcnow())
+        embed.set_author(name=ctx.author, icon_url=ctx.author.avatar_url)
+        x = await ctx.send(embed=embed)
+        await x.add_reaction("👍")
+        await x.add_reaction("👎")        
+    
 def setup(bot):
     bot.add_cog(mod(bot))
