@@ -97,6 +97,7 @@ class mod():
     @commands.command()
     @commands.has_permissions(manage_guild=True)
     async def welcome(self, ctx, sort=None):
+        """Turn on or off welcome messages"""        
         if sort == None:
             await ctx.send("**Choose `on` or `off`**")
         if sort == "on":
@@ -129,6 +130,7 @@ class mod():
     @commands.command()
     @commands.has_permissions(manage_guild=True)
     async def welcomeimage(self, ctx, sort=None):
+        """Turn on or off welcome images"""
         if sort == None:
             await ctx.send("choose `on` or `off`")
         if sort == "on":
@@ -141,6 +143,7 @@ class mod():
     @commands.command(aliases=['goodbye'])
     @commands.has_permissions(manage_guild=True)
     async def leave(self, ctx, sort=None):
+        """Turn on or off leave messages"""
         if sort == None:
             await ctx.send("**Choose `on` or `off`**")
         if sort == "on":
@@ -173,6 +176,7 @@ class mod():
     @commands.command()
     @commands.has_permissions(manage_guild=True)
     async def modlog(self, ctx, sort=None):
+        """Turn on or off the modlog"""        
         if sort == None:
             await ctx.send("**`on` or `off`**")
         if sort == "on":
@@ -197,6 +201,7 @@ class mod():
     @commands.command()
     @commands.has_permissions(manage_guild=True)
     async def antiinvites(self, ctx, sort=None):
+        """Turn on or off anti invites"""
         if sort == None:
             await ctx.send("choose `on` or `off`")
         if sort == "on":
@@ -210,7 +215,7 @@ class mod():
     @commands.command()
     @commands.has_permissions(kick_members=True)
     async def kick(self, ctx, user:discord.Member,*, reason=None):
-        """"Kicks a member from your server!"""
+        """Kicks a member from your server!"""
         await user.kick()
         x = await self.bot.db.modlog.find_one({"id": str(ctx.guild.id)})
         embed=discord.Embed(title="Case: kick", color=0xff7c3e, timestamp = datetime.datetime.utcnow())
@@ -226,6 +231,7 @@ class mod():
     @commands.command()
     @commands.has_permissions(ban_members=True)
     async def ban(self, ctx, user:discord.Member,*, reason):
+        """Bans a member from your server!"""
         await user.ban()
         x = await self.bot.db.modlog.find_one({"id": str(ctx.guild.id)})
         embed=discord.Embed(title="Case: Ban", color=0xff0f0f, timestamp = datetime.datetime.utcnow())
@@ -241,6 +247,7 @@ class mod():
     @commands.command()   
     @commands.has_permissions(kick_members=True)
     async def warn(self, ctx, user:discord.Member,*, reason):
+        """Warn a user to make them a good pep again!"""
         x = await self.bot.db.modlog.find_one({"id": str(ctx.guild.id)})
         embed=discord.Embed(title="Case: Warn", color=0xff7c3e, timestamp = datetime.datetime.utcnow())
         embed.add_field(name="User", value=f"{user} ({user.mention})", inline=False)
@@ -255,6 +262,7 @@ class mod():
     @commands.command()   
     @commands.has_permissions(manage_channels=True)
     async def mute(self, ctx, user:discord.Member,*, reason):
+        """Mute a user so they cant chat"""
         x = await self.bot.db.modlog.find_one({"id": str(ctx.guild.id)})
         embed=discord.Embed(title="Case: Mute", color=0xffff37, timestamp = datetime.datetime.utcnow())
         embed.add_field(name="User", value=f"{user} ({user.mention})", inline=False)
@@ -269,6 +277,7 @@ class mod():
     @commands.command()   
     @commands.has_permissions(manage_channels=True)
     async def unmute(self, ctx, user:discord.Member,*, reason):
+        """Unmute a user"""
         x = await self.bot.db.modlog.find_one({"id": str(ctx.guild.id)})
         embed=discord.Embed(title="Case: Unmute", color=0x00f200, timestamp = datetime.datetime.utcnow())
         embed.add_field(name="User", value=f"{user} ({user.mention})", inline=False)
@@ -283,6 +292,7 @@ class mod():
     @commands.command()
     @commands.has_permissions(manage_messages=True)
     async def purge(self, ctx, number: int):
+        """Purge messages from a channel"""        
         try:
             float(number)
         except ValueError:
@@ -292,6 +302,7 @@ class mod():
     @commands.command()
     @commands.has_permissions(manage_roles = True)
     async def autorole(self, ctx, *, role):
+        """Role when someone joins"""
         if role == 'off':
             await self.bot.db.autorole.update_one({"id": str(ctx.guild.id)}, {"$set": {"role": False}}, upsert=True)
             await ctx.send("Turned off autorole")
@@ -305,6 +316,7 @@ class mod():
     @commands.command(aliases=['arole'])
     @commands.has_permissions(manage_roles = True)
     async def addrole(self, ctx, user:discord.Member,*, role):
+        """Add a role to a user"""        
         x = discord.utils.get(ctx.guild.roles, name=role)
         await user.add_roles(x)
         await ctx.send(f"Added **{role}** to **{user}**")           
@@ -312,6 +324,7 @@ class mod():
     @commands.command(aliases=['rrole'])
     @commands.has_permissions(manage_roles = True)
     async def removerole(self, ctx, user:discord.Member,*, role):
+        """Remove a role from a user"""        
         x = discord.utils.get(ctx.guild.roles, name=role)
         await user.remove_roles(x)
         await ctx.send(f"Removed **{role}** from **{user}**")         
