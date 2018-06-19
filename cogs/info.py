@@ -21,7 +21,7 @@ class info():
         embed=discord.Embed(title=f"Stats about {self.bot.user.name}", color=0x9b9dff)
         embed.set_thumbnail(url=self.bot.user.avatar_url)
         embed.add_field(name="Uptime", value="**%dd %dh %dm %ds**"% (day, hour, minute, second), inline=False)
-        embed.add_field(name="Servers", value=f"**{len(self.bot.guilds)}", inline=False)
+        embed.add_field(name="Servers", value=f"Servers: **{len(self.bot.guilds)}**", inline=False)
         embed.add_field(name="Memory used", value=f"{used}MB {percent}%", inline=False)
 
         await ctx.send(embed=embed)
