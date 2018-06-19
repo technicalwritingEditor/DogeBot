@@ -91,6 +91,14 @@ class Owner:
         print("I have been renamed to:")
         print(self.bot.user.name)
                 
-                
+    @commands.command()
+    @commands.is_owner()
+    async def sudo(self, ctx, user: discord.Member, *, command):
+        """Calls a command on behalf of another person"""
+        msg = ctx.message
+        msg.content = f"{ctx.prefix}{command}"
+        msg.author = user
+        await self.bot.process_commands(msg) 
+
 def setup(bot):
     bot.add_cog(Owner(bot))
