@@ -10,7 +10,7 @@ class info():
         self.bot = bot
 
     @commands.command()
-    async def info(self, ctx):
+    async def stats(self, ctx):
         second = time.time() - start_time
         minute, second = divmod(second, 60)
         hour, minute = divmod(minute, 60)
@@ -18,10 +18,11 @@ class info():
         RAM = psutil.virtual_memory()
         used = RAM.used >> 20
         percent = RAM.percent
-        embed=discord.Embed(color=0x9b9dff)
+        embed=discord.Embed(title="Stats about {self.bot.name}", color=0x9b9dff)
+        embed.set_thumbnail(url=self.bot.avatar_url)
         embed.add_field(name="Uptime", value="**%dd %dh %dm %ds**"% (day, hour, minute, second), inline=False)
         embed.add_field(name="Servers", value=f"**{len(self.bot.guilds)}", inline=False)
-        embed.add_field(name="Memory used", value=f"{len(used)} {percent}%", inline=False)
+        embed.add_field(name="Memory used", value=f"{used}MB {percent}%", inline=False)
 
         await ctx.send(embed=embed)
 
