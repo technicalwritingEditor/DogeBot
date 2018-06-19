@@ -22,6 +22,8 @@ class info():
         embed.set_thumbnail(url=self.bot.user.avatar_url)
         embed.add_field(name="Uptime", value="**%dd %dh %dm %ds**"% (day, hour, minute, second), inline=False)
         embed.add_field(name="Servers", value=f"Servers: **{len(self.bot.guilds)}**", inline=False)
+        embed.add_field(name="Users", value=str(len(self.bot.users)), inline=False)
+        embed.add_field(name="Channels", value=str(channel_count(self.bot)), inline=False)
         embed.add_field(name="Memory used", value=f"{used}MB {percent}%", inline=False)
 
         await ctx.send(embed=embed)
