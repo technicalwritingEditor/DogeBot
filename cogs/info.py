@@ -11,6 +11,7 @@ class info():
 
     @commands.command()
     async def stats(self, ctx):
+        """Get some stats about the bot"""
         second = time.time() - start_time
         minute, second = divmod(second, 60)
         hour, minute = divmod(minute, 60)
@@ -29,6 +30,7 @@ class info():
 
     @commands.command()
     async def invite(self, ctx):
+        """"Invite me"""
         embed=discord.Embed(description="**Invite me or join my support guild!**\n[Invite](https://discordapp.com/oauth2/authorize?client_id=454285151531433984&permissions=8&scope=bot)\n[Support guild](https://discord.gg/Z6d8Ecq)", color=0x9b9dff)
         await ctx.send(embed=embed)
         
