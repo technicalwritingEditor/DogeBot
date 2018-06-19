@@ -210,7 +210,7 @@ class mod():
     @commands.command()
     @commands.has_permissions(kick_members=True)
     async def kick(self, ctx, user:discord.Member,*, reason=None):
-        """"d!kick <user> [reason]"""
+        """"Kicks a member from your server!"""
         await user.kick()
         x = await self.bot.db.modlog.find_one({"id": str(ctx.guild.id)})
         embed=discord.Embed(title="Case: kick", color=0xff7c3e, timestamp = datetime.datetime.utcnow())
