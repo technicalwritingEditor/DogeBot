@@ -287,14 +287,6 @@ class mod():
         except ValueError:
             return await ctx.send("The number is invalid.")
         await ctx.channel.purge(limit=number+1)
-        x = await self.bot.db.modlog.find_one({"id": str(ctx.guild.id)})
-        channel = int(x['channel'])
-        send_channel = self.bot.get_channel(channel)
-        embed=discord.Embed(description=f"Purged {messages}\nModerator: {ctx.author.mention}")
-        await send_channel.send(embed=embed)
-        msg = await ctx.send(f"Purged **{number}** messages!")
-        await asyncio.sleep(3)
-        await msg.delete()
   
     @commands.command()
     @commands.has_permissions(manage_roles = True)
