@@ -8,7 +8,7 @@ class fun():
 
     @commands.command()
     async def lenny(self, ctx):
-	"""Lenny ( ͡° ͜ʖ ͡°)"""
+	"""Lenny"""
         await ctx.send("( ͡° ͜ʖ ͡°)")
 
     @commands.command()
