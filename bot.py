@@ -48,11 +48,11 @@ async def help(ctx, cmd: str = None):
         embed.add_field(name="Utility", value="`8ball`, `serverinfo`, `userinfo`, `ping`", inline=False)
         embed.set_footer(text="I´m a very new bot and in early development, there will come A LOT more commands!")
         await ctx.send(embed=embed)
-    if command is None:
-        await ctx.send("That command doesnt exist!")
     if cmd:
         x = bot.get_command(cmd)
-        await ctx.send(f"```fix\n- {cmd} -```\n```{x.help}\nUsage: d!{x.signature}```")
+        await ctx.send(f"```fix\n- {cmd} -``` ```{x.help}\nUsage: d!{x.signature}```")
+    elif command is None:
+        await ctx.send("That command doesnt exist!")
 
 @bot.command()
 @commands.is_owner()
