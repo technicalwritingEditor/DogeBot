@@ -21,9 +21,12 @@ bot.load_extension("cogs.source")
 @bot.event
 async def on_command_error(message,  error):
         if isinstance (error, commands.MissingPermissions):
-            embed3=discord.Embed(color=0xff2d32, timestamp = datetime.datetime.utcnow())
-            embed3.add_field(name="Error", value=f"{error}")
-            await discord.abc.Messageable.send(message.channel, embed=embed3)
+            embed=discord.Embed(color=0xff2d32, timestamp = datetime.datetime.utcnow())
+            embed.add_field(name="Error", value=f"{error}")
+            await discord.abc.Messageable.send(message.channel, embed=embed)
+        if isinstance (error, commands.NotOwner):
+            em=discord.Embed(color=0xff2d322, timestamp = datetime.datetime.utcnow())
+            embed.add_field(name="Error", value="Your not my daddy!")
 
 @bot.event
 async def on_ready():
