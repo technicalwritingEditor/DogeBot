@@ -10,6 +10,7 @@ class images():
 
     @commands.command()
     async def rip(self, ctx, user:discord.Member = None):
+        """Rip dat user"""
         user = user or ctx.author
         if user.id == 454285151531433984:
             await ctx.send("Dont rip meh!")
@@ -23,6 +24,7 @@ class images():
 
     @commands.command()
     async def achievement(self, ctx, *, text = None):
+        """Write a achievement"""
         if text == None:
             embed=discord.Embed(description="**achievement <text>**",color=0x9b9dff)
             await ctx.send(embed=embed)
