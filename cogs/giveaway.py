@@ -10,7 +10,7 @@ class start():
     @commands.has_permissions(manage_guild=True)
     @commands.cooldown(1, 10, commands.BucketType.user)
     async def start(self, ctx, duration,*, prize):
-        """Start a giveaway"""
+            """Start a giveaway"""
             unit = duration[-1]
             if unit == 's':
                 duration = int(duration[:-1])
