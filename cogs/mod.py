@@ -332,7 +332,7 @@ class mod():
     @commands.command()
     @commands.has_permissions(manage_guild=True)
     async def poll(self, ctx,*, question):
-        embed=discord.Embed(description=question, color=0xff0f0f, timestamp = datetime.datetime.utcnow())
+        embed=discord.Embed(description=question, color=ctx.author.color, timestamp = datetime.datetime.utcnow())
         embed.set_author(name=ctx.author, icon_url=ctx.author.avatar_url)
         x = await ctx.send(embed=embed)
         await x.add_reaction("👍")
