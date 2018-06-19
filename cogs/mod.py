@@ -285,7 +285,7 @@ class mod():
         try:
             float(number)
         except ValueError:
-            return await ctx.send("The number is invalid.")
+            return await ctx.send("**The number is invalid.**")
         await ctx.channel.purge(limit=number+1)
   
     @commands.command()
