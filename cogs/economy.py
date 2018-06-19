@@ -19,7 +19,7 @@ class economy():
     @commands.command(aliases=['bal'])
     async def balance(self, ctx):
         """"See your current balance"""
-          user=await self.bot.db.configs.find_one({ "id": ctx.author.id })
+          user = self.bot.db.configs.find_one({ "id": ctx.author.id })
           await ctx.send(f"{ctx.author.mention} | Your bal: **{user['money']}**:dollar: ")
 
     @commands.command()
