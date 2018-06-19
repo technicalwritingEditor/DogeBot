@@ -6,14 +6,8 @@ class source():
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(pass_context=True)
-    async def helpsource(self, ctx):
-        embed=discord.Embed(color=0xe156f1)
-        embed.add_field(name="source", value="Source code of any of my commands", inline=False)
-        embed.set_thumbnail(url="http://clipground.com/images/clipart-bird-png-9.png")
-        await ctx.send(embed=embed)
-
     @commands.command(name="source")
+    @commands.is_owner()
     async def source(self, context, *, command=None):
         """Get the source code for any of my commands."""
         if command is None:
