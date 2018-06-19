@@ -15,7 +15,7 @@ class mod():
             return
         on_or_off = y['on_or_off']
         if on_or_off == "on":
-            if  "https://discord.gg/".lower() in message.content.lower():
+            if  "https://discord.gg/".lower() in message.content.lower() or "discord.gg/".lower() in message.content.lower():
                 x = await message.channel.send(f"{message.author.mention}| **No invites!** :rage: ")
                 await message.delete()
                 await asyncio.sleep(3)
