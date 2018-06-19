@@ -36,6 +36,7 @@ async def on_ready():
     
 @bot.command()
 async def help(ctx, cmd: str = None):
+    """This thing"""
     if cmd == None:
         embed=discord.Embed(title="My commands", color=0x9b9dff)
         embed.add_field(name="Info", value="`help`, `info`, `invite`", inline=False)
