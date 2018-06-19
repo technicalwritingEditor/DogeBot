@@ -26,7 +26,7 @@ async def on_command_error(message,  error):
             await discord.abc.Messageable.send(message.channel, embed=embed)
         if isinstance (error, commands.NotOwner):
             em=discord.Embed(color=0xff2d322, timestamp = datetime.datetime.utcnow())
-            embed.add_field(name="Error", value="Your not my daddy!")
+            em.add_field(name="Error", value="Your not my daddy!")
             await discord.abc.Messageable.send(message.channel, embed=em)
 
 @bot.event
