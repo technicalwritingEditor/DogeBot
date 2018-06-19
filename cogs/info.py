@@ -18,7 +18,7 @@ class info():
         RAM = psutil.virtual_memory()
         used = RAM.used >> 20
         percent = RAM.percent
-        embed=discord.Embed(title=f"Stats about {self.bot.user.name}", color=0x9b9dff)
+        embed=discord.Embed(title=f"{self.bot.user.name} stats", color=0x9b9dff)
         embed.set_thumbnail(url=self.bot.user.avatar_url)
         embed.add_field(name="Uptime", value="**%dd %dh %dm %ds**"% (day, hour, minute, second), inline=False)
         embed.add_field(name="Servers", value=f"Servers: **{len(self.bot.guilds)}**", inline=False)
