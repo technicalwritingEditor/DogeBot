@@ -330,7 +330,7 @@ class mod():
         await ctx.send(f"Removed **{role}** from **{user}**")         
 
     @commands.command()
-    @commands.has_permissions(manage_server=True)
+    @commands.has_permissions(manage_guild=True)
     async def poll(self, ctx,*, question):
         embed=discord.Embed(description=question, color=0xff0f0f, timestamp = datetime.datetime.utcnow())
         embed.set_author(name=ctx.author, icon_url=ctx.author.avatar_url)
