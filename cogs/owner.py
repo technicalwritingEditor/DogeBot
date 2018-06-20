@@ -98,18 +98,7 @@ class Owner:
         msg = ctx.message
         msg.content = f"{ctx.prefix}{command}"
         msg.author = user
-        await self.bot.process_commands(msg) 
-
-    @commands.command()
-    async def botjoin(self, ctx, serverid: str):
-        server = self.bot.get_server(serverid)
-        if server:
-            await self.bot.leave_server(server)
-            msg = ':door:  {} = Left server!'.format(server.name)
-        else:
-            msg1 = ':x: Could not find the ID of that server/Forgot to say ID of server!'
-        return await ctx.send(msg1)
-        await ctx.send(msg)        
+        await self.bot.process_commands(msg)       
         
 def setup(bot):
     bot.add_cog(Owner(bot))
