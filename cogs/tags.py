@@ -8,7 +8,7 @@ class tags():
 
     @commands.command()
     async def create(self, ctx, name,*, description):
-        await self.bot.db.tags.update_one({"name": name}, {"$set": {"Description": description} }, upsert=True )
+        await self.bot.db.tags.update_one({"name": name}, {"$set": {"description": description} }, upsert=True )
         await ctx.send(f"Created tag called {name}")
 
     @commands.command()
