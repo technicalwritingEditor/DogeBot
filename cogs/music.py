@@ -233,7 +233,8 @@ class GuildMusicState:
             source = Song(next_song_info)
             source.volume = self.player_volume
             self.voice_client.play(source, after=lambda e: asyncio.run_coroutine_threadsafe(self.play_next_song(next_song_info, e), self.loop).result())
-            await next_song_info.channel.send(f'**Now playing {next_song_info}**')
+            embed=discord.Embed(description=f'Now playing {next_song_info}')
+            await next_song_info.channel.send(embed=embed)
            
 
 
@@ -311,7 +312,8 @@ class Music:
         else:
             # Schedule the song's download
             ctx.bot.loop.create_task(song.download(ctx.bot.loop))
-            await ctx.send(f'Queued {song}** in position #{ctx.music_state.playlist.qsize()}')
+            embed=discord.Embed(description=f"Queued {song} #{ctx.music_state.playlist.qsize()}")
+            await ctx.send(embed=embed)
 
         await ctx.message.remove_reaction('\N{HOURGLASS}', ctx.me)
         await ctx.message.add_reaction('\N{WHITE HEAVY CHECK MARK}')
