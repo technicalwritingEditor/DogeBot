@@ -16,7 +16,7 @@ bot.load_extension("cogs.owner")
 bot.load_extension("cogs.giveaway")
 bot.load_extension("cogs.music")
 bot.load_extension("cogs.source")
-
+bot.load_extension("cogs.tags")
 
 @bot.event
 async def on_command_error(message,  error):
