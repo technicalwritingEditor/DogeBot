@@ -58,20 +58,21 @@ async def help(ctx, cmd: str = None):
 
 @bot.command()
 @commands.is_owner()
-async def cogload(ctx, cog):
-    await bot.load_extension(f"cogs.{cog}")
-    await ctx.send(f"Loaded the cog {cog}")
+async def load(ctx, cog : str):
+    """Loads an extension."""
+    try:
+        bot.load_extension(f"cogs.{cog}")
+    except (AttributeError, ImportError) as e:
+        await ctx.send("```py\n{}: {}\n```".format(type(e).__name__, str(e)))
+        return
+    await ctx.send(f"Loaded cogs.{cog}")
+
 
 @bot.command()
-async def unloadcog(ctx, cog):
-    await bot.unload_extension(f"cogs.{cog}")
-    await ctx.send(f"Unloaded the cog {cog}")
-
-@bot.command()
-async def restartcog(ctx, cog):
-    await bot.unload_extension(f"cogs.{cog}")
-    await bot.load_extension(f"cogs.{cog}")
-    await ctx.send(f"Reloaded the cog {cog}")
+@commands.is_owner()
+async def unload(ctx, cog : str):
+    bot.unload_extension(f"cogs.{cog}")
+    await ctx.send(f"Unloaded cogs.{cog}")
     
 def has_role_in_my_server(name):
     def wrapper(ctx):
