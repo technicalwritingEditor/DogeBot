@@ -365,4 +365,4 @@ class Music:
         if not ctx.music_state.is_playing():
             raise MusicError('**Not playing anything to skip.**')
         else:
-            ctx.music_state.clear(1)
+            ctx.music_state.song.skip()
