@@ -233,7 +233,7 @@ class GuildMusicState:
             source = Song(next_song_info)
             source.volume = self.player_volume
             self.voice_client.play(source, after=lambda e: asyncio.run_coroutine_threadsafe(self.play_next_song(next_song_info, e), self.loop).result())
-            embed=discord.Embed(description=f'Now playing {next_song_info}')
+            embed=discord.Embed(description=f'Now playing {next_song_info}', color=0x80ffff)
             await next_song_info.channel.send(embed=embed)
            
 
@@ -270,7 +270,8 @@ class Music:
     @commands.command(aliases=['playlist'])
     async def queue(self, ctx):
         """Shows info about the current playlist."""
-        await ctx.send(f'{ctx.music_state.playlist}')
+        embed=discord.Embed(title=description=f'{ctx.music_state.playlist}', color=0x80ffff)
+        await ctx.send()
 
     @commands.command(aliases=['summon', 'connect'])
     async def join(self, ctx, *, channel: discord.VoiceChannel = None):
@@ -312,7 +313,7 @@ class Music:
         else:
             # Schedule the song's download
             ctx.bot.loop.create_task(song.download(ctx.bot.loop))
-            embed=discord.Embed(description=f"Queued {song} #{ctx.music_state.playlist.qsize()}")
+            embed=discord.Embed(description=f"Queued {song} #{ctx.music_state.playlist.qsize()}", color=0x80ffff)
             await ctx.send(embed=embed)
 
         await ctx.message.remove_reaction('\N{HOURGLASS}', ctx.me)
