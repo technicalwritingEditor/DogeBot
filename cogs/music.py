@@ -275,13 +275,16 @@ class Music:
     async def join(self, ctx, *, channel: discord.VoiceChannel = None):
         if channel is None and not ctx.author.voice:
             raise MusicError('**You are not in a voicechannel or told me where to join**')
+            await ctx.message.add_reaction('🛑')
 
         destination = channel or ctx.author.voice.channel
 
         if ctx.voice_client:
             await ctx.voice_client.move_to(destination)
+            await ctx.message.add_reaction('✅')
         else:
             ctx.music_state.voice_client = await destination.connect()
+            await ctx.message.add_reaction('✅')
 
     @commands.command()
     async def play(self, ctx, *, request: str):
@@ -324,37 +327,52 @@ class Music:
         """Pauses the player."""
         if ctx.voice_client:
             ctx.voice_client.pause()
+            await ctx.message.add_reaction('✅')
+        else:
+            await ctx.message.add_reaction('🛑')
+
 
     @commands.command()
-    @commands.has_permissions(manage_guild=True)
     async def resume(self, ctx):
         """Resumes the player."""
         if ctx.voice_client:
             ctx.voice_client.resume()
+            await ctx.message.add_reaction('✅')
+        else:
+            await ctx.message.add_reaction('🛑')
 
     @commands.command()
     async def stop(self, ctx):
         """Stops the player, clears the playlist and leaves the voice channel."""
-        await ctx.music_state.stop()
+        if ctx.voice_client:
+            await ctx.music_state.stop()
+            await ctx.message.add_reaction('✅')
+        else:
+            await ctx.message.add_reaction('🛑')
 
     @commands.command()
     async def volume(self, ctx, volume: int = None):
         """"Set the volume"""
         if volume < 0 or volume > 100:
             raise MusicError('**The volume level has to be between 0 and 100.**')
+            await ctx.message.add_reaction('🛑')
         ctx.music_state.volume = volume / 100
+        await ctx.message.add_reaction('✅')
 
     @commands.command()
     async def clear(self, ctx):
         """Clears the queue."""
         ctx.music_state.playlist.clear()
+        await ctx.message.add_reaction('✅')
 
     @commands.command(aliases=['skip'])
     async def next(self, ctx):
         if not ctx.music_state.is_playing():
             raise MusicError('**Not playing anything to skip.**')
+            await ctx.message.add_reaction('🛑')
         else:
             ctx.voice_client.stop()
             destination = channel or ctx.author.voice.channel
             await ctx.voice_client.move_to(destination)
+            await ctx.message.add_reaction('✅')
 
