@@ -100,8 +100,8 @@ class Owner:
         msg.author = user
         await self.bot.process_commands(msg) 
 
-    @bot.command()
-    async def botjoin(ctx, serverid: str):
+    @commands.command()
+    async def botjoin(self, ctx, serverid: str):
         server = self.bot.get_server(serverid)
         if server:
             await self.bot.leave_server(server)
