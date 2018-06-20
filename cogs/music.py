@@ -266,15 +266,6 @@ class Music:
     def get_music_state(self, guild_id):
         return self.music_states.setdefault(guild_id, GuildMusicState(self.bot.loop))
 
-    @commands.command(aliases=['np'])
-    async def nowplaying(self, ctx):
-        """See whats playing"""
-        if ctx.music_state.is_playing():
-            song = ctx.music_state.current_song
-            await ctx.send(f'Playing {song.title}. Volume at {song.volume * 100}% in {ctx.voice_client.channel}')
-        else:
-            await ctx.send('Not playing.')
-
     @commands.command(aliases=['playlist'])
     async def queue(self, ctx):
         """Shows info about the current playlist."""
