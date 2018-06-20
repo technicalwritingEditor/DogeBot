@@ -13,9 +13,8 @@ class tags():
 
     @commands.command()
     async def search(self, ctx,*,name):
-        x = await self.bot.db.tags.find_one({"name": name})
-        descript = x['description']
-        await ctx.send(descript)
+        x = await self.bot.db.tags.find_one({"name": name })
+        await ctx.send(x['description'])
 
 def setup(bot):
     bot.add_cog(tags(bot))
