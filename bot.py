@@ -79,7 +79,7 @@ async def reload(ctx, cog: str):
     x = await ctx.send(f"Reloading {cog}!")
     bot.unload_extension(f"cogs.{cog}")
     bot.load_extension(f"cogs.{cog}")
-    await x.edit(content="Realoded {cog}!")
+    await x.edit(content=f"Realoded {cog}!")
     
 def has_role_in_my_server(name):
     def wrapper(ctx):
