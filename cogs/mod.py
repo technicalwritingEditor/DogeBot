@@ -317,9 +317,9 @@ class mod():
     @commands.has_permissions(manage_roles = True)
     async def addrole(self, ctx, user:discord.Member,*, role):
         """Add a role to a user"""        
-        x = discord.utils.get(ctx.guild.roles, name=role.lower)
+        x = discord.utils.get(ctx.guild.roles, name=str(role))
         await user.add_roles(x)
-        await ctx.send(f"Added **{role}** to **{user}**")           
+        await ctx.send(f"Added **{str(role)}** to **{user}**")           
 
     @commands.command(aliases=['rrole'])
     @commands.has_permissions(manage_roles = True)
