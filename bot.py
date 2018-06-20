@@ -20,6 +20,7 @@ bot.load_extension("cogs.tags")
 
 @bot.event
 async def on_command_error(message,  error):
+        print(error)
         if isinstance (error, commands.MissingPermissions):
             embed=discord.Embed(color=0xff2d32, timestamp = datetime.datetime.utcnow())
             embed.add_field(name="Error", value=f"{error}")
