@@ -271,7 +271,7 @@ class Music:
         """See whats playing"""
         if ctx.music_state.is_playing():
             song = ctx.music_state.current_song
-            await ctx.send(f'Playing {song}. Volume at {song.volume * 100}% in {ctx.voice_client.channel}')
+            await ctx.send(f'Playing {song.title}. Volume at {song.volume * 100}% in {ctx.voice_client.channel}')
         else:
             await ctx.send('Not playing.')
 
