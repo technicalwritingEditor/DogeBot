@@ -360,8 +360,8 @@ class Music:
         """Clears the queue."""
         ctx.music_state.playlist.clear()
 
-    @commands.command()
-    async def skip(self, ctx):
+    @commands.command(aliases=['skip'])
+    async def next(self, ctx):
         if not ctx.music_state.is_playing():
             raise MusicError('**Not playing anything to skip.**')
         else:
