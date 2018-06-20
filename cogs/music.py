@@ -272,7 +272,6 @@ class Music:
         await ctx.send(f'{ctx.music_state.playlist}')
 
     @commands.command(aliases=['summon', 'connect'])
-    @commands.has_permissions(manage_guild=True)
     async def join(self, ctx, *, channel: discord.VoiceChannel = None):
         if channel is None and not ctx.author.voice:
             raise MusicError('**You are not in a voicechannel or told me where to join**')
@@ -334,7 +333,6 @@ class Music:
             ctx.voice_client.resume()
 
     @commands.command()
-    @commands.has_permissions(manage_guild=True)
     async def stop(self, ctx):
         """Stops the player, clears the playlist and leaves the voice channel."""
         await ctx.music_state.stop()
