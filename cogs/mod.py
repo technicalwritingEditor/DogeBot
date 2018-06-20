@@ -338,5 +338,10 @@ class mod():
         await x.add_reaction("👍")
         await x.add_reaction("👎")        
     
+    @commands.command()
+    async def unban(self, ctx, user:discord.Member, reason):
+        await user.unban()
+        await ctx.send(f"Unbanned {user} reason: {reason}")   
+
 def setup(bot):
     bot.add_cog(mod(bot))
