@@ -74,6 +74,13 @@ async def unload(ctx, cog : str):
     bot.unload_extension(f"cogs.{cog}")
     await ctx.send(f"Unloaded cogs.{cog}")
     
+@bot.command()
+async def reload(ctx, cog: str):
+    x = await ctx.send(f"Reloading {cog}!")
+    bot.unload_extension(f"cogs.{cog}")
+    bot.load_extension(f"cogs.{cog}")
+    await x.edit(content="Realoded {cog}!")
+    
 def has_role_in_my_server(name):
     def wrapper(ctx):
         server = bot.get_guild(455305359645736971)
