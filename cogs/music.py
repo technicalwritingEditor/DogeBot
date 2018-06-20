@@ -340,9 +340,9 @@ class Music:
     @commands.command()
     async def volume(self, ctx, volume: int = None):
         """"Set the volume"""
-        if volume < 0 or volume > 500:
+        if volume < 0 or volume > 100:
             raise MusicError('**The volume level has to be between 0 and 100.**')
-        ctx.music_state.volume = volume / 500
+        ctx.music_state.volume = volume / 100
 
     @commands.command()
     async def clear(self, ctx):
