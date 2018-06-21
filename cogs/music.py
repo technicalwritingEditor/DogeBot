@@ -369,8 +369,8 @@ class Music:
     @commands.command(aliases=['skip'])
     async def next(self, ctx):
         if not ctx.music_state.is_playing():
-            raise MusicError('**Not playing anything to skip.**')
             await ctx.message.add_reaction('🛑')
+            raise MusicError('**Not playing anything to skip.**')
         else:
             ctx.voice_client.stop()
             destination = channel or ctx.author.voice.channel
