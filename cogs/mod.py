@@ -99,7 +99,13 @@ class mod():
     async def welcome(self, ctx, sort=None):
         """Turn on or off welcome messages"""        
         if sort == None:
-            await ctx.send("**Choose `on` or `off`**")
+            x = await self.bot.db.welcome.find_one({"id": str(ctx.guild.id)})
+            channel = int(x['channel'])
+            message = x['message']
+            embed=discord.Embed(description="Your welcoming information")
+            embed.add_field(name="Channel", value=channel.mention, inline=False)
+            embed.add_field(name="Message", value=message)
+            await ctx.send(embed=embed)
         if sort == "on":
             await ctx.send("**Please mention the channel to set the welcome messages in.**")
             try:
