@@ -354,6 +354,8 @@ class Music:
     @commands.command()
     async def volume(self, ctx, volume: int = None):
         """"Set the volume"""
+        if volume == None:
+            await ctx.send(volume)
         if volume < 0 or volume > 100:
             raise MusicError('**The volume level has to be between 0 and 100.**')
             await ctx.message.add_reaction('🛑')
