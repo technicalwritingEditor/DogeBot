@@ -103,7 +103,7 @@ class mod():
             channel = int(x['channel'])
             message = x['message']
             embed=discord.Embed(description="Your welcoming information")
-            embed.add_field(name="Channel", value=channel.mention, inline=False)
+            embed.add_field(name="Channel", value=channel, inline=False)
             embed.add_field(name="Message", value=message)
             await ctx.send(embed=embed)
         if sort == "on":
