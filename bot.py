@@ -33,7 +33,7 @@ async def on_command_error(message,  error):
 @bot.event
 async def on_ready():
     print("Im online") 
-    await bot.change_presence(activity=discord.Game(name="d!help"))
+    await bot.change_presence(activity=discord.Game(name="-help"))
     
 @bot.command()
 async def help(ctx, cmd: str = None):
