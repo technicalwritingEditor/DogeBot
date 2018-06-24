@@ -3,7 +3,7 @@ from discord.ext import commands
 import os
 from motor.motor_asyncio import AsyncIOMotorClient
     
-bot=commands.Bot(command_prefix='d!')
+bot=commands.Bot(command_prefix='-')
 bot.remove_command('help')
 
 bot.load_extension("cogs.fun")
