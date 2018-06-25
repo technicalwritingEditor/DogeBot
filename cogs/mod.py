@@ -102,7 +102,7 @@ class mod():
             x = await self.bot.db.welcome.find_one({"id": str(ctx.guild.id)})
             channel = int(x['channel'])
             message = x['message']
-            embed=discord.Embed(description="Your welcoming information")
+            embed=discord.Embed(description="Your welcoming information",color=0x00f200)
             embed.add_field(name="Channel", value=channel, inline=False)
             embed.add_field(name="Message", value=message)
             await ctx.send(embed=embed)
