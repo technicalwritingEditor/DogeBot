@@ -138,7 +138,13 @@ class mod():
     async def welcomeimage(self, ctx, sort=None):
         """Turn on or off welcome images"""
         if sort == None:
-            await ctx.send("choose `on` or `off`")
+            x = await self.bot.db.welcome.find_one({"id": str(ctx.guild.id)})
+            channel = int(x['channel'])
+            message = x['message']
+            embed=discord.Embed(description="Your welcoming information",color=0x00f200)
+            embed.add_field(name="Channel", value=channel, inline=False)
+            embed.add_field(name="Message", value=message)
+            await ctx.send(embed=embed)
         if sort == "on":
             await ctx.send("**You have turned on welcome images!**")
             await self.bot.db.welcome.update_one({"id": str(ctx.guild.id)}, {"$set": {"on_or_off": "on"} }, upsert=True )
