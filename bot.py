@@ -33,7 +33,7 @@ async def on_command_error(message,  error):
 @bot.event
 async def on_ready():
     print("Im online") 
-    await bot.change_presence(activity=discord.Game(name="-help | {len(bot.guilds)} servers"))
+    await bot.change_presence(activity=discord.Game(name=f"-help | {len(bot.guilds)} servers"))
     
 @bot.event
 async def on_guild_join(guild):
