@@ -33,7 +33,30 @@ async def on_command_error(message,  error):
 @bot.event
 async def on_ready():
     print("Im online") 
-    await bot.change_presence(activity=discord.Game(name="-help"))
+    await bot.change_presence(activity=discord.Game(name="-help | {len(bot.guilds)} servers"))
+    
+@bot.event
+async def on_guild_join(guild):
+    lol = bot.get_channel(461050385583570954)
+    em = discord.Embed(color=discord.Color(value=0x11f95e))
+    em.title = "I have joined new server!"
+    em.description = f"Server: {guild}"
+    em.set_footer(text=f"ID: {guild.id}")
+    em.set_thumbnail(url=guild.icon_url)
+    await lol.send(embed=em)
+    try:
+        await guild.channels[0].send(f"Hello my peeps. Im a discord bot created by L3NNY#4519. Try me out by doing ``+help``!")
+    except discord.Forbidden:
+        pass
+      
+@bot.event
+async def on_guild_remove(guild):
+    lol = bot.get_channel(461050385583570954)
+    em = discord.Embed(color=discord.Color(value=0xf44242))
+    em.title = "I have left a server."
+    em.description = f"Server: {guild}"
+    em.set_footer(text=f"ID: {guild.id}")
+    await lol.send(embed=em)   
     
 @bot.command()
 async def help(ctx, cmd: str = None):
