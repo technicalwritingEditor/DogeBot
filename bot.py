@@ -42,10 +42,9 @@ async def on_guild_join(guild):
     em.title = "I have joined new server!"
     em.description = f"Server: {guild}"
     em.set_footer(text=f"ID: {guild.id}")
-    em.set_thumbnail(url=guild.icon_url)
     await lol.send(embed=em)
     try:
-        await guild.channels[0].send(f"Hello my peeps. Im a discord bot created by L3NNY#4519. Try me out by doing ``+help``!")
+        await guild.channels[0].send(f"Hello! Thanks for adding meh!")
     except discord.Forbidden:
         pass
       
@@ -53,10 +52,10 @@ async def on_guild_join(guild):
 async def on_guild_remove(guild):
     lol = bot.get_channel(461050385583570954)
     em = discord.Embed(color=discord.Color(value=0xf44242))
-    em.title = "I have left a server."
+    em.title = "One server less"
     em.description = f"Server: {guild}"
     em.set_footer(text=f"ID: {guild.id}")
-    await lol.send(embed=em)   
+    await lol.send(embed=em)
     
 @bot.command()
 async def help(ctx, cmd: str = None):
@@ -75,7 +74,7 @@ async def help(ctx, cmd: str = None):
         await ctx.send(embed=embed)
     if cmd:
         x = bot.get_command(cmd)
-        await ctx.send(f"```fix\n- {cmd} -``` ```{x.help}\nUsage: d!{x.signature}```")
+        await ctx.send(f"```fix\n- {cmd} -``` ```{x.help}\nUsage: -{x.signature}```")
     elif command is None:
         await ctx.send("That command doesnt exist!")
 
