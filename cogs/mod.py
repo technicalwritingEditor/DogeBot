@@ -228,10 +228,6 @@ class mod():
     @commands.has_permissions(kick_members=True)
     async def kick(self, ctx, user:discord.Member,*, reason=None):
         """Kicks a member from your server!"""
-        em = discord.Embed(description=f"Kicked from {ctx.guild.name}", color=0xff7c3e)
-        em.add_field(name="Moderator", value=ctx.author.mention, inline=False)
-        em.add_feild(name="Reason", value=reason)
-        await user.send(embed=em)
         await user.kick()
         x = await self.bot.db.modlog.find_one({"id": str(ctx.guild.id)})
         embed=discord.Embed(title="Case: kick", color=0xff7c3e, timestamp = datetime.datetime.utcnow())
@@ -247,10 +243,6 @@ class mod():
     @commands.has_permissions(ban_members=True)
     async def ban(self, ctx, user:discord.Member,*, reason):
         """Bans a member from your server!"""
-        em = discord.Embed(description=f"Banned from {ctx.guild.name}", color=0xff0f0f)
-        em.add_field(name="Moderator", value=ctx.author.mention, inline=False)
-        em.add_feild(name="Reason", value=reason)
-        await user.send(embed=em)
         await user.ban()
         x = await self.bot.db.modlog.find_one({"id": str(ctx.guild.id)})
         embed=discord.Embed(title="Case: Ban", color=0xff0f0f, timestamp = datetime.datetime.utcnow())
