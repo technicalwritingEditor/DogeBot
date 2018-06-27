@@ -212,6 +212,31 @@ class mod():
 
     @commands.command()
     @commands.has_permissions(manage_guild=True)
+    async def logs(self, ctx, sort=None):
+        """Turn on or off the logs"""
+        if sort == None:
+            await ctx.send("**`on` or `off`**")
+        if sort == "on":
+            await ctx.send("**Please mention the channel to set the log messages in.**")
+            try:
+                x = await self.bot.wait_for("message", check=lambda x: x.channel == ctx.channel and x.author == ctx.author, timeout=60.0)
+            except asyncio.TimeoutError:
+                return await ctx.send("**The time is up**")
+            if not x.content.startswith("<#") and not x.content.endswith(">"):
+                return await ctx.send("**Please mention the channel**")
+            channel = x.content.strip("<#").strip(">")
+            try:
+                channel = int(channel)
+            except ValueError:
+                return await ctx.send("**Please mention the channel right**")
+            await self.bot.db.logging.update_one({"id": str(ctx.guild.id)}, {"$set": {"channel": channel} }, upsert=True )
+            await ctx.send("**I have set the mod-log channel!**")
+        if sort == "off":
+            await self.bot.db.logging.update_one({"id": str(ctx.guild.id)}, {"$set": {"channel": False} }, upsert=True )
+            await ctx.send("**I have turned off logs**")
+            
+    @commands.command()
+    @commands.has_permissions(manage_guild=True)
     async def antiinvites(self, ctx, sort=None):
         """Turn on or off anti invites"""
         if sort == None:
@@ -229,7 +254,7 @@ class mod():
     async def kick(self, ctx, user:discord.Member,*, reason=None):
         """Kicks a member from your server!"""
         await user.kick()
-        x = await self.bot.db.modlog.find_one({"id": str(ctx.guild.id)})
+        x = await self.bot.db.logging.find_one({"id": str(ctx.guild.id)})
         embed=discord.Embed(title="Case: kick", color=0xff7c3e, timestamp = datetime.datetime.utcnow())
         embed.add_field(name="User", value=f"{user} ({user.mention})", inline=False)
         embed.add_field(name="Moderator", value=ctx.author, inline=False)
