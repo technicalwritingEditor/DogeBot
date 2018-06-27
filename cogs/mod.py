@@ -20,7 +20,7 @@ class mod():
                 await message.delete()
                 await asyncio.sleep(3)
                 await x.delete()
-                x = await self.bot.db.modlog.find_one({"id": str(message.guild.id)})
+                x = await self.bot.db.logging.find_one({"id": str(message.guild.id)})
                 mod_channel = int(x['channel'])
                 xD = self.bot.get_channel(mod_channel)
                 embed = discord.Embed(description=f"📧 Invite deleted at {message.channel.mention}. Sent by {message.author.mention}!", color=0x9b9dff)
