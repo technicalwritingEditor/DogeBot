@@ -323,7 +323,6 @@ class Music:
         await ctx.message.add_reaction('\N{CROSS MARK}')
 
     @commands.command()
-    @commands.has_permissions(manage_guild=True)
     async def pause(self, ctx):
         """Pauses the player."""
         if ctx.voice_client:
