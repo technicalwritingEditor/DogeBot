@@ -253,6 +253,7 @@ class mod():
         channel = int(x['channel'])
         send_channel= self.bot.get_channel(channel)
         await send_channel.send(embed=embed)
+        await user.send(f"You have been banned from {ctx.guild}\nModerator: {ctx.author.mention}\nReason: {reason}")
         
     @commands.command()   
     @commands.has_permissions(kick_members=True)
