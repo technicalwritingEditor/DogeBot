@@ -257,7 +257,7 @@ class mod():
         channel = int(x['channel'])
         send_channel= self.bot.get_channel(channel)
         await send_channel.send(embed=embed)
-        em = discord.Embed(description=f"Kicked from {ctx.guild.name}", color=0xff7c3e)
+        em = discord.Embed(description=f"Kicked from {ctx.guild.name}", color=0xff0f0f)
         em.add_field(name="Moderator", value=ctx.author.mention, inline=False)
         em.add_feild(name="Reason", value=reason)
         await user.send(embed=em)
