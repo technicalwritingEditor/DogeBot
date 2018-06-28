@@ -31,7 +31,7 @@ class info():
     @commands.command()
     async def invite(self, ctx):
         """"Invite me"""
-        embed=discord.Embed(description="**Invite me or join my support guild!**\n[Invite](https://discordapp.com/oauth2/authorize?client_id=454285151531433984&permissions=8&scope=bot)\n[Support guild](https://discord.gg/Z6d8Ecq)", color=0x9b9dff)
+        embed=discord.Embed(description="**Invite me or join my support guild! And vote!**\n[Invite](https://discordapp.com/oauth2/authorize?client_id=454285151531433984&permissions=8&scope=bot)\n[Support guild](https://discord.gg/Z6d8Ecq)\n[Vote](https://discordbots.org/bot/454285151531433984/vote)", color=0x9b9dff)
         await ctx.send(embed=embed)
         
 def setup(bot):
