@@ -102,10 +102,18 @@ class mod():
         send_channel = self.bot.get_channel(channel)
         if not send_channel:
             return
-        embed=discord.Embed(title="Message removed", description=message.content, color=0xf90000, timestamp = datetime.datetime.utcnow())
+        embed=discord.Embed(title="Message removed", color=0xf90000, timestamp = datetime.datetime.utcnow())
+        embed.add_field(name="User", value=message.author)
+        embed.add_field(name="Channel", value=message.channel.mention)
+        embed.add_field(name="Message", value=message.content, inline=False)
         await send_channel.send(embed=embed)
 
     async def on_message_edit(self, before, after):
+        embed=discord.Embed(title="Message edited", color=0xff8040, timestamp = datetime.datetime.utcnow())
+        embed.add_field(name="User", value=before.message.author)
+        embed.add_field(name="Channel", value=before.channel.mention)
+        embed.add_field(name="Before", value=before.content, inline=False)
+        embed.add_field(name="After", value=after.content, inline=False)
         x = await self.bot.db.logging.find_one({"id": str(before.guild.id)})
         if not x:
             return
@@ -113,12 +121,7 @@ class mod():
         send_channel = self.bot.get_channel(channel)
         if not send_channel:
             return
-        embed=discord.Embed(title="Message edited", color=0xff8040, timestamp = datetime.datetime.utcnow())
-        embed.add_field(name="User", value=before.message.author)
-        embed.add_field(name="Channel", value=before.channel.mention)
-        embed.add_field(name="Before", value=before.content)
-        embed.add_field(name="After", value=after.content)
-        await send_channel.send(embed=embed)            
+        await send_channel.send(embed=embed)   
             
     @commands.command()
     @commands.has_permissions(manage_guild=True)
