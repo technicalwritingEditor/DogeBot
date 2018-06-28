@@ -42,6 +42,7 @@ async def on_guild_join(guild):
     em.title = "I have joined new server!"
     em.description = f"Server: {guild}"
     em.add_field(name="Members", value=len(guild.members))
+    em.add_field(name="Owner", value=guild.owner)
     em.set_thumbnail(url=guild.icon_url)
     em.set_footer(text=f"ID: {guild.id}")
     await lol.send(embed=em)
