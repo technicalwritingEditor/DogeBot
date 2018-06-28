@@ -110,7 +110,7 @@ class mod():
 
     async def on_message_edit(self, before, after):
         embed=discord.Embed(title="Message edited", color=0xff8040, timestamp = datetime.datetime.utcnow())
-        embed.add_field(name="User", value=before.message.author)
+        embed.add_field(name="User", value=before.author)
         embed.add_field(name="Channel", value=before.channel.mention)
         embed.add_field(name="Before", value=before.content, inline=False)
         embed.add_field(name="After", value=after.content, inline=False)
