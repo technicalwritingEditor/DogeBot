@@ -94,6 +94,32 @@ class mod():
                 #return
             #await send_channel.send(embed=em)     
 
+    async def on_message_delete(self, message):
+        x = await self.bot.db.logging.find_one({"id": str(message.guild.id)})
+        if not x:
+            return
+        channel = int(x['channel'])
+        send_channel = self.bot.get_channel(channel)
+        if not send_channel:
+            return
+        embed=discord.Embed(title="Message removed", description=message.content, color=0xf90000, timestamp = datetime.datetime.utcnow())
+        await send_channel.send(embed=embed)
+
+    async def on_message_edit(self, before, after):
+        x = await self.bot.db.logging.find_one({"id": str(message.guild.id)})
+        if not x:
+            return
+        channel = int(x['channel'])
+        send_channel = self.bot.get_channel(channel)
+        if not send_channel:
+            return
+        embed=discord.Embed(title="Message edited", color=0xff8040, timestamp = datetime.datetime.utcnow())
+        embed.add_field(name="User", value=before.message.author)
+        embed.add_field(name="Channel", value=before.channel.mention)
+        embed.add_field(name="Before", value=before.content)
+        embed.add_field(name="After", value=after.content)
+        await send_channel.send(embed=embed)            
+            
     @commands.command()
     @commands.has_permissions(manage_guild=True)
     async def welcome(self, ctx, sort=None):
