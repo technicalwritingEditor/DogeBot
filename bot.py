@@ -41,6 +41,7 @@ async def on_guild_join(guild):
     em = discord.Embed(color=discord.Color(value=0x11f95e))
     em.title = "I have joined new server!"
     em.description = f"Server: {guild}"
+    em.add_field(name="Members", value=len(guild.members))
     em.set_footer(text=f"ID: {guild.id}")
     await lol.send(embed=em)
     try:
