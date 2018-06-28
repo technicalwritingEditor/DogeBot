@@ -358,7 +358,7 @@ class mod():
         await send_channel.send(embed=embed)
 
     @commands.command()
-    #@commands.has_permissions(manage_messages=True)
+    @commands.has_permissions(manage_messages=True)
     async def purge(self, ctx, number: int):
         """Purge messages from a channel"""        
         try:
