@@ -254,7 +254,7 @@ class mod():
     async def kick(self, ctx, user:discord.Member,*, reason=None):
         """Kicks a member from your server!"""
         await user.kick()
-        x = await self.bot.db.logging.find_one({"id": str(ctx.guild.id)})
+        x = await self.bot.db.modlog.find_one({"id": str(ctx.guild.id)})
         embed=discord.Embed(title="Case: kick", color=0xff7c3e, timestamp = datetime.datetime.utcnow())
         embed.add_field(name="User", value=f"{user} ({user.mention})", inline=False)
         embed.add_field(name="Moderator", value=ctx.author, inline=False)
