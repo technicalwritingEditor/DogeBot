@@ -45,7 +45,7 @@ class info():
         xd = self.bot.get_channel(457623659369070642)
         x = await xd.send(embed=embed)
         await x.add_reaction("✅")
-        await x.add_reaction("❌")
+        await x.add_reaction("⛔")
         await ctx.send("✅ | Your suggestion has been made! kthx")
             
 def setup(bot):
