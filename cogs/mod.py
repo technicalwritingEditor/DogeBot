@@ -259,7 +259,7 @@ class mod():
             except ValueError:
                 return await ctx.send("**Please mention the channel right**")
             await self.bot.db.logging.update_one({"id": str(ctx.guild.id)}, {"$set": {"channel": channel} }, upsert=True )
-            await ctx.send("**I have set the mod-log channel!**")
+            await ctx.send("**I have set the logs channel!**")
         if sort == "off":
             await self.bot.db.logging.update_one({"id": str(ctx.guild.id)}, {"$set": {"channel": False} }, upsert=True )
             await ctx.send("**I have turned off logs**")
