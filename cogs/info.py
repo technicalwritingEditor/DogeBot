@@ -35,8 +35,10 @@ class info():
         await ctx.send(embed=embed)
  
     @commands.command()
-    async def suggest(self, ctx,*,suggestion):
+    async def suggest(self, ctx,*,suggestion=None):
         """Give a suggestion to me"""
+        if suggestion==None:
+            return await ctx.send("❌ | You need to add a suggestion")
         embed=discord.Embed(description=suggestion,color=0x00ff80, timestamp = datetime.datetime.utcnow())
         embed.set_author(name=ctx.author, icon_url=ctx.author.avatar_url)
         embed.set_footer(text=f"From {ctx.author.guild}")
@@ -44,6 +46,7 @@ class info():
         x = await xd.send(embed=embed)
         await x.add_reaction("✅")
         await x.add_reaction("❌")
+        await ctx.send("✅ | Your suggestion has been made! kthx")
             
 def setup(bot):
     bot.add_cog(info(bot))
