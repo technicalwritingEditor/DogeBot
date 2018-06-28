@@ -106,7 +106,7 @@ class mod():
         await send_channel.send(embed=embed)
 
     async def on_message_edit(self, before, after):
-        x = await self.bot.db.logging.find_one({"id": str(message.guild.id)})
+        x = await self.bot.db.logging.find_one({"id": str(before.guild.id)})
         if not x:
             return
         channel = int(x['channel'])
