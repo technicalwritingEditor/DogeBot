@@ -42,6 +42,7 @@ async def on_guild_join(guild):
     em.title = "I have joined new server!"
     em.description = f"Server: {guild}"
     em.add_field(name="Members", value=len(guild.members))
+    em.set_thumbnail(url=guild.icon_url)
     em.set_footer(text=f"ID: {guild.id}")
     await lol.send(embed=em)
     try:
@@ -56,6 +57,7 @@ async def on_guild_remove(guild):
     em.title = "One server less"
     em.description = f"Server: {guild}"
     em.set_footer(text=f"ID: {guild.id}")
+    em.set_thumbnail(url=guild.icon_url)
     await lol.send(embed=em)
     
 @bot.command()
