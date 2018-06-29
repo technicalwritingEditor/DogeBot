@@ -122,6 +122,8 @@ async def reload(ctx, cog: str):
 @bot.command()
 async def prefix(ctx, prefix:str):
     """Set my prefix for the server"""
+    if len(prefix) > 5:
+        return await ctx.send("It needs to be lower than 5 characters!")
     await bot.db.prefixes.update_one({"id": ctx.guild.id}, { "$set": { "prefix": prefix } }, upsert=True)
     await ctx.send(f"New prefix `{prefix}`")
 
