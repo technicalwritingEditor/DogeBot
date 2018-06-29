@@ -7,7 +7,7 @@ async def getprefix(bot, message):
     if isinstance(message.channel, discord.DMChannel):
         return commands.when_mentioned_or("-")(bot, message)
     try:
-        x = bot.db.prefixes.find_one({"id": message.guild.id})
+        x = await bot.db.prefixes.find_one({ "id": message.guild.id })
         if not x:
             return "-"
         prefix = x['prefix']
