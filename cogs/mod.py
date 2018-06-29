@@ -419,7 +419,7 @@ class mod():
             if len(prefix) > 5:
                 return await ctx.send("It needs to be lower than 5 characters!")
             await self.bot.db.prefixes.update_one({"id": ctx.guild.id}, { "$set": { "prefix": prefix } }, upsert=True)
-            await ctx.send(f"New prefix `{prefix}`")     
+            await ctx.send(f"New prefix `{prefix}`")   
         
 def setup(bot):
     bot.add_cog(mod(bot))
