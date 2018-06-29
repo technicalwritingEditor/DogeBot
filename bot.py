@@ -123,6 +123,7 @@ async def reload(ctx, cog: str):
     await x.edit(content=f"Realoded {cog}!")
  
 @bot.command()
+@commands.has_permissions(manage_guild=True)
 async def prefix(ctx, prefix:str):
     """Set my prefix for the server"""
     if len(prefix) > 5:
