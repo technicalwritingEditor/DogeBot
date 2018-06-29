@@ -125,7 +125,7 @@ async def prefix(ctx, newprefix=None):
         x = bot.db.prefixes.find_one({"id": ctx.guild.id})
         await ctx.send(x['prefix'])
     else:
-        await bot.db.prefixes.update_one({"id": ctx.guild.id}, { "$set": { "prefix": newprefix } }, upsert=True )
+        await bot.db.prefixes.update_one({"id": ctx.guild.id}, { "$set": { "prefix": newprefix } })
         await ctx.send(f"New prefix `{newprefix}`")
 
 def has_role_in_my_server(name):
