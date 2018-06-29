@@ -90,7 +90,7 @@ async def help(ctx, cmd: str = None):
         await ctx.send(embed=embed)
     if cmd:
         x = bot.get_command(cmd)
-        y = await bot.db.prefixes.find_one({ "id": message.guild.id })
+        y = await bot.db.prefixes.find_one({ "id": ctx.guild.id })
         prefix = y['prefix']
         if prefix == None:
             return await ctx.send(f"```fix\n- {cmd} -``` ```{x.help}\nUsage: -{x.signature}```")
