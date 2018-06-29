@@ -408,12 +408,18 @@ class mod():
 
     @commands.command()
     @commands.has_permissions(manage_guild=True)
-    async def prefix(self, ctx, prefix:str):
+    async def prefix(self, ctx, prefix:str=None):
         """Set my prefix for the server"""
-        if len(prefix) > 5:
-            return await ctx.send("It needs to be lower than 5 characters!")
-        await self.bot.db.prefixes.update_one({"id": ctx.guild.id}, { "$set": { "prefix": prefix } }, upsert=True)
-        await ctx.send(f"New prefix `{prefix}`")        
+        if prefix == None:
+            y = await bot.db.prefixes.find_one({ "id": ctx.guild.id })
+            if not y:
+                return await ctx.send("My prefix in this guild is: `-`")
+            await ctx.send(f"My prefix in this guild is: `{y['prefix']}`")
+        else:
+            if len(prefix) > 5:
+                return await ctx.send("It needs to be lower than 5 characters!")
+            await self.bot.db.prefixes.update_one({"id": ctx.guild.id}, { "$set": { "prefix": prefix } }, upsert=True)
+            await ctx.send(f"New prefix `{prefix}`")      
         
 def setup(bot):
     bot.add_cog(mod(bot))
