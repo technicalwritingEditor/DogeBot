@@ -91,10 +91,9 @@ async def help(ctx, cmd: str = None):
     if cmd:
         x = bot.get_command(cmd)
         y = await bot.db.prefixes.find_one({ "id": ctx.guild.id })
-        prefix = y['prefix']
-        if prefix == None:
+        if not y:
             return await ctx.send(f"```fix\n- {cmd} -``` ```{x.help}\nUsage: -{x.signature}```")
-        await ctx.send(f"```fix\n- {cmd} -``` ```{x.help}\nUsage: {prefix}{x.signature}```")
+        await ctx.send(f"```fix\n- {cmd} -``` ```{x.help}\nUsage: {y['prefix']}{x.signature}```")
     elif command is None:
         await ctx.send("That command doesnt exist!")
 
