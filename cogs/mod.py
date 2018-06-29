@@ -405,11 +405,15 @@ class mod():
         x = await ctx.send(embed=embed)
         await x.add_reaction("👍")
         await x.add_reaction("👎")        
-    
-    @commands.command()
-    async def unban(self, ctx, user:discord.Member, reason):
-        await user.unban()
-        await ctx.send(f"Unbanned {user} reason: {reason}")   
 
+    @commands.command()
+    @commands.has_permissions(manage_guild=True)
+    async def prefix(self, ctx, prefix:str):
+        """Set my prefix for the server"""
+        if len(prefix) > 5:
+            return await ctx.send("It needs to be lower than 5 characters!")
+        await self.bot.db.prefixes.update_one({"id": ctx.guild.id}, { "$set": { "prefix": prefix } }, upsert=True)
+        await ctx.send(f"New prefix `{prefix}`")        
+        
 def setup(bot):
     bot.add_cog(mod(bot))
