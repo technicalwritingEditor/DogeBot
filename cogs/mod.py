@@ -307,7 +307,10 @@ class mod():
         channel = int(x['channel'])
         send_channel= self.bot.get_channel(channel)
         await send_channel.send(embed=embed)
-        await user.send(f"You have been banned from {ctx.guild}\nModerator: {ctx.author.mention}\nReason: {reason}")
+        em = discord.Embed(title=f"You have been banned from **{ctx.guild.name}**", color=0xff0f0f, timestamp = datetime.datetime.utcnow())
+        em.add_field(name="Moderator", value=ctx.author.mention, inline=False)
+        em.add_field(name="Reason", value=reason)
+        await user.send(embed=em)
         
     @commands.command()   
     @commands.has_permissions(kick_members=True)
