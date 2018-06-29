@@ -122,10 +122,10 @@ async def reload(ctx, cog: str):
 @bot.command()
 async def prefix(ctx, newprefix=None):
     if prefix == None:
-        x = bot.db.prefixes.find_one({"id": ctx.guild.id})
+        x = bot.db.prefixes.find_one({"id": message.guild.id})
         await ctx.send(x['prefix'])
     else:
-        await bot.db.prefixes.update_one({"id": ctx.guild.id}, newprefix)
+        await bot.db.prefixes.update_one({"id": message.guild.id}, { "$set": { "prefix": newprefix } }, upsert=True )
         await ctx.send(f"New prefix `{newprefix}`")
 
 def has_role_in_my_server(name):
