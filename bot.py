@@ -11,6 +11,7 @@ async def getprefix(bot, message):
         if not x:
             return "-"
         prefix = x['prefix']
+        return commands.when_mentioned_or(prefix)(bot, message)
 
 bot=commands.Bot(command_prefix=getprefix)
 bot.remove_command('help')
