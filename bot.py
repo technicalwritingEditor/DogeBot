@@ -78,7 +78,7 @@ async def help(ctx, cmd: str = None):
     """This thing"""
     if cmd == None:
         embed=discord.Embed(title="My commands", color=0x9b9dff)
-        embed.add_field(name="Info", value="`help`, `info`, `invite`", inline=False)
+        embed.add_field(name="Info", value="`help`, `stats`, `invite`", inline=False)
         embed.add_field(name="Fun", value="`roast`, `face`, `lenny`, `tableflip`, `dog`", inline=False)
         embed.add_field(name="Economy", value="`openaccount`, `earn`, `bal`, `daily`", inline=False)
         embed.add_field(name="Images", value="`rip`, `achievement`, `avatar`", inline=False)
