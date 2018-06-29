@@ -85,7 +85,7 @@ async def help(ctx, cmd: str = None):
         embed.add_field(name="Moderation", value="`welcome`, `leave`, `modlog`, `antiinvites`, `autorole`, `kick`, `ban`, `purge`, `warn`, `mute`, `unmute`", inline=False)
         embed.add_field(name="Music", value="`join`, `play`, `nowplaying`, `playlist`, `pause`, `stop`, `resume`, `clear`")
         embed.add_field(name="Giveaway", value="`start`", inline=False)
-        embed.add_field(name="Utility", value="`8ball`, `serverinfo`, `userinfo`, `ping`", inline=False)
+        embed.add_field(name="Utility", value="`8ball`, `serverinfo`, `userinfo`, `ping`, `prefix`", inline=False)
         embed.set_footer(text="I´m a very new bot and in early development, there will come A LOT more commands!")
         await ctx.send(embed=embed)
     if cmd:
@@ -121,6 +121,7 @@ async def reload(ctx, cog: str):
  
 @bot.command()
 async def prefix(ctx, prefix:str):
+    """Set my prefix for the server"""
     await bot.db.prefixes.update_one({"id": ctx.guild.id}, { "$set": { "prefix": prefix } }, upsert=True)
     await ctx.send(f"New prefix `{prefix}`")
 
