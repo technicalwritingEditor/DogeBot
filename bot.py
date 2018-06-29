@@ -3,7 +3,16 @@ from discord.ext import commands
 import os
 from motor.motor_asyncio import AsyncIOMotorClient
     
-bot=commands.Bot(command_prefix='-')
+async def getprefix(bot, message):
+    if isinstance(message.channel, discord.DMChannel):
+        return commands.when_mentioned_or("-")(bot, message)
+    try:
+        x = bot.db.prefixes.find_one({"id": message.guild.id})
+        if not x:
+            return "-"
+        prefix = x['prefix']
+
+bot=commands.Bot(command_prefix=getprefix)
 bot.remove_command('help')
 
 bot.load_extension("cogs.fun")
@@ -106,7 +115,16 @@ async def reload(ctx, cog: str):
     bot.unload_extension(f"cogs.{cog}")
     bot.load_extension(f"cogs.{cog}")
     await x.edit(content=f"Realoded {cog}!")
-    
+ 
+@bot.command()
+async def prefix(ctx, newprefix=None):
+    if prefix == None:
+        x = bot.db.prefixes.find_one({"id": message.guild.id})
+        await ctx.send(x['prefix'])
+    else:
+        await bot.db.prefixes.update_one({"id": message.guild.id}, newprefix)
+        await ctx.send("New prefix `newprefix`")
+
 def has_role_in_my_server(name):
     def wrapper(ctx):
         server = bot.get_guild(455305359645736971)
