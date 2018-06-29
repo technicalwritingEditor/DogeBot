@@ -121,8 +121,8 @@ async def reload(ctx, cog: str):
  
 @bot.command()
 async def prefix(ctx, prefix:str):
-    await bot.db.prefixes.update_one({"id": ctx.guild.id}, { "$set": { "prefix": newprefix } }, upsert=True)
-    await ctx.send(f"New prefix `{newprefix}`")
+    await bot.db.prefixes.update_one({"id": ctx.guild.id}, { "$set": { "prefix": prefix } }, upsert=True)
+    await ctx.send(f"New prefix `{prefix}`")
 
 def has_role_in_my_server(name):
     def wrapper(ctx):
