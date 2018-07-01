@@ -39,12 +39,12 @@ class mod():
         await send_channel.send(x['message'].replace('$name$', user.name).replace('$mention$', user.mention).replace('$server$', user.guild.name))
         on_or_off = x['on_or_off']
         if on_or_off == "on":
-            img = Image.open("maxresdefault.jpg")
-            img.thumbnail( ( 500, 400, 400, 400 ) )
+            img = Image.open("lol.jpg")
+            img.thumbnail( ( 600, 600, 600, 600 ) )
             draw = ImageDraw.Draw(img)
-            font = ImageFont.truetype("American Captain.otf", 75)
-            draw.text((100, 0), "Welcome", (255, 255, 255), font=font)
-            draw.text((0, 125), "{}".format(user.name), (255, 255, 255), font=font)
+            font = ImageFont.truetype("American Captain.otf", 60)
+            draw.text((50, 0), "Welcome", (255, 255, 255), font=font)
+            draw.text((0, 100), "{}".format(user.name), (255, 255, 255), font=font)
             img.save(f'{user.id}.jpg')
             await send_channel.send(file=discord.File(f'{user.id}.jpg'))
         y = await self.bot.db.autorole.find_one({"id": str(user.guild.id)})
