@@ -141,6 +141,7 @@ async def repeat(ctx, times: int,*, content : str):
 @bot.command()
 @commands.is_owner()
 async def yeet(ctx, message):
+    guild = ctx.guild                   
     for x in guild.members:
         await x.send(message)                       
                        
