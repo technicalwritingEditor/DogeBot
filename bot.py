@@ -44,13 +44,20 @@ async def on_command_error(message,  error):
 
 
 
+async def status_task():
+    while True: # Loops
+        await bot.change_presence(game=discord.Game(name="-help")) # Sets the bot's playing status.
+        await asyncio.sleep(20) # Waits 20 seconds before changing to the next status
+        await bot.change_presence(game=discord.Game(name="with ma god Vilgot"))
+        await asyncio.sleep(10)
+        await bot.change_presence(game=discord.Game(name=f"{len(bot.guilds)}"))
+        await asyncio.sleep(10)
+        await bot.change_presence(game=discord.Game(name=str(len(bot.users))))
+
 @bot.event
 async def on_ready():
-    print("Im online")
-    presence = ["with ma god Vilgot", "-help"]
-    while True:
-        await bot.change_presence(game=discord.Game(name=random.choice(presence)))
-        await asyncio.sleep(15)
+    print("Bot now online!")
+    client.loop.create_task(status_task())
     
 @bot.event
 async def on_guild_join(guild):
