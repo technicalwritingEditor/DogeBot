@@ -136,6 +136,16 @@ def has_role_in_my_server(name):
 async def repeat(ctx, times: int,*, content : str):
     for i in range(times):
         await ctx.send(content)
+           
+@bot.event
+async def on_raw_reaction_add(payload):
+    channel = bot.get_channel(payload.channel_id)
+    if channel.id != 457623659369070642:
+        return
+    msg = await channel.get_message(payload.message_id)
+    reactions = list(filter(lambda x: x.emoji == "✅", msg.reactions))
+    if len(reactions) > 2:
+        print("More than 2 reactions!")                     
                        
 db = AsyncIOMotorClient(os.environ.get("MONGODB"))
 bot.db = db.pepe_my_bot    
