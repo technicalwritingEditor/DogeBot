@@ -78,7 +78,7 @@ async def help(ctx, cmd: str = None):
     if cmd == None:
         embed=discord.Embed(title="My commands", color=0x9b9dff)
         embed.add_field(name="Info", value="`help`, `stats`, `invite`", inline=False)
-        embed.add_field(name="Fun", value="`roast`, `face`, `lenny`, `tableflip`, `dog`", inline=False)
+        embed.add_field(name="Fun", value="`roast`, `face`, `lenny`, `tableflip`", inline=False)
         embed.add_field(name="Economy", value="`openaccount`, `earn`, `bal`, `daily`", inline=False)
         embed.add_field(name="Images", value="`rip`, `achievement`, `avatar`", inline=False)
         embed.add_field(name="Moderation", value="`welcome`, `leave`, `modlog`, `antiinvites`, `autorole`, `kick`, `ban`, `purge`, `warn`, `mute`, `unmute`", inline=False)
@@ -91,8 +91,8 @@ async def help(ctx, cmd: str = None):
         x = bot.get_command(cmd)
         y = await bot.db.prefixes.find_one({ "id": ctx.guild.id })
         if not y:
-            return await ctx.send(f"```fix\n- {cmd} -``` ```{x.help}\nUsage: -{x.signature}```")
-        await ctx.send(f"```fix\n- {cmd} -``` ```{x.help}\nUsage: {y['prefix']}{x.signature}```")
+            return await ctx.send(f"```fix\n- {cmd} -\n= {x.help}\nUsage: -{x.signature}```")
+        await ctx.send(f"```fix\n- {cmd} -\n = {x.help}\nUsage: {y['prefix']}{x.signature}```")
     elif command is None:
         await ctx.send("That command doesnt exist!")
 
