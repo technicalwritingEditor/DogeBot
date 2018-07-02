@@ -42,20 +42,20 @@ class utility():
         await message.edit(content=f":ping_pong: Pong! `{ping}`ms")                                                     
     
     @commands.command()
-    async def add(self, ctx, num1, num2):
-        await ctx.send(num1 + num1)
+    async def add(self, ctx, num1:int, num2:int):
+        await ctx.send(int(num1) + int(num2))
 
     @commands.command()
-    async def subtract(self, ctx, num1, num2):
-        await ctx.send(num1 - num1)
+    async def subtract(self, ctx, num1:int, num2:int):
+        await ctx.send(int(num1) - int(num2))
 
     @commands.command()
-    async def multiply(self, ctx, num1, num2):
-        await ctx.send(num1 * num1)
+    async def multiply(self, ctx, num1:int, num2:int):
+        await ctx.send(int(num1) * int(num2))
 
     @commands.command()
-    async def divide(self, ctx, num1, num2):
-        await ctx.send(num1 / num1)                            
+    async def divide(self, ctx, num1:int, num2:int):
+        await ctx.send(int(num1) / int(num2))                          
                             
 def setup(bot):
     bot.add_cog(utility(bot))
