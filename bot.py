@@ -57,7 +57,7 @@ async def status_task():
 @bot.event
 async def on_ready():
     print("Bot now online!")
-    client.loop.create_task(status_task())
+    bot.loop.create_task(status_task())
     
 @bot.event
 async def on_guild_join(guild):
