@@ -249,19 +249,19 @@ class mod():
                 channel = int(channel)
             except ValueError:
                 return await ctx.send("**Please mention the channel right**")
-            await self.bot.db.welcome.update_one({"id": str(ctx.guild.id)}, {"$set": {"channel": channel} }, upsert=True )
-            await ctx.send("**I have set the welcome channel!**")
+            await self.bot.db.banlog.update_one({"id": str(ctx.guild.id)}, {"$set": {"channel": channel} }, upsert=True )
+            await ctx.send("**I have set the ban channel!**")
             embed=discord.Embed(description="**Write a message!**\n\nVaribales:\n**$name$** Name of user\n**$mention$** Mentions user\n**$server$** Server name", color=0x00ff00)
             await ctx.send(embed=embed)
             try:
                 x = await self.bot.wait_for("message", check=lambda x: x.channel == ctx.channel and x.author == ctx.author, timeout=60.0)
             except asyncio.TimeoutError:
                  return await ctx.send("Request timed out. Please try again.")
-            await self.bot.db.welcome.update_one({"id": str(ctx.guild.id)}, {"$set": {"channel": channel, "message": x.content}}, upsert=True)
+            await self.bot.db.banlog.update_one({"id": str(ctx.guild.id)}, {"$set": {"channel": channel, "message": x.content}}, upsert=True)
             await ctx.send("Successfully turned on message")
         if sort == "off":
-            await self.bot.db.welcome.update_one({"id": str(ctx.guild.id)}, {"$set": {"channel": False, "message": None}}, upsert=True)
-            await ctx.send("**I have turned off ban messages**")            
+            await self.bot.db.banlog.update_one({"id": str(ctx.guild.id)}, {"$set": {"channel": False, "message": None}}, upsert=True)
+            await ctx.send("**I have turned off ban messages**")     
             
     @commands.command()
     @commands.has_permissions(manage_guild=True)
