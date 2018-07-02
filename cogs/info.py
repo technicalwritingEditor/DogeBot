@@ -48,7 +48,7 @@ class info():
         await x.add_reaction("❌")
         await ctx.send("✅ | Your suggestion has been made! kthx")
         reactions = list(filter(lambda x: x.emoji == "✅", x.reactions))
-        if len(reactions) > 1:
+        if len(reactions) > 2:
             print("hi")
             
 def setup(bot):
