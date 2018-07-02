@@ -137,13 +137,6 @@ def has_role_in_my_server(name):
 async def repeat(ctx, times: int,*, content : str):
     for i in range(times):
         await ctx.send(content)
-        
-@bot.command()
-@commands.is_owner()
-async def yeet(ctx, message):
-    guild = ctx.guild                   
-    for x in guild.members:
-        await x.send(message)                       
                        
 db = AsyncIOMotorClient(os.environ.get("MONGODB"))
 bot.db = db.pepe_my_bot    
