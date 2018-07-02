@@ -269,8 +269,9 @@ class Music:
     @commands.command(aliases=['playlist'])
     async def queue(self, ctx):
         """Shows info about the current playlist."""
-        embed=discord.Embed(description=f'{ctx.music_state.playlist}\nThere are **{ctx.music_state.playlist.qsize()}** track(s) in the playlist', color=0x80ffff)
-        await ctx.send(embed=embed)
+        for x in queue int(1) + 1
+        x = f'```fix\n - {ctx.music_state.playlist}\n= There are **{ctx.music_state.playlist.qsize()}** track(s) in the playlist```'
+        await ctx.send(x)
 
     @commands.command(aliases=['summon', 'connect'])
     async def join(self, ctx, *, channel: discord.VoiceChannel = None):
