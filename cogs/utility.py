@@ -20,10 +20,15 @@ class utility():
         """See some information about the server"""
         guild = ctx.guild
         time = str(guild.created_at.strftime("%b %m, %Y, %A, %I:%M %p"))
-        embed=discord.Embed(description=f"**{guild.name}**\nOwner: **{guild.owner.mention}**\nMembers: **{len(guild.members)}**\nRoles: **{len(guild.members)}**\nVerification level: **{guild.verification_level}**\nCreated at: **{'%s' % time}**", color=0x06ff06)
+        embed=discord.Embed(description=f"**{guild.name}**\nOwner: **{guild.owner.mention}**\nMembers: **{len(guild.members)}**\nRoles: **{len(guild.members)}** *to see all the roles use `roles`\nVerification level: **{guild.verification_level}**\nCreated at: **{'%s' % time}**", color=0x06ff06)
         embed.set_thumbnail(url=guild.icon_url)
         await ctx.send(embed=embed)
 
+    @commands.command()
+    async def roles(self, ctx):
+        embed=discord.Embed(title="All roles", description=[x.name for x in ctx.guild.roles])
+        await ctx.send(embed=embed)
+                            
     @commands.command()
     async def userinfo(self, ctx, user: discord.Member):
         """See some information about a user"""
