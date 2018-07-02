@@ -388,7 +388,7 @@ class mod():
     @commands.has_permissions(manage_roles = True)
     async def addrole(self, ctx, user:discord.Member,*, role):
         """Add a role to a user"""        
-        x = discord.utils.get(ctx.guild.roles, name=str(role))
+        x = discord.utils.get(ctx.guild.roles, name=str(role).lower)
         await user.add_roles(x)
         await ctx.send(f"Added **{str(role)}** to **{user}**")           
 
@@ -396,7 +396,7 @@ class mod():
     @commands.has_permissions(manage_roles = True)
     async def removerole(self, ctx, user:discord.Member,*, role):
         """Remove a role from a user"""        
-        x = discord.utils.get(ctx.guild.roles, name=role)
+        x = discord.utils.get(ctx.guild.roles, name=role.lower)
         await user.remove_roles(x)
         await ctx.send(f"Removed **{role}** from **{user}**")         
 
