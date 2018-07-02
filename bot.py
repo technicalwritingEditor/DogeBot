@@ -42,10 +42,19 @@ async def on_command_error(message,  error):
             em.add_field(name="Error", value="Your not my daddy!")
             await message.channel.send(embed=em)
 
+
+
 @bot.event
 async def on_ready():
-    print("Im online") 
-    await bot.change_presence(activity=discord.Game(name=f"-help | {len(bot.guilds)} servers"))
+    print("Im online")
+    presence = [
+        "with ma god Vilgot",
+        "-help",
+        f"{len(bot.guilds)}"
+    ]
+    while True:
+        await bot.change_presence(activity=discord.Game(name=random.choice(presence)))
+        await asyncio.sleep(15)
     
 @bot.event
 async def on_guild_join(guild):
