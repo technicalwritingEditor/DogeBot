@@ -26,8 +26,7 @@ class utility():
 
     @commands.command()
     async def roles(self, ctx):
-        embed=discord.Embed(title="All roles", description=[x.name for x in ctx.guild.roles])
-        await ctx.send(embed=embed)
+        await ctx.send(f"```fix\n= There is {} in this server.\n\n- {[x.name for x in ctx.guild.roles]}```")
                             
     @commands.command()
     async def userinfo(self, ctx, user: discord.Member):
