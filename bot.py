@@ -144,8 +144,9 @@ async def on_raw_reaction_add(payload):
         return
     msg = await channel.get_message(payload.message_id)
     reactions = list(filter(lambda x: x.emoji == "✅", msg.reactions))
+    print(reactions)
     if len(reactions) > 2:
-        print("More than 2 reactions!")                     
+        print("More than 2 reactions!")                  
                        
 db = AsyncIOMotorClient(os.environ.get("MONGODB"))
 bot.db = db.pepe_my_bot    
