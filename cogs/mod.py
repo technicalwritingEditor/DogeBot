@@ -67,15 +67,7 @@ class mod():
             return
         await send_channel.send(x['message'].replace('$name$', user.name).replace('$mention$', user.mention).replace('$server$', user.guild.name))   
    
-    async def on_member_ban(self, user):
-        x = await self.bot.db.banlog.find_one({"id": str(user.guild.id)})
-        if not x:
-            return
-        channel = int(x['channel'])
-        send_channel = self.bot.get_channel(channel)
-        if not send_channel:
-            return
-        await send_channel.send(x['message'].replace('$name$', user.name).replace('$mention$', user.mention).replace('$server$', user.guild.name))
+
 
     #async def on_message_delete(self, message):
         #em = discord.Embed(color=0x1aff00, timestamp = datetime.datetime.utcnow())
@@ -223,45 +215,6 @@ class mod():
         if sort == "off":
             await self.bot.db.leave.update_one({"id": str(ctx.guild.id)}, {"$set": {"channel": False, "message": None}}, upsert=True)
             await ctx.send("**I have turned off leave messages**")           
-
-    @commands.command()
-    @commands.has_permissions(manage_guild=True)
-    async def banmsg(self, ctx, sort=None):
-        """Turn on or off ban messages"""
-        if sort == None:
-            x = await self.bot.db.banlog.find_one({"id": str(ctx.guild.id)})
-            channel = int(x['channel'])
-            message = x['message']
-            embed=discord.Embed(description="Your ban information",color=0x00f200)
-            embed.add_field(name="Channel", value=channel, inline=False)
-            embed.add_field(name="Message", value=message)
-            await ctx.send(embed=embed)
-        if sort == "on":
-            await ctx.send("**Please mention the channel to set the ban messages in.**")
-            try:
-                x = await self.bot.wait_for("message", check=lambda x: x.channel == ctx.channel and x.author == ctx.author, timeout=60.0)
-            except asyncio.TimeoutError:
-                return await ctx.send("**The time is up**")
-            if not x.content.startswith("<#") and not x.content.endswith(">"):
-                return await ctx.send("**Please mention the channel**")
-            channel = x.content.strip("<#").strip(">")
-            try:
-                channel = int(channel)
-            except ValueError:
-                return await ctx.send("**Please mention the channel right**")
-            await self.bot.db.banlog.update_one({"id": str(ctx.guild.id)}, {"$set": {"channel": channel} }, upsert=True )
-            await ctx.send("**I have set the ban channel!**")
-            embed=discord.Embed(description="**Write a message!**\n\nVaribales:\n**$name$** Name of user\n**$mention$** Mentions user\n**$server$** Server name", color=0x00ff00)
-            await ctx.send(embed=embed)
-            try:
-                x = await self.bot.wait_for("message", check=lambda x: x.channel == ctx.channel and x.author == ctx.author, timeout=60.0)
-            except asyncio.TimeoutError:
-                 return await ctx.send("Request timed out. Please try again.")
-            await self.bot.db.banlog.update_one({"id": str(ctx.guild.id)}, {"$set": {"channel": channel, "message": x.content}}, upsert=True)
-            await ctx.send("Successfully turned on message")
-        if sort == "off":
-            await self.bot.db.banlog.update_one({"id": str(ctx.guild.id)}, {"$set": {"channel": False, "message": None}}, upsert=True)
-            await ctx.send("**I have turned off ban messages**")     
             
     @commands.command()
     @commands.has_permissions(manage_guild=True)
