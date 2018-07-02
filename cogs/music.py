@@ -1,3 +1,4 @@
+import discord
 import asyncio
 import functools
 import logging
@@ -275,8 +276,8 @@ class Music:
     @commands.command(aliases=['summon', 'connect'])
     async def join(self, ctx, *, channel: discord.VoiceChannel = None):
         if channel is None and not ctx.author.voice:
-            raise MusicError('**You are not in a voicechannel or told me where to join**')
             await ctx.message.add_reaction('🛑')
+            raise MusicError('**You are not in a voicechannel or told me where to join**')
 
         destination = channel or ctx.author.voice.channel
 
@@ -356,8 +357,8 @@ class Music:
         if volume == None:
             await ctx.send(volume)
         if volume < 0 or volume > 100:
-            raise MusicError('**The volume level has to be between 0 and 100.**')
             await ctx.message.add_reaction('🛑')
+            raise MusicError('**The volume level has to be between 0 and 100.**')
         ctx.music_state.volume = volume / 100
         await ctx.message.add_reaction('✅')
 
@@ -377,4 +378,3 @@ class Music:
             destination = channel or ctx.author.voice.channel
             await ctx.voice_client.move_to(destination)
             await ctx.message.add_reaction('✅')
-
