@@ -41,7 +41,7 @@ class info():
             return await ctx.send("❌ | You need to add a suggestion")
         embed=discord.Embed(description=suggestion,color=0x00ff80, timestamp = datetime.datetime.utcnow())
         embed.set_author(name=ctx.author, icon_url=ctx.author.avatar_url)
-        embed.set_footer(text=f"From {ctx.author.guild} • message id: {ctx.author.message.id}")
+        embed.set_footer(text=f"From {ctx.author.guild}")
         xd = self.bot.get_channel(457623659369070642)
         x = await xd.send(embed=embed)
         await x.add_reaction("✅")
