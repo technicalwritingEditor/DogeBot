@@ -49,7 +49,7 @@ class info():
         await ctx.send("✅ | Your suggestion has been made! kthx")
         reactions = list(filter(lambda x: x.emoji == "✅", x.reactions))
         if len(reactions) > 1:
-            await xd.send("hi")
+            print("hi")
             
 def setup(bot):
     bot.add_cog(info(bot))
