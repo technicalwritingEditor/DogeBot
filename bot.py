@@ -42,24 +42,11 @@ async def on_command_error(message,  error):
             em.add_field(name="Error", value="Your not my daddy!")
             await message.channel.send(embed=em)
 
-
-
-async def status_task():
-    while True: # Loops
-        await bot.change_presence(game=discord.Game(name="-help")) # Sets the bot's playing status.
-        await asyncio.sleep(20) # Waits 20 seconds before changing to the next status
-        await bot.change_presence(game=discord.Game(name="with ma god Vilgot"))
-        await asyncio.sleep(10)
-        await bot.change_presence(game=discord.Game(name=f"{len(bot.guilds)}"))
-        await asyncio.sleep(10)
-        await bot.change_presence(game=discord.Game(name=str(len(bot.users))))
-
 @bot.event
 async def on_ready():
     print("Bot now online!")
-    bot.loop.create_task(status_task())
+    await bot.change_presence(game=discord.Game(name="with ma god Vilgot | -help"))
     
-@bot.event
 async def on_guild_join(guild):
     lol = bot.get_channel(461050385583570954)
     em = discord.Embed(color=discord.Color(value=0x11f95e))
