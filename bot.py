@@ -47,9 +47,9 @@ async def on_command_error(message,  error):
 @bot.event
 async def on_ready():
     print("Im online")
-    presence = ["with ma god Vilgot", "-help", f"{len(bot.guilds)}"]
+    presence = ["with ma god Vilgot", "-help"]
     while True:
-        await bot.change_presence(activity=discord.Game(name=random.choice(presence)))
+        await bot.change_presence(game=discord.Game(name=random.choice(presence)))
         await asyncio.sleep(15)
     
 @bot.event
