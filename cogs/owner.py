@@ -100,5 +100,12 @@ class Owner:
         msg.author = user
         await self.bot.process_commands(msg)       
         
+    @commands.command()
+    @commands.is_owner()
+    async def restart(self, ctx):
+        x = await ctx.send("I have been forced to restart.")
+        await bot.logout()
+        await x.edit(content="Im done restarting!")        
+        
 def setup(bot):
     bot.add_cog(Owner(bot))
