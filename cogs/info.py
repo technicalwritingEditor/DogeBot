@@ -24,7 +24,7 @@ class info():
         embed.add_field(name="Uptime", value="**%dd %dh %dm %ds**"% (day, hour, minute, second), inline=False)
         embed.add_field(name="Servers", value=f"Servers: **{len(self.bot.guilds)}**", inline=False)
         embed.add_field(name="Users", value=str(len(self.bot.users)))
-        embed.add_field(name="Memory used", value=f"{used}GB {percent}%", inline=False)
+        embed.add_field(name="Memory used", value=f"{used}GB ({percent}%)", inline=False)
 
         await ctx.send(embed=embed)
 
