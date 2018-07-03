@@ -105,8 +105,6 @@ class Owner:
     async def restart(self, ctx):
         x = await ctx.send("I have been forced to restart.")
         await self.bot.logout()
-        await self.bot.login()
-        await x.edit(content="Im done restarting!")        
         
 def setup(bot):
     bot.add_cog(Owner(bot))
