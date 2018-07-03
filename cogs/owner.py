@@ -104,7 +104,7 @@ class Owner:
     @commands.is_owner()
     async def restart(self, ctx):
         x = await ctx.send("I have been forced to restart.")
-        await bot.logout()
+        await self.bot.logout()
         await x.edit(content="Im done restarting!")        
         
 def setup(bot):
