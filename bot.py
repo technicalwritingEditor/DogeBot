@@ -44,8 +44,12 @@ async def on_command_error(message,  error):
 
 @bot.event
 async def on_ready():
-    print("Bot now online!")
-    await bot.change_presence(activity=discord.Game(name=f"With ma god Vilgot | -help"))
+    print('Bot is online, and ready to ROLL!')
+    while True:
+        await bot.change_presence(activity=discord.Game(name=f"-help"))
+        await asyncio.sleep(10)
+        await bot.change_presence(activity=discord.Game(name=f"with ma god Vilgot"))
+        await asyncio.sleep(10)
     
 async def on_guild_join(guild):
     lol = bot.get_channel(461050385583570954)
