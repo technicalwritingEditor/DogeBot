@@ -134,7 +134,7 @@ class mod():
         if not send_channel:
             return
         embed=discord.Embed(title="Changing nickname", color=0xd000e1, timestamp = datetime.datetime.utcnow())
-        embed.add_field(name="User", value=before.author, inline=False)
+        embed.add_field(name="User", value=before.mention, inline=False)
         embed.add_field(name="before", value=before.nickname)
         embed.add_field(name="after", value=after.nickname, inline=False)
         await send_channel.send(embed=embed)     
