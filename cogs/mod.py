@@ -124,7 +124,21 @@ class mod():
         if not send_channel:
             return
         await send_channel.send(embed=embed)   
-            
+    
+    async def on_member_update(self,before, after):
+        x = await self.bot.db.logging.find_one({"id": str(message.guild.id)})
+        if not x:
+            return
+        channel = int(x['channel'])
+        send_channel = self.bot.get_channel(channel)
+        if not send_channel:
+            return
+        embed=discord.Embed(title="Changing nickname", color=0xd000e1, timestamp = datetime.datetime.utcnow())
+        embed.add_field(name="User", value=before.author, inline=False)
+        embed.add_field(name="before", value=before.nickname)
+        embed.add_field(name="after", value=after.nickname, inline=False)
+        await send_channel.send(embed=embed)     
+    
     @commands.command()
     @commands.has_permissions(manage_guild=True)
     async def welcome(self, ctx, sort=None):
