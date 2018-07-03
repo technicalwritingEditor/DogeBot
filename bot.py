@@ -141,19 +141,19 @@ async def repeat(ctx, times: int,*, content : str):
     for i in range(times):
         await ctx.send(content)
            
-@bot.event
-async def on_raw_reaction_add(payload):
-    vilgot_id = 338600456383234058
-    channel = bot.get_channel(payload.channel_id)
-    if channel.id != 457623659369070642:
-        return
-    msg = await channel.get_message(payload.message_id)
-    reactions = list(filter(lambda x: x.emoji == "✅", msg.reactions))
-    print(reactions)
-    if reactions[0].count > 3:
-        embed=discord.Embed(title="Suggestion got over 3 votes!", description=payload.message.content)
-        await vilgot_id.send(embed=embed)               
-                       
+#@bot.event
+#async def on_raw_reaction_add(payload):
+    #vilgot_id = 338600456383234058
+    #channel = bot.get_channel(payload.channel_id)
+    #if channel.id != 457623659369070642:
+        #return
+    #msg = await channel.get_message(payload.message_id)
+    #reactions = list(filter(lambda x: x.emoji == "✅", msg.reactions))
+    #print(reactions)
+    #if reactions[0].count > 3:
+        #embed=discord.Embed(title="Suggestion got over 3 votes!", description=payload.message.content)
+        #await vilgot_id.send(embed=embed)
+
 db = AsyncIOMotorClient(os.environ.get("MONGODB"))
 bot.db = db.pepe_my_bot    
     
