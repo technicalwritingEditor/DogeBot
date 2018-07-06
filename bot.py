@@ -50,7 +50,7 @@ async def on_ready():
         await asyncio.sleep(10)
         await bot.change_presence(activity=discord.Game(name=f"with ma god Vilgot"))
         await asyncio.sleep(10)
-    
+@bot.event    
 async def on_guild_join(guild):
     lol = bot.get_channel(461050385583570954)
     em = discord.Embed(color=discord.Color(value=0x11f95e))
